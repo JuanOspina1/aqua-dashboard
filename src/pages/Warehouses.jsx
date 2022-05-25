@@ -12,6 +12,9 @@ const Warehouses = () => {
             Warehouse & Inventory
           </h1>
         </div>
+
+        {/* SECTION FOR SELECTING WHSE, ITEMS, MODIFICATIONS  */}
+
         <div className="flex-wrap w-full">
           <WarehouseInfo />
         </div>

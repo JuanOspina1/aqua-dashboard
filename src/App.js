@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-import AddWarehouse from "./pages/AddWarehouse";
+import WarehouseMgnt from "./pages/WarehouseMgnt";
 import Home from "./pages/Home";
 import Warehouses from "./pages/Warehouses";
 import Orders from "./pages/Orders";
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/warehouses" element={<Warehouses />} />
-          <Route path="/new-warehouse" element={<AddWarehouse />} />
+          <Route path="/management" element={<WarehouseMgnt />} />
         </Routes>
       </div>
     </>

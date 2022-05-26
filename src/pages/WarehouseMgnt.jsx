@@ -1,7 +1,7 @@
 import React from "react";
 
-const AddWarehouse = () => {
+const WarehouseMgnt = () => {
   return <div>AddWarehouse</div>;
 };
 
-export default AddWarehouse;
+export default WarehouseMgnt;

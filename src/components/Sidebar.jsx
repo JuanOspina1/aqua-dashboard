@@ -1,6 +1,8 @@
 import React from "react";
-import { FaHome, FaWarehouse, FaClipboardList } from "react-icons/fa";
+import { FaHome, FaWarehouse, FaClipboardList, FaTools } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+
+// Need to fix css so only the link only works on the button click instead of the entire div
 
 const Sidebar = () => {
   return (
@@ -8,7 +10,7 @@ const Sidebar = () => {
       <Link to="/">
         <div className="sidebar-icon">
           <FaHome />
-          <span className="p-2">Home</span>
+          <span className="p-2"> Home</span>
         </div>
       </Link>
 
@@ -23,6 +25,13 @@ const Sidebar = () => {
         <div className="sidebar-icon">
           <FaWarehouse />
           <span className="p-2">Warehouse</span>
+        </div>
+      </Link>
+
+      <Link to="/management">
+        <div className="sidebar-icon">
+          <FaTools />
+          <span className="p-2">Management</span>
         </div>
       </Link>
     </div>

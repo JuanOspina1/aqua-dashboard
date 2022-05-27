@@ -41,8 +41,9 @@ const WarehouseInfo = () => {
   // Consolidate into the css file once happy with design
   return (
     <>
+      {/* I need to make the whse information section mobile responsive */}
       <div className="grid">
-        <div className="grid grid-cols-2 gap-6 w-1/3 ml-4">
+        <div className="grid grid-cols-2 w-1/3 ml-4">
           <div className="w-fit h-fit p-4 shadow-lg  rounded-3xl">
             <h1 className="font-bold">Warehouse Name</h1>
             <p>{whseInfo?.name}</p>
@@ -64,14 +65,33 @@ const WarehouseInfo = () => {
           </div>
         </div>
 
-        {/* INVENTORY SECTION */}
-        <div className="grid grid-rows-2 gap-2">
-          {/* <div className="grid grid-cols-10 gap-2"> */}
+        {/* INVENTORY SECTION - REDO USING TABLE LAYOUT*/}
+        {/* <div className="grid grid-flow-row auto-rows-max gap-2">
           {inventory.map((item) => (
             <WarehouseInventory item={item} key={item.lotNumber} />
           ))}
-          {/* </div> */}
-        </div>
+        </div> */}
+
+        <table className="table-auto mt-4">
+          <thead>
+            <tr>
+              <th>Lot Number</th>
+              <th>PO Number</th>
+              <th>Brand</th>
+              <th>Product</th>
+              <th>Size</th>
+              <th>Case Count</th>
+              <th>Weight (LB)</th>
+              <th>Cost Of Goods (LB)</th>
+              <th>Sales Price (LB)</th>
+            </tr>
+          </thead>
+          <tbody className="text-center">
+            {inventory.map((item) => {
+              return <WarehouseInventory item={item} key={item?.lotNumber} />;
+            })}
+          </tbody>
+        </table>
       </div>
     </>
   );

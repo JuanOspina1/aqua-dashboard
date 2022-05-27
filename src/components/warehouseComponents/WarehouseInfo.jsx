@@ -65,10 +65,12 @@ const WarehouseInfo = () => {
         </div>
 
         {/* INVENTORY SECTION */}
-        <div className="grid grid-cols-10 gap-2">
+        <div className="grid grid-rows-2 gap-2">
+          {/* <div className="grid grid-cols-10 gap-2"> */}
           {inventory.map((item) => (
             <WarehouseInventory item={item} key={item.lotNumber} />
           ))}
+          {/* </div> */}
         </div>
       </div>
     </>

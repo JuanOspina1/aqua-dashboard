@@ -1,6 +1,7 @@
 import React from "react";
 
 const WarehouseInventory = ({ item }) => {
+  // Sort by brand / lot # / case count
   return (
     <tr className="shadow-lg mt-4 h-12 hover:h-32">
       <td className="border-r-2">{item?.lotNumber}</td>

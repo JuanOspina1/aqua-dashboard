@@ -40,7 +40,7 @@ const WarehouseInfo = () => {
     console.log(
       `This is inside initialWhseData:` + JSON.stringify(docSnap.data())
     );
-    setWarehouseInfo(docSnap.data().information);
+    setWarehouseInfo(docSnap.data()?.information);
     setInventory(docSnap.data()?.Items);
   };
 

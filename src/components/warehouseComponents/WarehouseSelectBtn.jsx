@@ -9,9 +9,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const WarehouseSelectBtn = (arr) => {
+const WarehouseSelectBtn = ({ whseArr }) => {
+  // console.log(whseArr);
   // Grab the array of warehouses
-  const [warehouses, setWarehouses] = useState([]);
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -31,64 +31,25 @@ const WarehouseSelectBtn = (arr) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        {/* I NEED TO MAP OVER THE ARRAY I AM CREATING */}
-
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  value="Seafrigo Chicago"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
+            {whseArr.map((whse) => {
+              return (
+                <Menu.Item key={whse}>
+                  {({ active }) => (
+                    <a
+                      value={whse}
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )}
+                    >
+                      {whse}
+                    </a>
                   )}
-                >
-                  Seafrigo Chicago
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  value="USA Poultry"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Support
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  License
-                </a>
-              )}
-            </Menu.Item>
-            <form method="POST" action="#">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    type="submit"
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      "block w-full text-left px-4 py-2 text-sm"
-                    )}
-                  >
-                    Sign out
-                  </button>
-                )}
-              </Menu.Item>
-            </form>
+                </Menu.Item>
+              );
+            })}
           </div>
         </Menu.Items>
       </Transition>

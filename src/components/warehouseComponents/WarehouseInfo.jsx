@@ -8,8 +8,14 @@ import {
   collection,
   query,
   getDocs,
+  collectionGroup,
+  getDoc,
 } from "firebase/firestore";
 import { FaPlusCircle } from "react-icons/fa";
+import WarehouseSelectBtn from "./WarehouseSelectBtn";
+
+////////////
+// Synchrony
 
 ////////////////////////////
 // ISSUES TO ADDRESS IN DB
@@ -17,41 +23,67 @@ import { FaPlusCircle } from "react-icons/fa";
 // 2) Lowercase all fields in the document
 // 3) Information for each warehouse should be a map instead of an array
 
+////////////////////////////
+// By default, I want the first warehouse to show so I need to make the initial state based on the first whse in the collection
+// State should change based on the selection from the dropdown menu
+///// Need to find how to return that value from WarehouseSelectBtn
 const WarehouseInfo = () => {
   const [warehouseCollection, setWarehouseCollection] = useState([]);
+  const [curWhse, setCurWhse] = useState({});
   const [warehouseInfo, setWarehouseInfo] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [hidden, setHidden] = useState(true);
-  const warehouseOptions = [];
 
+  // Setting the initial data is not working, need to find how to make this run after getting the data from the above useEffect after it has filled the array
+  const initialWhseData = async () => {
+    const docSnap = await getDoc(doc(db, "warehouses", warehouseCollection[0]));
+    console.log(
+      `This is inside initialWhseData:` + JSON.stringify(docSnap.data())
+    );
+    setWarehouseInfo(docSnap.data().information);
+    setInventory(docSnap.data()?.Items);
+  };
+
+  // Get all warehouses available
+  const warehouseOptions = [];
   useEffect(() => {
     async function getCollectionIDs() {
       const res = await getDocs(collection(db, "warehouses"));
       res.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data().information[0].name);
+        // console.log(doc.id, "=>", doc.data());
         warehouseOptions.push(doc.data().information[0].name);
+        console.log("This is inside the forEach" + warehouseOptions);
       });
+      setWarehouseCollection(warehouseOptions);
     }
     getCollectionIDs();
-    console.log(warehouseOptions);
+    // Needs to happen after the array has been filled from the above async function
   }, []);
+  // console.log(warehouseCollection);
+
+  // initialWhseData();
+
+  ////////////////////////////////////
+  // Current way of handling the initial data - the below will be based on the current warehouse - need to get the inital data above
 
   // This needs to be based on the selected warehouse from a dropdown
-  useEffect(() => {
-    onSnapshot(doc(db, "warehouses", "USA Poultry"), (doc) => {
-      setInventory(doc.data()?.Items);
-    });
-  }, []);
+  // useEffect(() => {
+  //   onSnapshot(doc(db, "warehouses", warehouseCollection[0]), (doc) => {
+  //     setInventory(doc.data()?.Items);
+  //   });
+  // }, []);
 
-  // console.log(inventory);
+  // // console.log(inventory);
 
-  useEffect(() => {
-    onSnapshot(doc(db, "warehouses", "USA Poultry"), (doc) => {
-      setWarehouseInfo(doc.data()?.information);
-    });
-  }, []);
+  // useEffect(() => {
+  //   onSnapshot(doc(db, "warehouses", warehouseCollection[0]), (doc) => {
+  //     setWarehouseInfo(doc.data()?.information);
+  //   });
+  // }, []);
   // Since this is only one warehouse, I need to destructure it to grab the info
+
   const [whseInfo] = warehouseInfo;
+  // console.log(warehouseInfo);
 
   const handleAddItemClick = () => {
     // This will be used to hide the inventory and present a for to add an item to the current warehouse.
@@ -60,6 +92,12 @@ const WarehouseInfo = () => {
 
   return (
     <>
+      <div className="grid grid-cols-6 gap-4 m-2">
+        <WarehouseSelectBtn
+          whseArr={warehouseCollection}
+          key={"whseSelector"}
+        />
+      </div>
       {/* I need to make the whse information section mobile responsive */}
       <div className="grid">
         <div className="grid grid-cols-2">

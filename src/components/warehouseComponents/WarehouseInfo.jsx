@@ -92,11 +92,14 @@ const WarehouseInfo = () => {
     getCollectionIDs();
   }, []);
   // console.log(warehouseCollection);
-  if (!warehouseInfo) {
-    return;
-  } else {
-    const [whseInfo] = warehouseInfo;
-  }
+  // if (!warehouseInfo) {
+  //   return;
+  // } else {
+  //   const [whseInfo] = warehouseInfo;
+  // }
+
+  const [whseInfo] = warehouseInfo;
+
   // console.log(warehouseInfo);
 
   // THIS FUNCTION IS PART OF THE PREBUILT DROPDOWN MENU
@@ -189,7 +192,7 @@ const WarehouseInfo = () => {
             </div>
           </div>
         </div>
-
+        {/* NEED TO CHANGE BACK TO THE INVENTORY ONCE THE ITEM IS CREATED */}
         <div className={`bg-gray-600 ${hidden === false ? "" : "hidden"}`}>
           <AddItemForm currWhse={whseInfo?.name} key={"itemForm"} />
         </div>

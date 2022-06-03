@@ -193,7 +193,7 @@ const WarehouseInfo = () => {
           </div>
         </div>
         {/* NEED TO CHANGE BACK TO THE INVENTORY ONCE THE ITEM IS CREATED */}
-        <div className={`bg-gray-600 ${hidden === false ? "" : "hidden"}`}>
+        <div className={` ${hidden === false ? "" : "hidden"}`}>
           <AddItemForm currWhse={whseInfo?.name} key={"itemForm"} />
         </div>
 

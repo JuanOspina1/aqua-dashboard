@@ -8,7 +8,7 @@ import Orders from "./pages/Orders";
 function App() {
   return (
     <>
-      <div className="flex">
+      <div className="flex ">
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />

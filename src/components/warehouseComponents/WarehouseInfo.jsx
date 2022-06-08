@@ -157,31 +157,31 @@ const WarehouseInfo = () => {
       </Menu>
 
       {/* I need to make the whse information section mobile responsive */}
-      <div className="grid">
-        <div className="grid grid-cols-2">
-          <div className="grid grid-cols-2 ml-4">
-            <div className="w-fit h-fit p-4 shadow-lg  rounded-3xl">
+      <div className="grid ">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 ml-4 bg-white rounded-md shadow-lg">
+            <div className="whse-info">
               <h1 className="font-bold">Warehouse Name</h1>
               <p>{whseInfo?.name}</p>
             </div>
 
-            <div className="w-fit h-fit p-4 shadow-lg rounded-3xl">
+            <div className="whse-info">
               <h1 className="font-bold">Warehouse Address</h1>
               <p>{whseInfo?.address}</p>
             </div>
 
-            <div className="w-fit h-fit p-4 shadow-lg rounded-3xl">
+            <div className="whse-info">
               <h1 className="font-bold">Contact Email</h1>
               <p>{whseInfo?.email}</p>
             </div>
 
-            <div className="w-fit h-fit p-4 shadow-lg rounded-3xl">
+            <div className="whse-info">
               <h1 className="font-bold">Warehouse Phone Number</h1>
               <p>{whseInfo?.phone}</p>
             </div>
           </div>
 
-          <div className="grid justify-items-center">
+          <div className="grid justify-items-center bg-white rounded-md shadow-lg mr-4">
             <span className="font-bold text-xl">Add a New Item</span>
             <div className="">
               <FaPlusCircle
@@ -199,7 +199,10 @@ const WarehouseInfo = () => {
 
         {/* <form className={`bg-gray-600 ${}`} ></form> */}
 
-        <table className={`table-auto mt-4 ${hidden === true ? "" : "hidden"}`}>
+        <table
+          className={`table-auto bg-white rounded-md mt-4 mr-4 ml-4
+          ${hidden === true ? "" : "hidden"}`}
+        >
           <thead>
             <tr>
               <th>Lot Number</th>
@@ -213,7 +216,7 @@ const WarehouseInfo = () => {
               <th>Sales Price (LB)</th>
             </tr>
           </thead>
-          <tbody className="text-center">
+          <tbody className="text-center ">
             {inventory.map((item) => {
               if (!item) {
                 return;

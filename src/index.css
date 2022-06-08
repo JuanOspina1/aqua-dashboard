@@ -18,9 +18,14 @@
   .inventory-description {
     @apply w-fit h-fit p-4 shadow-lg rounded-3xl row-span-1 bg-gray-200;
   }
+
+  /* I can add shadow to create a pill for each with the rounding below or find a nicer way to divide each item */
+  .whse-info {
+    @apply w-fit h-fit p-4  rounded-3xl;
+  }
 }
 
 body {
-  background-color: white;
+  background-color: #f4f4f4;
   font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

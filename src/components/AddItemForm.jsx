@@ -5,51 +5,17 @@ import { FaCheckCircle, FaPlusCircle, FaTimesCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 const AddItemForm = ({ currWhse }) => {
-  const [brand, setBrand] = useState("");
-  const [caseCount, setCaseCount] = useState("");
-  const [caseWeight, setCaseWeight] = useState("");
-  const [cogs, setCogs] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [lotNumber, setLotNumber] = useState("");
-  const [poNumber, setPoNumber] = useState("");
-  const [received, setReceived] = useState("");
-  const [salesPrice, setSalesPrice] = useState("");
-  const [size, setSize] = useState("");
-
-  // const [newItemsArr, setNewItemsArr] = useState([]);
-
   // Default rows of 1
   const [formRows, setFormRows] = useState([{ id: 1 }]);
 
   // Using a normal variable instead of state for adding multiple items
   const newItemsArr = [];
 
-  // I need to be able to create items for each row - I may not be able to use the state for this - maybe I can create an object for each item, then push each item into an array in the state and then array UNION in the DB
   const addFormRow = (e) => {
     e.preventDefault();
     setFormRows([...formRows, { id: formRows.length + 1 }]);
   };
   // State that controls the current warehouse
-  console.log(currWhse);
-
-  // Push items to the DB
-  // const addItemToWhse = async (newItem) => {
-  //   console.log(newItem);
-  //   const whseRef = doc(db, "warehouses", currWhse);
-  //   await updateDoc(whseRef, {
-  //     Items: arrayUnion(newItem),
-  //   });
-  //   setBrand("");
-  //   setCaseCount("");
-  //   setCaseWeight("");
-  //   setCogs("");
-  //   setItemName("");
-  //   setLotNumber("");
-  //   setPoNumber("");
-  //   setReceived("");
-  //   setSalesPrice("");
-  //   setSize("");
-  // };
 
   const addItemArrToWhse = async () => {
     const whseRef = doc(db, "warehouses", currWhse);
@@ -58,7 +24,6 @@ const AddItemForm = ({ currWhse }) => {
     });
   };
 
-  // I might want to allow the default action upon submission - I need to see how this interacts.
   const createAllItems = (e) => {
     e.preventDefault();
     console.log(e.target);
@@ -78,23 +43,20 @@ const AddItemForm = ({ currWhse }) => {
         size: e.target.size[i].value,
       };
 
-      // setNewItemsArr((current) => [...current, newItem]);
       newItemsArr.push(newItem);
     });
     console.log(newItemsArr);
     addItemArrToWhse(newItemsArr);
   };
 
-  // console.log(uuidv4());
-
   return (
     /////////////////////////////////
     // Consolidate Styling into the CSS sheet
-    // Need to create input validation
+    // Need to create input validation ( MOST IMPORTANT: LOT NUMBERS MUST BE UNIQUE - BASIS OF DELETION)
 
     <form onSubmit={createAllItems} key={uuidv4()} className="ml-4 mt-4 w-full">
-      {formRows.map((row) => (
-        <>
+      {formRows.map((row) => {
+        return (
           <div key={uuidv4()} className="grid grid-cols-11 gap-4">
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Brand:
@@ -211,6 +173,7 @@ const AddItemForm = ({ currWhse }) => {
             </label>
 
             <button
+              key={uuidv4()}
               onClick={() =>
                 setFormRows(formRows.filter((fr) => fr.id !== row.id))
               }
@@ -218,8 +181,8 @@ const AddItemForm = ({ currWhse }) => {
               <FaTimesCircle className="cursor-pointer" />
             </button>
           </div>
-        </>
-      ))}
+        );
+      })}
 
       <button type="submit">
         {/* <button onClick={consoleBrandsArr}> */}

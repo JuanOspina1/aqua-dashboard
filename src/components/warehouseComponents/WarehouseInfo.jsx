@@ -36,10 +36,6 @@ const WarehouseInfo = () => {
   const [inventory, setInventory] = useState([]);
   const [hidden, setHidden] = useState(true);
 
-  // const chosenWhseData = async (whseName) => {
-  //   onSnapshot
-  // }
-
   //////////////////////////////
   // STATE RESETS TO FIRST WAREHOUSE IN THE ARRAY IF YOU SWITCH PAGES AND COME BACK
   const initialWhseData = async (firstWhse) => {
@@ -61,10 +57,6 @@ const WarehouseInfo = () => {
       setInventory(doc.data()?.Items);
       setWarehouseInfo(doc.data()?.information);
     });
-  };
-
-  const currentWhse = () => {
-    // Based on the selected whse name, set the info and inventory
   };
 
   //////////////////////////
@@ -91,16 +83,8 @@ const WarehouseInfo = () => {
     }
     getCollectionIDs();
   }, []);
-  // console.log(warehouseCollection);
-  // if (!warehouseInfo) {
-  //   return;
-  // } else {
-  //   const [whseInfo] = warehouseInfo;
-  // }
 
   const [whseInfo] = warehouseInfo;
-
-  // console.log(warehouseInfo);
 
   // THIS FUNCTION IS PART OF THE PREBUILT DROPDOWN MENU
   function classNames(...classes) {
@@ -215,16 +199,14 @@ const WarehouseInfo = () => {
               <th>Weight (LB)</th>
               <th>Cost Of Goods (LB)</th>
               <th>Sales Price (LB)</th>
+              <th>Delete Lot</th>
             </tr>
           </thead>
           <tbody className="text-center ">
-            {inventory.map((item) => {
-              if (!item) {
-                return;
-              } else {
-                return <WarehouseInventory item={item} key={item?.lotNumber} />;
-              }
-            })}
+            <WarehouseInventory
+              inventoryItems={inventory}
+              whseInformation={warehouseInfo}
+            />
           </tbody>
         </table>
       </div>

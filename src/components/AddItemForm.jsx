@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { db } from "../firebase";
 import { FaCheckCircle, FaPlusCircle, FaTimesCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
+import AddItemFormRow from "./AddItemFormRow";
 
 ///////////////////////////////////
 // WHEN YOU ADD A NEW LINE, IT DELETES THE INFORMATION ON THE PREVIOUS LINES - MAY NEED TO FIND A WAY TO HOLD THE STATE FOR EACH LINE DYNAMICALLY.
@@ -51,6 +52,39 @@ const AddItemForm = ({ currWhse }) => {
     console.log(newItemsArr);
     addItemArrToWhse(newItemsArr);
   };
+
+  // ATTEMPTING TO MAP EACH ROW AS A COMPONENT SO EACH ROW HAS ITS OWN STATE
+  // Issues
+  // 1 ) State gets reset when a new row is added, need to track how this is working
+  // 2 ) focus is lost in the input field after each key typed
+
+  // return (
+  //   /////////////////////////////////
+  //   // Consolidate Styling into the CSS sheet
+  //   // Need to create input validation ( MOST IMPORTANT: LOT NUMBERS MUST BE UNIQUE - BASIS OF DELETION)
+
+  //   // ATTEMPTING TO MAP EACH ROW AS A COMPONENT SO EACH ROW HAS ITS OWN STATE
+
+  //   <form onSubmit={createAllItems} key={uuidv4()} className="ml-4 mt-4 w-full">
+  //     {formRows.map((row) => (
+  //       <AddItemFormRow
+  //         formRows={formRows}
+  //         row={row}
+  //         setFormRows={setFormRows}
+  //       />
+  //     ))}
+
+  //     <button type="submit">
+  //       {/* <button onClick={consoleBrandsArr}> */}
+  //       <FaCheckCircle className="cursor-pointer" />
+  //     </button>
+  //     <button onClick={addFormRow}>
+  //       <FaPlusCircle className="cursor-pointer" />
+  //     </button>
+  //   </form>
+  // );
+
+  //////////////////////////////////////////////////////////
 
   return (
     /////////////////////////////////

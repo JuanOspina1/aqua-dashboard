@@ -21,7 +21,7 @@ import AddItemForm from "../AddItemForm";
 
 ////////////////////////////
 // ISSUES TO ADDRESS IN DB
-// 1) I should create random IDs instead of using the warehouses name
+// 1) I should create random IDs instead of using the warehouses name - for the logic below, it is based on the ID being exactly the same as the warehouse name
 // 2) Lowercase all fields in the document
 // 3) Information for each warehouse should be a map instead of an array
 

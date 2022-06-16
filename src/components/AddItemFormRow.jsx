@@ -3,6 +3,9 @@ import { useState } from "react";
 import { FaTimesCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
+//////////////////////////////////////////////
+// This component is currently not in use
+
 const AddItemFormRow = (setFormRows, formRows, row) => {
   const [brand, setBrand] = useState("");
   const [caseCount, setCaseCount] = useState("");

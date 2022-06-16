@@ -30,8 +30,8 @@ const AddItemForm = ({ currWhse }) => {
 
   const createAllItems = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log(e.target.brand);
+    // console.log(e.target);
+    // console.log(e.target.brand);
 
     formRows.forEach((id, i) => {
       const newItem = {
@@ -211,6 +211,7 @@ const AddItemForm = ({ currWhse }) => {
 
             <button
               key={uuidv4()}
+              type="button"
               onClick={() =>
                 setFormRows(formRows.filter((fr) => fr.id !== row.id))
               }

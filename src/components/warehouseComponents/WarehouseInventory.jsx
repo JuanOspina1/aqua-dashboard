@@ -12,11 +12,11 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
   const [inventory, setInventory] = useState([]);
 
   // Sort by brand / lot # / case count
-  console.log(whseInformation);
-  console.log(inventoryItems);
+  // console.log(whseInformation);
+  // console.log(inventoryItems);
 
   const items = inventoryItems;
-  console.log(items);
+  // console.log(items);
 
   // useEffect(() => {
   //   onSnapshot(doc(db, 'warehouses', warehouseInfo.name), (doc) => {

@@ -63,6 +63,7 @@ const WarehouseInfo = () => {
   // HANDLERS SECTION
 
   const handleAddItemClick = () => {
+    console.log("I was clicked");
     // This will be used to hide the inventory and present a for to add an item to the current warehouse.
     setHidden(!hidden);
   };
@@ -179,7 +180,11 @@ const WarehouseInfo = () => {
         </div>
         {/* NEED TO CHANGE BACK TO THE INVENTORY ONCE THE ITEM IS CREATED */}
         <div className={` ${hidden === false ? "" : "hidden"}`}>
-          <AddItemForm currWhse={whseInfo?.name} key={"itemForm"} />
+          <AddItemForm
+            currWhse={whseInfo?.name}
+            key={"itemForm"}
+            handleAddItemClick={handleAddItemClick}
+          />
         </div>
 
         {/* <form className={`bg-gray-600 ${}`} ></form> */}

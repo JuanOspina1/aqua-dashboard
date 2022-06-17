@@ -26,6 +26,7 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
 
   const removeItemFromInv = async (itemLotNumber) => {
     try {
+      console.log("Clicked to delete item");
       const [warehouseInfo] = whseInformation;
       const whseRef = doc(db, "warehouses", warehouseInfo.name);
       const result = items.filter(

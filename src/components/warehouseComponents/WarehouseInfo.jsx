@@ -168,7 +168,7 @@ const WarehouseInfo = () => {
 
           <div className="grid justify-items-center bg-white rounded-md shadow-lg mr-4">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
-            <span className="font-bold text-xl">Add a New Item</span>
+            <span className="font-bold text-xl">Add New Items</span>
             <div className="">
               <FaPlusCircle
                 size={50}

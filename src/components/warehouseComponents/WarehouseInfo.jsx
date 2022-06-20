@@ -35,7 +35,6 @@ const WarehouseInfo = () => {
   const [warehouseCollection, setWarehouseCollection] = useState([]);
   const [warehouseInfo, setWarehouseInfo] = useState([]);
   const [inventory, setInventory] = useState([]);
-  const [hidden, setHidden] = useState(true);
 
   const [withdrawForm, setWithdrawForm] = useState(false);
   const [inventoryForm, setInventoryForm] = useState(true);
@@ -66,12 +65,6 @@ const WarehouseInfo = () => {
 
   //////////////////////////
   // HANDLERS SECTION
-
-  const handleAddItemClick = () => {
-    console.log("I was clicked");
-    // This will be used to hide the inventory and present a for to add an item to the current warehouse.
-    setHidden(!hidden);
-  };
 
   ////////////////////////
   // refactoring logic to add withdraw form
@@ -224,14 +217,17 @@ const WarehouseInfo = () => {
           />
         </div>
 
-        <div className={` ${withdrawForm === true ? "" : "hidden"}`}>
-          <WithdrawItemForm />
+        <div
+          className={` ${
+            withdrawForm === true ? "" : "hidden"
+          } grid grid-cols-2`}
+        >
+          <WithdrawItemForm
+            inventoryItems={inventory}
+            whseInformation={warehouseInfo}
+          />
         </div>
 
-        {/* <table
-          className={`table-auto bg-white rounded-md mt-4 mr-4 ml-4 
-          ${hidden === true ? "" : "hidden"}`}
-        > */}
         <table
           className={`table-auto bg-white rounded-md mt-4 mr-4 ml-4 
           ${inventoryForm === true ? "" : "hidden"}`}

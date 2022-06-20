@@ -16,6 +16,15 @@ import { getFirestore } from "firebase/firestore";
 //   appId: process.env.REACT_APP_APP_ID,
 // };
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAuLI16xyCs1Yq1eR23hhgkaUkRyzsOf1E",
+  authDomain: "aqua-dashboard-2ea38.firebaseapp.com",
+  projectId: "aqua-dashboard-2ea38",
+  storageBucket: "aqua-dashboard-2ea38.appspot.com",
+  messagingSenderId: "334476247978",
+  appId: "1:334476247978:web:e2e4d82874f44023bf21d3",
+};
+
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

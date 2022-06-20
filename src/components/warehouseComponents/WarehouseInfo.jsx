@@ -11,10 +11,11 @@ import {
   collectionGroup,
   getDoc,
 } from "firebase/firestore";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import AddItemForm from "../AddItemForm";
+import WithdrawItemForm from "../WithdrawItemForm";
 
 ////////////
 // Synchrony
@@ -35,6 +36,10 @@ const WarehouseInfo = () => {
   const [warehouseInfo, setWarehouseInfo] = useState([]);
   const [inventory, setInventory] = useState([]);
   const [hidden, setHidden] = useState(true);
+
+  const [withdrawForm, setWithdrawForm] = useState(false);
+  const [inventoryForm, setInventoryForm] = useState(true);
+  const [addItemsForm, setAddItemsForm] = useState(false);
 
   //////////////////////////////
   // STATE RESETS TO FIRST WAREHOUSE IN THE ARRAY IF YOU SWITCH PAGES AND COME BACK
@@ -66,6 +71,23 @@ const WarehouseInfo = () => {
     console.log("I was clicked");
     // This will be used to hide the inventory and present a for to add an item to the current warehouse.
     setHidden(!hidden);
+  };
+
+  ////////////////////////
+  // refactoring logic to add withdraw form
+
+  const handleWithdrawForm = () => {
+    console.log("Withdraw form is clicked");
+    setAddItemsForm(false);
+    setInventoryForm(true);
+    setWithdrawForm(!withdrawForm);
+  };
+
+  const handleAddItemsForm = () => {
+    console.log("Add Items has been clicked");
+    setAddItemsForm(!addItemsForm);
+    setInventoryForm(!inventoryForm);
+    setWithdrawForm(false);
   };
 
   // Get all warehouses available
@@ -166,32 +188,53 @@ const WarehouseInfo = () => {
             </div>
           </div>
 
-          <div className="grid justify-items-center bg-white rounded-md shadow-lg mr-4">
+          <div className="grid grid-cols-2 justify-items-center bg-white rounded-md shadow-lg mr-4">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
-            <span className="font-bold text-xl">Add New Items</span>
-            <div className="">
-              <FaPlusCircle
-                size={50}
-                className="cursor-pointer"
-                onClick={handleAddItemClick}
-              />
+
+            <div className="grid justify-items-center">
+              <span className="font-bold text-xl">Add New Items</span>
+              <div className="">
+                <FaPlusCircle
+                  size={50}
+                  className="cursor-pointer"
+                  onClick={handleAddItemsForm}
+                />
+              </div>
+            </div>
+
+            <div className="grid justify-items-center">
+              <span className="font-bold text-xl">Withdraw Items</span>
+              <div className="">
+                <FaMinusCircle
+                  size={50}
+                  className="cursor-pointer"
+                  onClick={handleWithdrawForm}
+                />
+              </div>
             </div>
           </div>
         </div>
         {/* NEED TO CHANGE BACK TO THE INVENTORY ONCE THE ITEM IS CREATED */}
-        <div className={` ${hidden === false ? "" : "hidden"}`}>
+        {/* <div className={` ${hidden === false ? "" : "hidden"}`}> */}
+        <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
           <AddItemForm
             currWhse={whseInfo?.name}
             key={"itemForm"}
-            handleAddItemClick={handleAddItemClick}
+            handleAddItemClick={handleAddItemsForm}
           />
         </div>
 
-        {/* <form className={`bg-gray-600 ${}`} ></form> */}
+        <div className={` ${withdrawForm === true ? "" : "hidden"}`}>
+          <WithdrawItemForm />
+        </div>
 
-        <table
+        {/* <table
           className={`table-auto bg-white rounded-md mt-4 mr-4 ml-4 
           ${hidden === true ? "" : "hidden"}`}
+        > */}
+        <table
+          className={`table-auto bg-white rounded-md mt-4 mr-4 ml-4 
+          ${inventoryForm === true ? "" : "hidden"}`}
         >
           <thead className="border-b-2">
             <tr>

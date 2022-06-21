@@ -9,7 +9,6 @@ function App() {
   return (
     <>
       <div className="flex ">
-        <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/orders" element={<Orders />} />

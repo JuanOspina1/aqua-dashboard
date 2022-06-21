@@ -1,10 +1,12 @@
 import React from "react";
+import Sidebar from "../components/Sidebar";
 import WarehouseInfo from "../components/warehouseComponents/WarehouseInfo";
 // Page for displaying warehouses, their information, and their inventories
 
 const Warehouses = () => {
   return (
     <>
+      <Sidebar />
       <div className="flex-wrap w-full ml-40">
         <div className="h-auto w-full">
           <h1 className="text-3xl font-bold p-4 text-center">

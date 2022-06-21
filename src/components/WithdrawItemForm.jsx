@@ -31,16 +31,23 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
     setLotNumber(e.target.text);
   };
 
-  // I think I can do most of the below within a map - first validate if it matches the lot number, then update the casecount, this creates a new array that I can send to the db
-  const withdrawItem1 = async (e) => {
+  // VALIDATING INPUTS WITH NESTED IF STATEMENT - I need to find out how to stop the function if the if statement fails
+  const withdrawItem = async (e) => {
     try {
       e.preventDefault();
-      // Need to add validation regarding the quantity - must validate quantity only after finding the matching item
+      // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
+
+      // If statement is happening within the map - it will not stop the outer function - need to return if the alert window happens
       const withdrawnInventoryArr = inventoryItems.map((el, i) => {
         if (el.lotNumber === lotNumber) {
-          console.log(Number(el.caseCount));
-          el.caseCount = Number(el.caseCount) - withdrawQty;
-          return el;
+          if (withdrawQty <= el.caseCount) {
+            el.caseCount = Number(el.caseCount) - withdrawQty;
+            return el;
+          } else {
+            return alert(
+              "The withdraw amount must be equal or less than the quantity available"
+            );
+          }
         } else return el;
       });
 
@@ -49,38 +56,6 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
       await updateDoc(whseRef, {
         Items: withdrawnInventoryArr,
       });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const withdrawItem = async (e) => {
-    try {
-      e.preventDefault();
-
-      // Find the index of the item to edit
-      const indexPosition = inventoryItems.indexOf(
-        (el) => el.lotNumber === lotNumber
-      );
-      console.log(indexPosition);
-      // Filter out the item to edit
-      const [itemToChange] = inventoryItems.filter(
-        (items) => items.lotNumber === lotNumber
-      );
-      // Calculate the new qty
-      const newQty = itemToChange.caseCount - withdrawQty;
-      // Set the caseCount to the new Qty
-      itemToChange.caseCount = newQty;
-      // Setting a new array to the inventory array - trying to avoid modification to the original array
-      const updatedInvArray = inventoryItems;
-      // Replace the old object with the new object - NOT replacing at the correct index
-      updatedInvArray.splice(indexPosition, 1, itemToChange);
-      console.log(updatedInvArray);
-
-      const whseRef = doc(db, "warehouses", currWhse.name);
-      //   await updateDoc(whseRef, {
-      //     Items: updatedInvArray,
-      //   });
     } catch (err) {
       console.error(err);
     }
@@ -99,7 +74,7 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
 
   return (
     <form
-      onSubmit={withdrawItem1}
+      onSubmit={withdrawItem}
       className="grid grid-cols-4 gap-2 ml-4 mr-2 mt-4 border-4"
     >
       <Menu as="div" className="relative inline-block text-left">
@@ -148,9 +123,11 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
           </Menu.Items>
         </Transition>
       </Menu>
-
-      <span className="inline-block align-middle">Lot Number: {lotNumber}</span>
-
+      <div>
+        <span className="inline-block align-middle mt-2">
+          Lot Number: {lotNumber}
+        </span>
+      </div>
       <input
         onChange={(e) => setWithdrawQty(e.target.value)}
         name="quantity"

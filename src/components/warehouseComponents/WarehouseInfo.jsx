@@ -16,6 +16,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import AddItemForm from "../AddItemForm";
 import WithdrawItemForm from "../WithdrawItemForm";
+import Sidebar from "../Sidebar";
 
 ////////////
 // Synchrony
@@ -41,13 +42,9 @@ const WarehouseInfo = () => {
   const [addItemsForm, setAddItemsForm] = useState(false);
 
   //////////////////////////////
-  // STATE RESETS TO FIRST WAREHOUSE IN THE ARRAY IF YOU SWITCH PAGES AND COME BACK
+  // STATE RESETS TO FIRST WAREHOUSE IN THE ARRAY IF YOU SWITCH PAGES AND COME BACK - WAREHOUSE FUNCTIONALITY DOES NOT WORK ON THE INITIAL WHSE, ONLY IF CHOSEN FROM THE DROPDOWN
   const initialWhseData = async (firstWhse) => {
     const docSnap = await getDoc(doc(db, "warehouses", firstWhse));
-    // console.log(
-    //   `This is inside initialWhseData:` + JSON.stringify(docSnap.data())
-    // );
-    // setCurWhse(docSnap.data());
     setWarehouseInfo(docSnap.data()?.information);
     setInventory(docSnap.data()?.Items);
   };
@@ -109,7 +106,8 @@ const WarehouseInfo = () => {
 
   return (
     <>
-      <Menu as="div" className="relative inline-block text-left">
+      {/* <Sidebar /> */}
+      <Menu as="div" className="relative inline-block text-left ml-4 mb-2">
         <div>
           <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
             Warehouses
@@ -207,8 +205,7 @@ const WarehouseInfo = () => {
             </div>
           </div>
         </div>
-        {/* NEED TO CHANGE BACK TO THE INVENTORY ONCE THE ITEM IS CREATED */}
-        {/* <div className={` ${hidden === false ? "" : "hidden"}`}> */}
+
         <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
           <AddItemForm
             currWhse={whseInfo?.name}

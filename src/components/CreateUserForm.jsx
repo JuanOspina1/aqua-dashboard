@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
-const CreateUserForm = () => {
-  // Attempt to handle the entire form in one state
-  const [inputs, setInputs] = useState({});
+// I would like to implement a dissapearing success message when a new user is created.
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [officeAddress, setOfficeAddress] = useState("");
-  const [officePhone, setOfficePhone] = useState("");
+const CreateUserForm = () => {
+  const [inputs, setInputs] = useState({});
 
   const { user, signUp } = UserAuth();
 
@@ -21,10 +15,6 @@ const CreateUserForm = () => {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     console.log(inputs);
-  //   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -101,97 +91,5 @@ const CreateUserForm = () => {
     </form>
   );
 };
-
-// const CreateUserForm = () => {
-//   // Attempt to handle the entire form in one state
-//   // const [inputs, setInputs] = useState({})
-
-//   // const handleChange = (e) => {
-//   //     const name = e.target.name;
-//   //     const value = e.target.value;
-//   //     setInputs(values => ({...values, [name]: value}))
-//   //   }
-
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [firstName, setFirstName] = useState("");
-//   const [lastName, setLastName] = useState("");
-//   const [officeAddress, setOfficeAddress] = useState("");
-//   const [officePhone, setOfficePhone] = useState("");
-
-//   const { user, signUp } = UserAuth();
-//   //   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await signUp(
-//         email,
-//         password,
-//         firstName,
-//         lastName,
-//         officeAddress,
-//         officePhone
-//       );
-//       //   navigate("/");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <label>
-//         Email Address:
-//         <input
-//           type="text"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         Password:
-//         <input
-//           type="text"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         First Name:
-//         <input
-//           type="text"
-//           value={firstName}
-//           onChange={(e) => setFirstName(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         Last Name:
-//         <input
-//           type="text"
-//           value={lastName}
-//           onChange={(e) => setLastName(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         Office Address:
-//         <input
-//           type="text"
-//           value={officeAddress}
-//           onChange={(e) => setOfficeAddress(e.target.value)}
-//         />
-//       </label>
-//       <label>
-//         Office Phone Number:
-//         <input
-//           type="text"
-//           value={officePhone}
-//           onChange={(e) => setOfficePhone(e.target.value)}
-//         />
-//       </label>
-//       <button>Submit New User</button>
-//     </form>
-//   );
-// };
 
 export default CreateUserForm;

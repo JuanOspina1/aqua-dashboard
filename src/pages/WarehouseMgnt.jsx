@@ -13,6 +13,7 @@ const WarehouseMgnt = () => {
 
   const createNewWarehouse = () => {};
 
+  // Fix this logic once the other form has been implemented
   const controlUserForm = () => {
     setUserform(!userForm);
   };

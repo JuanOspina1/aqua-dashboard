@@ -1,15 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
 import WarehouseMgnt from "./pages/WarehouseMgnt";
 import Home from "./pages/Home";
 import Warehouses from "./pages/Warehouses";
 import Orders from "./pages/Orders";
 import Login from "./pages/Login";
+import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <>
-      <div className="flex ">
+      {/* <div className="flex "> */}
+      <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -17,7 +18,8 @@ function App() {
           <Route path="/warehouses" element={<Warehouses />} />
           <Route path="/management" element={<WarehouseMgnt />} />
         </Routes>
-      </div>
+      </AuthContextProvider>
+      {/* </div> */}
     </>
   );
 }

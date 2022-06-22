@@ -1,10 +1,30 @@
 import React from "react";
-import { FaHome, FaWarehouse, FaClipboardList, FaTools } from "react-icons/fa";
+import {
+  FaHome,
+  FaWarehouse,
+  FaClipboardList,
+  FaTools,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
 // Need to fix css so only the link only works on the button click instead of the entire div
 
 const Sidebar = () => {
+  const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
+  // console.log(user.email)
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="fixed top-0 h-screen w-40 m-0 pt-4 flex flex-col bg-gray-600">
       <Link to="/">
@@ -29,11 +49,15 @@ const Sidebar = () => {
       </Link>
 
       <Link to="/management">
-        <div className="sidebar-icon">
+        <button className="sidebar-icon">
           <FaTools />
           <span className="p-2">Management</span>
-        </div>
+        </button>
       </Link>
+
+      <button className="sidebar-icon" onClick={handleLogout}>
+        <FaSignOutAlt />
+      </button>
     </div>
   );
 };

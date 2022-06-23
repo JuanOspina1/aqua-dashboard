@@ -32,63 +32,87 @@ const CreateUserForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-400 mt-4">
-      <label>
-        Email Address:
-        <input
-          type="text"
-          name="email"
-          value={inputs.email || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="text"
-          name="password"
-          value={inputs.password || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        First Name:
-        <input
-          type="text"
-          name="firstName"
-          value={inputs.firstName || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Last Name:
-        <input
-          type="text"
-          name="lastName"
-          value={inputs.lastName || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Office Address:
-        <input
-          type="text"
-          name="officeAddress"
-          value={inputs.officeAddress || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Office Phone Number:
-        <input
-          type="text"
-          name="officePhone"
-          value={inputs.officePhone || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <button>Submit New User</button>
-    </form>
+    <div className="bg-gray-600 mt-4 ml-4 mr-4 rounded-md w-1/2 shadow-lg">
+      <h1 className="text-center py-2 font-bold text-lg text-[#06aedb]">
+        Create New User Form
+      </h1>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-2 px-4 justify-items-center"
+      >
+        <label className="create-user-form-label">
+          Email Address:
+          <input
+            className="block"
+            type="text"
+            name="email"
+            value={inputs.email || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label className="create-user-form-label">
+          Password:
+          <input
+            className="block"
+            type="text"
+            name="password"
+            value={inputs.password || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label className="create-user-form-label">
+          First Name:
+          <input
+            className="block"
+            type="text"
+            name="firstName"
+            value={inputs.firstName || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label className="create-user-form-label">
+          Last Name:
+          <input
+            className="block"
+            type="text"
+            name="lastName"
+            value={inputs.lastName || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label className="create-user-form-label">
+          Office Address:
+          <input
+            className="block"
+            type="text"
+            name="officeAddress"
+            value={inputs.officeAddress || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label className="create-user-form-label">
+          Office Phone Number:
+          <input
+            className="block"
+            type="text"
+            name="officePhone"
+            value={inputs.officePhone || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <button
+          className="relative flex items-center justify-center 
+            h-12 w-36 mt-2 mb-2 mx-auto shadow-lg
+            bg-gray-800 text-[#06aedb]
+            hover:bg-[#06aedb] hover:text-white
+            rounded-3xl hover:rounded-xl
+            transition-all duration-300 ease-linear
+            cursor-pointer col-span-2"
+        >
+          Submit New User
+        </button>
+      </form>
+    </div>
   );
 };
 

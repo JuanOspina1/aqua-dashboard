@@ -23,6 +23,10 @@
   .whse-info {
     @apply w-fit h-fit p-4  rounded-3xl;
   }
+
+  .create-user-form-label {
+    @apply py-2 text-[#06aedb];
+  }
 }
 
 body {

@@ -29,7 +29,7 @@ const WarehouseMgnt = () => {
         </div>
 
         <div className="grid ml-40">
-          <div className="grid grid-cols-2  justify-items-center bg-white rounded-md shadow-lg ml-4 mr-4 pb-4">
+          <div className="grid grid-cols-2  justify-items-center bg-white rounded-md shadow-lg ml-4 mr-4 pb-4 w-1/2">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
 
             <div className="grid justify-items-center">

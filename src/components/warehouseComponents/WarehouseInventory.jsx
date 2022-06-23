@@ -18,12 +18,6 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
   const items = inventoryItems;
   // console.log(items);
 
-  // useEffect(() => {
-  //   onSnapshot(doc(db, 'warehouses', warehouseInfo.name), (doc) => {
-  //     setInventory(doc.data()?.Items);
-  //   });
-  // }, []);
-
   const removeItemFromInv = async (itemLotNumber) => {
     try {
       console.log("Clicked to delete item");
@@ -39,17 +33,6 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
       console.log(err);
     }
   };
-
-  //   const deleteShow = async (passedID) => {
-  //     try {
-  //       const result = movies.filter((item) => item.id !== passedID)
-  //       await updateDoc(movieRef, {
-  //           savedShows: result
-  //       })
-  //     } catch (error) {
-  //         console.log(error)
-  //     }
-  // }
 
   return (
     <>

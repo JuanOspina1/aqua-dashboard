@@ -30,7 +30,7 @@ import Sidebar from "../Sidebar";
 ////////////////////////////
 // By default, I want the first warehouse to show so I need to make the initial state based on the first whse in the collection
 // State should change based on the selection from the dropdown menu
-///// Need to find how to return that value from WarehouseSelectBtn
+
 const WarehouseInfo = () => {
   // List of warehouses in the DB
   const [warehouseCollection, setWarehouseCollection] = useState([]);
@@ -42,11 +42,18 @@ const WarehouseInfo = () => {
   const [addItemsForm, setAddItemsForm] = useState(false);
 
   //////////////////////////////
-  // STATE RESETS TO FIRST WAREHOUSE IN THE ARRAY IF YOU SWITCH PAGES AND COME BACK - WAREHOUSE FUNCTIONALITY DOES NOT WORK ON THE INITIAL WHSE, ONLY IF CHOSEN FROM THE DROPDOWN
+
   const initialWhseData = async (firstWhse) => {
-    const docSnap = await getDoc(doc(db, "warehouses", firstWhse));
-    setWarehouseInfo(docSnap.data()?.information);
-    setInventory(docSnap.data()?.Items);
+    // USE ONSNAPSHOT to keep changes in the DB rendering actively.
+
+    // const docSnap = await getDoc(doc(db, "warehouses", firstWhse));
+    // setWarehouseInfo(docSnap.data()?.information);
+    // setInventory(docSnap.data()?.Items);
+
+    onSnapshot(doc(db, "warehouses", firstWhse), (doc) => {
+      setInventory(doc.data()?.Items);
+      setWarehouseInfo(doc.data()?.information);
+    });
   };
 
   const getWhseFromDropdown = (e) => {
@@ -62,9 +69,6 @@ const WarehouseInfo = () => {
 
   //////////////////////////
   // HANDLERS SECTION
-
-  ////////////////////////
-  // refactoring logic to add withdraw form
 
   const handleWithdrawForm = () => {
     console.log("Withdraw form is clicked");

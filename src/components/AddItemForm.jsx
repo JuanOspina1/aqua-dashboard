@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 // WHEN YOU ADD A NEW LINE, IT DELETES THE INFORMATION ON THE PREVIOUS LINES - MAY NEED TO FIND A WAY TO HOLD THE STATE FOR EACH LINE DYNAMICALLY.
 
 const AddItemForm = ({ currWhse, handleAddItemClick }) => {
+  console.log("component mounted");
   // Default rows of 1
   const [formRows, setFormRows] = useState([{ id: 1 }]);
 

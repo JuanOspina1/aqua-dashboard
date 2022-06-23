@@ -31,7 +31,7 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
     setLotNumber(e.target.text);
   };
 
-  // VALIDATING INPUTS WITH NESTED IF STATEMENT - I need to find out how to stop the function if the if statement fails
+  // VALIDATING INPUTS WITH NESTED IF STATEMENT - I need to find out how to stop the function if the if statement fails instead of making an invalid call to firebase
   const withdrawItem = async (e) => {
     try {
       e.preventDefault();

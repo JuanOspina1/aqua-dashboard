@@ -10,12 +10,16 @@ import CreateUserForm from "../components/CreateUserForm";
 
 const WarehouseMgnt = () => {
   const [userForm, setUserform] = useState(false);
-
-  const createNewWarehouse = () => {};
+  const [whseForm, setWhseform] = useState(false);
 
   // Fix this logic once the other form has been implemented
   const controlUserForm = () => {
     setUserform(!userForm);
+    setWhseform(false);
+  };
+  const controlWhseForm = () => {
+    setWhseform(!whseForm);
+    setUserform(false);
   };
 
   return (
@@ -29,7 +33,7 @@ const WarehouseMgnt = () => {
         </div>
 
         <div className="grid ml-40">
-          <div className="grid grid-cols-2  justify-items-center bg-white rounded-md shadow-lg ml-4 mr-4 pb-4 w-1/2">
+          <div className="grid grid-cols-2  justify-items-center bg-slate-200  rounded-md shadow-lg ml-4 mr-4 pb-4 w-1/2">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
 
             <div className="grid justify-items-center">
@@ -51,7 +55,7 @@ const WarehouseMgnt = () => {
                 <FaWarehouse
                   size={50}
                   className="cursor-pointer"
-                  onClick={createNewWarehouse}
+                  onClick={controlWhseForm}
                 />
               </div>
             </div>
@@ -59,6 +63,9 @@ const WarehouseMgnt = () => {
 
           <div className={` ${userForm === true ? "" : "hidden"}`}>
             <CreateUserForm />
+          </div>
+          <div className={` ${whseForm === true ? "" : "hidden"}`}>
+            <CreateWhseForm />
           </div>
         </div>
       </div>

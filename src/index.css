@@ -25,7 +25,7 @@
   }
 
   .create-user-form-label {
-    @apply py-2 text-[#06aedb];
+    @apply py-2;
   }
 }
 

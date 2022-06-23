@@ -32,10 +32,8 @@ const CreateUserForm = () => {
   };
 
   return (
-    <div className="bg-gray-600 mt-4 ml-4 mr-4 rounded-md w-1/2 shadow-lg">
-      <h1 className="text-center py-2 font-bold text-lg text-[#06aedb]">
-        Create New User Form
-      </h1>
+    <div className="bg-slate-200  mt-4 ml-4 mr-4 rounded-md w-1/2 shadow-lg">
+      <h1 className="text-center py-2 font-bold text-lg ">Create New User</h1>
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-2 px-4 justify-items-center"
@@ -43,7 +41,7 @@ const CreateUserForm = () => {
         <label className="create-user-form-label">
           Email Address:
           <input
-            className="block"
+            className="block rounded-md"
             type="text"
             name="email"
             value={inputs.email || ""}
@@ -53,7 +51,7 @@ const CreateUserForm = () => {
         <label className="create-user-form-label">
           Password:
           <input
-            className="block"
+            className="block rounded-md"
             type="text"
             name="password"
             value={inputs.password || ""}
@@ -63,7 +61,7 @@ const CreateUserForm = () => {
         <label className="create-user-form-label">
           First Name:
           <input
-            className="block"
+            className="block rounded-md"
             type="text"
             name="firstName"
             value={inputs.firstName || ""}
@@ -73,7 +71,7 @@ const CreateUserForm = () => {
         <label className="create-user-form-label">
           Last Name:
           <input
-            className="block"
+            className="block rounded-md"
             type="text"
             name="lastName"
             value={inputs.lastName || ""}
@@ -83,7 +81,7 @@ const CreateUserForm = () => {
         <label className="create-user-form-label">
           Office Address:
           <input
-            className="block"
+            className="block rounded-md"
             type="text"
             name="officeAddress"
             value={inputs.officeAddress || ""}
@@ -93,7 +91,7 @@ const CreateUserForm = () => {
         <label className="create-user-form-label">
           Office Phone Number:
           <input
-            className="block"
+            className="block rounded-md"
             type="text"
             name="officePhone"
             value={inputs.officePhone || ""}

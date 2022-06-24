@@ -12,6 +12,59 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
   // Default rows of 1
   const [formRows, setFormRows] = useState([{ id: 1 }]);
 
+  const [inputs, setInputs] = useState([]);
+
+  const [inputs1, setInputs1] = useState({
+    brand: [],
+    caseCount: [],
+    caseWeight: [],
+    cogs: [],
+    itemName: [],
+    lotNumber: [],
+    poNumber: [],
+    received: [],
+    salesPrice: [],
+    size: [],
+  });
+
+  // ORIGINAL WORKING EXAMPLE
+  // const handleChange = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   setInputs((values) => ({ ...values, [name]: value }));
+  // };
+
+  // REFACTORING TRIAL
+  const handleChange = (e) => {
+    e.preventDefault();
+    formRows.forEach((id, i) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      setInputs1((values) => ({
+        ...values,
+        [name]: [...values[name]].splice(i, 0, value),
+      }));
+    });
+  };
+
+  // Everytime i type, it adds a new number to the array
+  const handleChange1 = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    const index = e.target.dataset.index;
+    // setInputs1((values) => ({ ...values, [name]: [...values[name], value] }));
+    setInputs1((values) => ({
+      ...values,
+      [name]: [...values[name], value],
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs1);
+  };
+
   // Using a normal variable instead of state for adding multiple items
   const newItemsArr = [];
 
@@ -21,6 +74,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
   };
   // State that controls the current warehouse
 
+  // Working example to add items
   const addItemArrToWhse = async () => {
     const whseRef = doc(db, "warehouses", currWhse);
     await updateDoc(whseRef, {
@@ -28,6 +82,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
     });
   };
 
+  // Working example to add items
   const createAllItems = (e) => {
     e.preventDefault();
     console.log(e.target);
@@ -75,19 +130,23 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
     /////////////////////////////////
     // Consolidate Styling into the CSS sheet
     // Need to create input validation ( MOST IMPORTANT: LOT NUMBERS MUST BE UNIQUE - BASIS OF DELETION)
+    // Onsubmit use createAllItems
 
-    <form onSubmit={createAllItems} key={uuidv4()} className="ml-4 mt-4 w-full">
-      {formRows.map((row) => {
+    <form onSubmit={handleSubmit} key={uuidv4()} className="ml-4 mt-4 w-full">
+      {formRows.map((row, i) => {
         return (
           <div key={uuidv4()} className="grid grid-cols-11 gap-4">
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Brand:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="brand"
                 className=" my-2 w-full rouded "
                 type="text"
                 placeholder="Brand"
+                value={inputs1.brand[i] || ""}
               />
             </label>
 
@@ -95,11 +154,14 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Case Count:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="caseCount"
                 className=" my-2  rouded w-full"
                 type="number"
                 step="any"
                 placeholder="Case Count"
+                value={inputs1.caseCount[i] || ""}
               />
             </label>
 
@@ -107,11 +169,14 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Case Weight:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="caseWeight"
                 className=" my-2  rouded w-full"
                 type="number"
                 step="any"
                 placeholder="Case Weight"
+                value={inputs1.caseWeight[i] || ""}
               />
             </label>
 
@@ -119,11 +184,14 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Cost of Goods:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="cogs"
                 className=" my-2  rouded w-full"
                 type="number"
                 step="any"
                 placeholder="Cost of Goods"
+                value={inputs1.cogs[i] || ""}
               />
             </label>
 
@@ -131,10 +199,13 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Item Name:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="itemName"
                 className=" my-2  rouded w-full"
                 type="text"
                 placeholder="Item Name"
+                value={inputs1.itemName[i] || ""}
               />
             </label>
 
@@ -142,10 +213,13 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Lot Number:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="lotNumber"
                 className=" my-2  rouded w-full"
                 type="text"
                 placeholder="Lot Number"
+                value={inputs1.lotNumber[i] || ""}
               />
             </label>
 
@@ -153,10 +227,13 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               PO Number:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="poNumber"
                 className=" my-2  rouded w-full"
                 type="text"
                 placeholder="PO Number"
+                value={inputs1.poNumber[i] || ""}
               />
             </label>
 
@@ -164,10 +241,13 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Received:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="received"
                 className=" my-2  rouded w-full"
                 type="Date"
                 placeholder="Date Received"
+                value={inputs1.received[i] || ""}
               />
             </label>
 
@@ -175,11 +255,14 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Sales Price:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="salesPrice"
                 className=" my-2  rouded w-full"
                 type="number"
                 step="any"
                 placeholder="Sales Price"
+                value={inputs1.salesPrice[i] || ""}
               />
             </label>
 
@@ -187,10 +270,13 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               Size:
               <input
                 key={uuidv4()}
+                onChange={handleChange1}
+                data-index={i}
                 name="size"
                 className=" my-2  rouded w-full"
                 type="text"
                 placeholder="Size"
+                value={inputs1.size[i] || ""}
               />
             </label>
 
@@ -216,6 +302,152 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
       </button>
     </form>
   );
+
+  // return (
+  //   /////////////////////////////////
+  //   // Consolidate Styling into the CSS sheet
+  //   // Need to create input validation ( MOST IMPORTANT: LOT NUMBERS MUST BE UNIQUE - BASIS OF DELETION)
+
+  //   <form onSubmit={createAllItems} key={uuidv4()} className="ml-4 mt-4 w-full">
+  //     {formRows.map((row) => {
+  //       return (
+  //         <div key={uuidv4()} className="grid grid-cols-11 gap-4">
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Brand:
+  //             <input
+  //               key={uuidv4()}
+  //               name="brand"
+  //               className=" my-2 w-full rouded "
+  //               type="text"
+  //               placeholder="Brand"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2  border-b-2 font-bold">
+  //             Case Count:
+  //             <input
+  //               key={uuidv4()}
+  //               name="caseCount"
+  //               className=" my-2  rouded w-full"
+  //               type="number"
+  //               step="any"
+  //               placeholder="Case Count"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Case Weight:
+  //             <input
+  //               key={uuidv4()}
+  //               name="caseWeight"
+  //               className=" my-2  rouded w-full"
+  //               type="number"
+  //               step="any"
+  //               placeholder="Case Weight"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Cost of Goods:
+  //             <input
+  //               key={uuidv4()}
+  //               name="cogs"
+  //               className=" my-2  rouded w-full"
+  //               type="number"
+  //               step="any"
+  //               placeholder="Cost of Goods"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Item Name:
+  //             <input
+  //               key={uuidv4()}
+  //               name="itemName"
+  //               className=" my-2  rouded w-full"
+  //               type="text"
+  //               placeholder="Item Name"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Lot Number:
+  //             <input
+  //               key={uuidv4()}
+  //               name="lotNumber"
+  //               className=" my-2  rouded w-full"
+  //               type="text"
+  //               placeholder="Lot Number"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             PO Number:
+  //             <input
+  //               key={uuidv4()}
+  //               name="poNumber"
+  //               className=" my-2  rouded w-full"
+  //               type="text"
+  //               placeholder="PO Number"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Received:
+  //             <input
+  //               key={uuidv4()}
+  //               name="received"
+  //               className=" my-2  rouded w-full"
+  //               type="Date"
+  //               placeholder="Date Received"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Sales Price:
+  //             <input
+  //               key={uuidv4()}
+  //               name="salesPrice"
+  //               className=" my-2  rouded w-full"
+  //               type="number"
+  //               step="any"
+  //               placeholder="Sales Price"
+  //             />
+  //           </label>
+
+  //           <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+  //             Size:
+  //             <input
+  //               key={uuidv4()}
+  //               name="size"
+  //               className=" my-2  rouded w-full"
+  //               type="text"
+  //               placeholder="Size"
+  //             />
+  //           </label>
+
+  //           <button
+  //             key={uuidv4()}
+  //             type="button"
+  //             onClick={() =>
+  //               setFormRows(formRows.filter((fr) => fr.id !== row.id))
+  //             }
+  //           >
+  //             <FaTimesCircle className="cursor-pointer" />
+  //           </button>
+  //         </div>
+  //       );
+  //     })}
+
+  //     <button type="submit">
+  //       {/* <button onClick={consoleBrandsArr}> */}
+  //       <FaCheckCircle className="cursor-pointer" />
+  //     </button>
+  //     <button onClick={addFormRow}>
+  //       <FaPlusCircle className="cursor-pointer" />
+  //     </button>
+  //   </form>
+  // );
 };
 
 export default AddItemForm;

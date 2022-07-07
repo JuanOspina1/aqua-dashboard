@@ -38,7 +38,7 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
     <>
       {items.map((item) => {
         return (
-          <tr key={uuidv4()} className="shadow-lg mt-4 h-12 hover:h-32">
+          <tr key={uuidv4()} className="shadow-lg mt-4 h-16">
             <td className="border-r-2">{item?.lotNumber}</td>
             <td className="border-r-2">{item?.poNumber}</td>
             <td className="border-r-2">{item?.brand}</td>
@@ -55,7 +55,7 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
                 className="cursor-pointer"
                 value={item?.lotNumber}
               >
-                <FaTimesCircle />
+                <FaTimesCircle className="mt-2" size={25} />
               </span>
             </td>
           </tr>

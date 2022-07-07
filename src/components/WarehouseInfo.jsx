@@ -16,7 +16,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import AddItemForm from "./AddItemForm";
 import WithdrawItemForm from "./WithdrawItemForm";
-import Sidebar from "./Sidebar";
+import AddItemFormOriginal from "./AddItemFormOriginal";
 
 ////////////
 // Synchrony
@@ -209,8 +209,16 @@ const WarehouseInfo = () => {
           </div>
         </div>
 
-        <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
+        {/* <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
           <AddItemForm
+            currWhse={whseInfo?.name}
+            key={"itemForm"}
+            handleAddItemClick={handleAddItemsForm}
+          />
+        </div> */}
+
+        <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
+          <AddItemFormOriginal
             currWhse={whseInfo?.name}
             key={"itemForm"}
             handleAddItemClick={handleAddItemsForm}

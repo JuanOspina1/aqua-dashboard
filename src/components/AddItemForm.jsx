@@ -126,6 +126,8 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
     handleAddItemClick();
   };
 
+  // STACK OVERFLOW SOLUTION - TRY KEEPING A CONSTANT KEY TO KEEP FOCUS ON INPUT FIELD - maybe index + a number
+
   return (
     /////////////////////////////////
     // Consolidate Styling into the CSS sheet
@@ -135,11 +137,11 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
     <form onSubmit={handleSubmit} key={uuidv4()} className="ml-4 mt-4 w-full">
       {formRows.map((row, i) => {
         return (
-          <div key={uuidv4()} className="grid grid-cols-11 gap-4">
+          <div key={uuidv4()} className="grid grid-cols-11 gap-4 bg-white">
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Brand:
               <input
-                key={uuidv4()}
+                key={i + 11}
                 onChange={handleChange1}
                 data-index={i}
                 name="brand"
@@ -153,7 +155,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2  border-b-2 font-bold">
               Case Count:
               <input
-                key={uuidv4()}
+                key={i + 22}
                 onChange={handleChange1}
                 data-index={i}
                 name="caseCount"
@@ -168,7 +170,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Case Weight:
               <input
-                key={uuidv4()}
+                key={i + 33}
                 onChange={handleChange1}
                 data-index={i}
                 name="caseWeight"
@@ -183,7 +185,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Cost of Goods:
               <input
-                key={uuidv4()}
+                key={i + 44}
                 onChange={handleChange1}
                 data-index={i}
                 name="cogs"
@@ -198,7 +200,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Item Name:
               <input
-                key={uuidv4()}
+                key={i + 55}
                 onChange={handleChange1}
                 data-index={i}
                 name="itemName"
@@ -212,7 +214,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Lot Number:
               <input
-                key={uuidv4()}
+                key={i + 66}
                 onChange={handleChange1}
                 data-index={i}
                 name="lotNumber"
@@ -226,7 +228,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               PO Number:
               <input
-                key={uuidv4()}
+                key={i + 77}
                 onChange={handleChange1}
                 data-index={i}
                 name="poNumber"
@@ -237,7 +239,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
               />
             </label>
 
-            <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
+            <label key={i + 88} className="border-r-2 border-b-2 font-bold">
               Received:
               <input
                 key={uuidv4()}
@@ -254,7 +256,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Sales Price:
               <input
-                key={uuidv4()}
+                key={i + 99}
                 onChange={handleChange1}
                 data-index={i}
                 name="salesPrice"
@@ -269,7 +271,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             <label key={uuidv4()} className="border-r-2 border-b-2 font-bold">
               Size:
               <input
-                key={uuidv4()}
+                key={i + 100}
                 onChange={handleChange1}
                 data-index={i}
                 name="size"
@@ -281,13 +283,17 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
             </label>
 
             <button
-              key={uuidv4()}
+              className="border-2"
+              key={i + 111}
               type="button"
               onClick={() =>
                 setFormRows(formRows.filter((fr) => fr.id !== row.id))
               }
             >
-              <FaTimesCircle className="cursor-pointer" />
+              <FaTimesCircle
+                className="cursor-pointer fill-red-600"
+                size={40}
+              />
             </button>
           </div>
         );
@@ -295,14 +301,15 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
 
       <button type="submit">
         {/* <button onClick={consoleBrandsArr}> */}
-        <FaCheckCircle className="cursor-pointer" />
+        <FaCheckCircle className="cursor-pointer" size={40} />
       </button>
       <button onClick={addFormRow}>
-        <FaPlusCircle className="cursor-pointer" />
+        <FaPlusCircle className="cursor-pointer ml-4" size={40} />
       </button>
     </form>
   );
 
+  // Working example
   // return (
   //   /////////////////////////////////
   //   // Consolidate Styling into the CSS sheet

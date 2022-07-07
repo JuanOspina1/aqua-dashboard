@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 import WarehouseInventory from "./WarehouseInventory";
 import {
   updateDoc,
@@ -14,9 +14,9 @@ import {
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import AddItemForm from "../AddItemForm";
-import WithdrawItemForm from "../WithdrawItemForm";
-import Sidebar from "../Sidebar";
+import AddItemForm from "./AddItemForm";
+import WithdrawItemForm from "./WithdrawItemForm";
+import Sidebar from "./Sidebar";
 
 ////////////
 // Synchrony
@@ -160,7 +160,7 @@ const WarehouseInfo = () => {
       {/* I need to make the whse information section mobile responsive */}
       <div className="grid ">
         <div className="grid grid-cols-2 gap-6">
-          <div className="grid grid-cols-2 ml-4 bg-slate-200  rounded-md shadow-lg">
+          <div className="grid grid-cols-2 ml-4 bg-white  rounded-md shadow-lg">
             <div className="whse-info">
               <h1 className="font-bold">Warehouse Name</h1>
               <p>{whseInfo?.name}</p>
@@ -182,7 +182,7 @@ const WarehouseInfo = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 justify-items-center bg-slate-200  rounded-md shadow-lg mr-4">
+          <div className="grid grid-cols-2 justify-items-center bg-white rounded-md shadow-lg mr-4">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
 
             <div className="grid justify-items-center">

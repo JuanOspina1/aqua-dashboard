@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import WarehouseInfo from "../components/warehouseComponents/WarehouseInfo";
+import WarehouseInfo from "../components/WarehouseInfo";
 // Page for displaying warehouses, their information, and their inventories
 
 const Warehouses = () => {

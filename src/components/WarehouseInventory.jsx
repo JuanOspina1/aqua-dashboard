@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { FaTimesCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 
 // Delete based on lot number
 

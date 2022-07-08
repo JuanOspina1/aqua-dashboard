@@ -14,6 +14,7 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
 
   const [inputs, setInputs] = useState([]);
 
+  // Trying to put each into an array and then form an object based on the index. Effect: This just adds a new item to the array on each click
   const [inputs1, setInputs1] = useState({
     brand: [],
     caseCount: [],

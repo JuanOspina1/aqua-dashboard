@@ -75,7 +75,7 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
   return (
     <form
       onSubmit={withdrawItem}
-      className="grid grid-cols-4 gap-2 ml-4 mr-2 mt-4 border-4"
+      className="grid grid-cols-4 gap-2 ml-4 mr-2 mt-4 border-4 bg-white"
     >
       <Menu as="div" className="relative inline-block text-left">
         <div>
@@ -131,7 +131,7 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
       <input
         onChange={(e) => setWithdrawQty(e.target.value)}
         name="quantity"
-        className=" my-2 w-full rouded"
+        className=" my-2 w-full rouded bg-slate-200"
         type="text"
         placeholder="Quantity"
         value={withdrawQty}

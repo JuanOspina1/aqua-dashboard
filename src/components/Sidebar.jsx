@@ -34,12 +34,13 @@ const Sidebar = () => {
         </div>
       </Link>
 
-      <Link to="/orders">
+      {/* Order tab to be implemented in the future, using single item withdraw currently */}
+      {/* <Link to="/orders">
         <div className="sidebar-icon">
           <FaClipboardList />
           <span className="p-2">Orders</span>
         </div>
-      </Link>
+      </Link> */}
 
       <Link to="/warehouses">
         <div className="sidebar-icon">

@@ -27,7 +27,7 @@ const Sidebar = () => {
 
   return (
     <div className="fixed top-0 h-screen w-40 m-0 pt-4 flex flex-col bg-gray-600">
-      <Link to="/">
+      <Link to="/home">
         <div className="sidebar-icon">
           <FaHome />
           <span className="p-2"> Home</span>

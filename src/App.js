@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import { AuthContextProvider } from "./context/AuthContext";
 
 function App() {
+  console.log(process.env.REACT_APP_TEST);
   return (
     <>
       {/* <div className="flex "> */}

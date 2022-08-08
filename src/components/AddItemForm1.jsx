@@ -12,7 +12,24 @@ import FormRow from "./FormRow";
 
 const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   // Default rows of 1 - change id to be index
-  const [formRows, setFormRows] = useState([{ id: 0 }]);
+  //   const [formRows, setFormRows] = useState([{ id: "" }]);
+
+  // Trying out the full object as the state
+
+  const [formRows, setFormRows] = useState([
+    {
+      brand: "",
+      caseCount: "",
+      caseWeight: "",
+      cogs: "",
+      itemName: "",
+      lotNumber: "",
+      poNumber: "",
+      received: "",
+      salesPrice: "",
+      size: "",
+    },
+  ]);
 
   console.log(formRows);
   /// USE THIS FOR THE ROWS - provided by Javier
@@ -25,9 +42,28 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     console.log("changed");
   };
 
+  //   const addFormRow = (e) => {
+  //     e.preventDefault();
+  //     setFormRows([...formRows, { id: "" }]);
+  //   };
+
   const addFormRow = (e) => {
     e.preventDefault();
-    setFormRows([...formRows, { id: formRows.length + 1 }]);
+    setFormRows([
+      ...formRows,
+      {
+        brand: "",
+        caseCount: "",
+        caseWeight: "",
+        cogs: "",
+        itemName: "",
+        lotNumber: "",
+        poNumber: "",
+        received: "",
+        salesPrice: "",
+        size: "",
+      },
+    ]);
   };
 
   // loop over formrows array to create objects at each index - the amount of total items(objects) should be equal to the total form rows
@@ -57,7 +93,8 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
           <FormRow
             key={i}
             value={row}
-            onChange={onFormRowChange(i)}
+            onFormRowChange={onFormRowChange}
+            // onChange={onFormRowChange(i)}
             setFormRows={setFormRows}
             formRows={formRows}
             row={row}

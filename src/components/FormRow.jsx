@@ -3,10 +3,8 @@ import { FaTimesCircle } from "react-icons/fa";
 
 // Currying
 
-// I need to correctly add items to the state, I am currently deleting everything else when a new box is filled within the component
-
 // handle submit -> add items takes an array of items
-const FormRow = ({ i, formRows, setFormRows, row }) => {
+const FormRow = ({ i, formRows, setFormRows, row, onFormRowChange }) => {
   const [newItem, setNewItem] = useState({
     brand: "",
     caseCount: "",
@@ -20,6 +18,15 @@ const FormRow = ({ i, formRows, setFormRows, row }) => {
     size: "",
   });
 
+  // const removeFormRow = () => {
+  //   setFormRows(formRows.filter((fr) => fr.id !== row.id));
+  // };
+
+  // Based on index
+  const removeFormRow = () => {
+    setFormRows(formRows.filter((fr) => fr[i] !== row[i]));
+  };
+
   console.log(formRows);
   // const rowIndex = i;
 
@@ -29,11 +36,12 @@ const FormRow = ({ i, formRows, setFormRows, row }) => {
         Brand:
         <input
           key={i + 11}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, brand: e.target.value };
-            })
-          }
+          // onChange={(e) =>
+          //   setNewItem((prevState) => {
+          //     return { ...prevState, brand: e.target.value };
+          //   })
+          // }
+          onChange={onFormRowChange(i)}
           data-index={i}
           name="brand"
           className=" my-2 w-full rouded "
@@ -212,7 +220,7 @@ const FormRow = ({ i, formRows, setFormRows, row }) => {
         className="border-2"
         key={i + 111}
         type="button"
-        onClick={() => setFormRows(formRows.filter((fr) => fr.id !== row.id))}
+        onClick={removeFormRow}
       >
         <FaTimesCircle className="cursor-pointer fill-red-600" size={40} />
       </button>

@@ -14,6 +14,19 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
 
   const [inputs, setInputs] = useState([]);
 
+  /// USE THIS FOR THE ROWS
+  // const onFormRowChange = (rowIndex) => (values) => {
+  //   let newRows = [...formRows];
+  //   newRows[rowIndex] = values;
+  //   setFormRows(newRows);
+  // };
+
+  // Returns a functions that contains the input within the scope =>
+  const addFormRow = (e) => {
+    e.preventDefault();
+    setFormRows([...formRows, { id: formRows.length + 1 }]);
+  };
+
   // Trying to put each into an array and then form an object based on the index. Effect: This just adds a new item to the array on each click
   const [inputs1, setInputs1] = useState({
     brand: [],
@@ -49,6 +62,8 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
   };
 
   // Everytime i type, it adds a new number to the array
+
+  // Pass in the FormRow components
   const handleChange1 = (e) => {
     e.preventDefault();
     const name = e.target.name;
@@ -69,10 +84,6 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
   // Using a normal variable instead of state for adding multiple items
   const newItemsArr = [];
 
-  const addFormRow = (e) => {
-    e.preventDefault();
-    setFormRows([...formRows, { id: formRows.length + 1 }]);
-  };
   // State that controls the current warehouse
 
   // Working example to add items

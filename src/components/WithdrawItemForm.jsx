@@ -6,9 +6,11 @@ import { FaCheckCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "../firebase";
 
+// This can be used as an Edit Quantities option once an actual order form has been created.
+
 const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
-  console.log(inventoryItems);
-  console.log(whseInformation);
+  // console.log(inventoryItems);
+  // console.log(whseInformation);
 
   ///////////////////////////////
   // Using state makes them persist if we switch warehouse, should probably save this in standard variables

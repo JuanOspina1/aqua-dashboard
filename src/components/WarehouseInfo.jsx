@@ -17,6 +17,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import AddItemForm from "./AddItemForm";
 import WithdrawItemForm from "./WithdrawItemForm";
 import AddItemFormOriginal from "./AddItemFormOriginal";
+import AddItemForm1 from "./AddItemForm1";
 
 ////////////
 // Synchrony
@@ -209,21 +210,21 @@ const WarehouseInfo = () => {
           </div>
         </div>
 
-        {/* <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
-          <AddItemForm
-            currWhse={whseInfo?.name}
-            key={"itemForm"}
-            handleAddItemClick={handleAddItemsForm}
-          />
-        </div> */}
-
         <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
-          <AddItemFormOriginal
+          <AddItemForm1
             currWhse={whseInfo?.name}
             key={"itemForm"}
             handleAddItemClick={handleAddItemsForm}
           />
         </div>
+
+        {/* <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
+          <AddItemFormOriginal
+            currWhse={whseInfo?.name}
+            key={"itemForm"}
+            handleAddItemClick={handleAddItemsForm}
+          />
+        </div> */}
 
         <div
           className={` ${

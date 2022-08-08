@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import { db } from "../firebase";
 import { FaCheckCircle, FaPlusCircle, FaTimesCircle } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
+import FormRow from "./FormRow";
 
 ///////////////////////////////////
 // WHEN YOU ADD A NEW LINE, IT DELETES THE INFORMATION ON THE PREVIOUS LINES - MAY NEED TO FIND A WAY TO HOLD THE STATE FOR EACH LINE DYNAMICALLY.
 
 const AddItemForm = ({ currWhse, handleAddItemClick }) => {
   console.log("component mounted");
-  // Default rows of 1
+
+  // Default rows of 1 - change id to be index
   const [formRows, setFormRows] = useState([{ id: 1 }]);
 
   const [inputs, setInputs] = useState([]);
@@ -137,8 +139,6 @@ const AddItemForm = ({ currWhse, handleAddItemClick }) => {
     addItemArrToWhse(newItemsArr);
     handleAddItemClick();
   };
-
-  // STACK OVERFLOW SOLUTION - TRY KEEPING A CONSTANT KEY TO KEEP FOCUS ON INPUT FIELD - maybe index + a number
 
   return (
     /////////////////////////////////

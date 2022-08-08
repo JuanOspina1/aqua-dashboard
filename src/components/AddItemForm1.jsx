@@ -35,20 +35,26 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   /// USE THIS FOR THE ROWS - provided by Javier
   // Returns a functions that contains the input within the scope => need more understanding regarding the use of this function
   // Deleting a row only deletes the last item in the array - need to update this functionality - Javier mentioned the below would help but need to know how.
-  const onFormRowChange = (rowIndex) => (values) => {
-    let newRows = [...formRows];
-    newRows[rowIndex] = values;
-    setFormRows(newRows);
-    console.log("changed");
-  };
+  // const onFormRowChange = (rowIndex) => (values) => {
+  //   let newRows = [...formRows];
+  //   newRows[rowIndex] = values;
+  //   setFormRows(newRows);
+  //   console.log("changed");
+  // };
 
-  //   const addFormRow = (e) => {
-  //     e.preventDefault();
-  //     setFormRows([...formRows, { id: "" }]);
-  //   };
+  // Trying to change inputs and add them to the corresponding state
+  const onFormRowInputChange = (rowIndex) => (name, value) => {
+    // Create copy of the state
+    console.log(rowIndex, name, value);
+    let newInput = [...formRows];
+    // Find the index of the selected input and then find the matching name
+    newInput[rowIndex][name] = value;
+    setFormRows(newInput);
+  };
 
   const addFormRow = (e) => {
     e.preventDefault();
+
     setFormRows([
       ...formRows,
       {
@@ -92,9 +98,9 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
         return (
           <FormRow
             key={i}
+            index={i}
             value={row}
-            onFormRowChange={onFormRowChange}
-            // onChange={onFormRowChange(i)}
+            onFormRowInputChange={onFormRowInputChange(i)}
             setFormRows={setFormRows}
             formRows={formRows}
             row={row}

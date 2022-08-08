@@ -4,7 +4,17 @@ import { FaTimesCircle } from "react-icons/fa";
 // Currying
 
 // handle submit -> add items takes an array of items
-const FormRow = ({ i, formRows, setFormRows, row, onFormRowChange }) => {
+const FormRow = ({
+  i,
+  index,
+  formRows,
+  setFormRows,
+  row,
+  onFormRowInputChange,
+}) => {
+  // ATTEMPTING TO HANDLE ITEM CREATION IN THE PARENT COMPONENT
+  console.log(i);
+  console.log(index);
   const [newItem, setNewItem] = useState({
     brand: "",
     caseCount: "",
@@ -23,8 +33,9 @@ const FormRow = ({ i, formRows, setFormRows, row, onFormRowChange }) => {
   // };
 
   // Based on index
-  const removeFormRow = () => {
-    setFormRows(formRows.filter((fr) => fr[i] !== row[i]));
+  const removeFormRow = (index) => () => {
+    console.log(index);
+    setFormRows(formRows.filter((fr, i) => i !== index));
   };
 
   console.log(formRows);
@@ -35,192 +46,156 @@ const FormRow = ({ i, formRows, setFormRows, row, onFormRowChange }) => {
       <label className="border-r-2 border-b-2 font-bold">
         Brand:
         <input
-          key={i + 11}
+          key={index + 11}
           // onChange={(e) =>
           //   setNewItem((prevState) => {
           //     return { ...prevState, brand: e.target.value };
           //   })
           // }
-          onChange={onFormRowChange(i)}
+          onChange={(e) => onFormRowInputChange("brand", e.target.value)}
           data-index={i}
           name="brand"
           className=" my-2 w-full rouded "
           type="text"
           placeholder="Brand"
-          value={newItem.brand || ""}
+          value={formRows[index].brand || ""}
         />
       </label>
 
       <label className="border-r-2  border-b-2 font-bold">
         Case Count:
         <input
-          key={i + 22}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, caseCount: e.target.value };
-            })
-          }
+          key={index + 22}
+          onChange={(e) => onFormRowInputChange("caseCount", e.target.value)}
           data-index={i}
           name="caseCount"
           className=" my-2  rouded w-full"
           type="number"
           step="any"
           placeholder="Case Count"
-          value={newItem.caseCount || ""}
+          value={formRows[index].caseCount || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         Case Weight:
         <input
-          key={i + 33}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, caseWeight: e.target.value };
-            })
-          }
+          key={index + 33}
+          onChange={(e) => onFormRowInputChange("caseWeight", e.target.value)}
           data-index={i}
           name="caseWeight"
           className=" my-2  rouded w-full"
           type="number"
           step="any"
           placeholder="Case Weight"
-          value={newItem.caseWeight || ""}
+          value={formRows[index].caseWeight || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         Cost of Goods:
         <input
-          key={i + 44}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, cogs: e.target.value };
-            })
-          }
+          key={index + 44}
+          onChange={(e) => onFormRowInputChange("cogs", e.target.value)}
           data-index={i}
           name="cogs"
           className=" my-2  rouded w-full"
           type="number"
           step="any"
           placeholder="Cost of Goods"
-          value={newItem.cogs || ""}
+          value={formRows[index].cogs || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         Item Name:
         <input
-          key={i + 55}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, itemName: e.target.value };
-            })
-          }
+          key={index + 55}
+          onChange={(e) => onFormRowInputChange("itemName", e.target.value)}
           data-index={i}
           name="itemName"
           className=" my-2  rouded w-full"
           type="text"
           placeholder="Item Name"
-          value={newItem.itemName || ""}
+          value={formRows[index].itemName || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         Lot Number:
         <input
-          key={i + 66}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, lotNumber: e.target.value };
-            })
-          }
+          key={index + 66}
+          onChange={(e) => onFormRowInputChange("lotNumber", e.target.value)}
           data-index={i}
           name="lotNumber"
           className=" my-2  rouded w-full"
           type="text"
           placeholder="Lot Number"
-          value={newItem.lotNumber || ""}
+          value={formRows[index].lotNumber || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         PO Number:
         <input
-          key={i + 77}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, poNumber: e.target.value };
-            })
-          }
+          key={index + 77}
+          onChange={(e) => onFormRowInputChange("poNumber", e.target.value)}
           data-index={i}
           name="poNumber"
           className=" my-2  rouded w-full"
           type="text"
           placeholder="PO Number"
-          value={newItem.poNumber || ""}
+          value={formRows[index].poNumber || ""}
         />
       </label>
 
-      <label key={i + 88} className="border-r-2 border-b-2 font-bold">
+      <label key={index + 88} className="border-r-2 border-b-2 font-bold">
         Received:
         <input
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, received: e.target.value };
-            })
-          }
+          onChange={(e) => onFormRowInputChange("received", e.target.value)}
           data-index={i}
           name="received"
           className=" my-2  rouded w-full"
           type="Date"
           placeholder="Date Received"
-          value={newItem.received || ""}
+          value={formRows[index].received || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         Sales Price:
         <input
-          key={i + 99}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, salesPrice: e.target.value };
-            })
-          }
+          key={index + 99}
+          onChange={(e) => onFormRowInputChange("salesPrice", e.target.value)}
           data-index={i}
           name="salesPrice"
           className=" my-2  rouded w-full"
           type="number"
           step="any"
           placeholder="Sales Price"
-          value={newItem.salesPrice || ""}
+          value={formRows[index].salesPrice || ""}
         />
       </label>
 
       <label className="border-r-2 border-b-2 font-bold">
         Size:
         <input
-          key={i + 100}
-          onChange={(e) =>
-            setNewItem((prevState) => {
-              return { ...prevState, size: e.target.value };
-            })
-          }
+          key={index + 100}
+          onChange={(e) => onFormRowInputChange("size", e.target.value)}
           data-index={i}
           name="size"
           className=" my-2  rouded w-full"
           type="text"
           placeholder="Size"
-          value={newItem.size || ""}
+          value={formRows[index].size || ""}
         />
       </label>
 
       <button
         className="border-2"
-        key={i + 111}
+        key={index + 111}
         type="button"
-        onClick={removeFormRow}
+        onClick={removeFormRow(index)}
       >
         <FaTimesCircle className="cursor-pointer fill-red-600" size={40} />
       </button>

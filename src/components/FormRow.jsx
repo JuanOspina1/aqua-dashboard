@@ -1,45 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaTimesCircle } from "react-icons/fa";
 
 // Currying
 
 // handle submit -> add items takes an array of items
 const FormRow = ({
-  i,
   index,
   formRows,
   setFormRows,
-  row,
+
   onFormRowInputChange,
 }) => {
   // ATTEMPTING TO HANDLE ITEM CREATION IN THE PARENT COMPONENT
-  console.log(i);
+
   console.log(index);
-  const [newItem, setNewItem] = useState({
-    brand: "",
-    caseCount: "",
-    caseWeight: "",
-    cogs: "",
-    itemName: "",
-    lotNumber: "",
-    poNumber: "",
-    received: "",
-    salesPrice: "",
-    size: "",
-  });
 
-  // const removeFormRow = () => {
-  //   setFormRows(formRows.filter((fr) => fr.id !== row.id));
-  // };
-
-  // Based on index
+  // Removing row based on index
   const removeFormRow = (index) => () => {
     console.log(index);
     setFormRows(formRows.filter((fr, i) => i !== index));
   };
-
-  console.log(formRows);
-  // const rowIndex = i;
 
   return (
     <div className="grid grid-cols-11 gap-4 bg-white">
@@ -47,13 +27,7 @@ const FormRow = ({
         Brand:
         <input
           key={index + 11}
-          // onChange={(e) =>
-          //   setNewItem((prevState) => {
-          //     return { ...prevState, brand: e.target.value };
-          //   })
-          // }
           onChange={(e) => onFormRowInputChange("brand", e.target.value)}
-          data-index={i}
           name="brand"
           className=" my-2 w-full rouded "
           type="text"
@@ -67,7 +41,6 @@ const FormRow = ({
         <input
           key={index + 22}
           onChange={(e) => onFormRowInputChange("caseCount", e.target.value)}
-          data-index={i}
           name="caseCount"
           className=" my-2  rouded w-full"
           type="number"
@@ -82,7 +55,6 @@ const FormRow = ({
         <input
           key={index + 33}
           onChange={(e) => onFormRowInputChange("caseWeight", e.target.value)}
-          data-index={i}
           name="caseWeight"
           className=" my-2  rouded w-full"
           type="number"
@@ -97,7 +69,6 @@ const FormRow = ({
         <input
           key={index + 44}
           onChange={(e) => onFormRowInputChange("cogs", e.target.value)}
-          data-index={i}
           name="cogs"
           className=" my-2  rouded w-full"
           type="number"
@@ -112,7 +83,6 @@ const FormRow = ({
         <input
           key={index + 55}
           onChange={(e) => onFormRowInputChange("itemName", e.target.value)}
-          data-index={i}
           name="itemName"
           className=" my-2  rouded w-full"
           type="text"
@@ -126,7 +96,6 @@ const FormRow = ({
         <input
           key={index + 66}
           onChange={(e) => onFormRowInputChange("lotNumber", e.target.value)}
-          data-index={i}
           name="lotNumber"
           className=" my-2  rouded w-full"
           type="text"
@@ -140,7 +109,6 @@ const FormRow = ({
         <input
           key={index + 77}
           onChange={(e) => onFormRowInputChange("poNumber", e.target.value)}
-          data-index={i}
           name="poNumber"
           className=" my-2  rouded w-full"
           type="text"
@@ -153,7 +121,6 @@ const FormRow = ({
         Received:
         <input
           onChange={(e) => onFormRowInputChange("received", e.target.value)}
-          data-index={i}
           name="received"
           className=" my-2  rouded w-full"
           type="Date"
@@ -167,7 +134,6 @@ const FormRow = ({
         <input
           key={index + 99}
           onChange={(e) => onFormRowInputChange("salesPrice", e.target.value)}
-          data-index={i}
           name="salesPrice"
           className=" my-2  rouded w-full"
           type="number"
@@ -182,7 +148,6 @@ const FormRow = ({
         <input
           key={index + 100}
           onChange={(e) => onFormRowInputChange("size", e.target.value)}
-          data-index={i}
           name="size"
           className=" my-2  rouded w-full"
           type="text"

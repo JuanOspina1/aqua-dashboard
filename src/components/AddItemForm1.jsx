@@ -8,14 +8,9 @@ import FormRow from "./FormRow";
 ///////////////////////////////////
 // PENDING TASKS
 
-// I need to work on deleting a row
+// 1) BUSINESS LOGIC
 
 const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
-  // Default rows of 1 - change id to be index
-  //   const [formRows, setFormRows] = useState([{ id: "" }]);
-
-  // Trying out the full object as the state
-
   const [formRows, setFormRows] = useState([
     {
       brand: "",
@@ -84,7 +79,7 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     console.log(e.target.elements.brand);
   };
 
-  // Working example to add items
+  // Working example to add items - put this in the business logice when applicable.
   //   const addItemArrToWhse = async () => {
   //     const whseRef = doc(db, "warehouses", currWhse);
   //     await updateDoc(whseRef, {

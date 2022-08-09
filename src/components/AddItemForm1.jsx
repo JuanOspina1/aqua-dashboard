@@ -1,9 +1,7 @@
-import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { db } from "../firebase";
 import { FaCheckCircle, FaPlusCircle, FaTimesCircle } from "react-icons/fa";
-import { v4 as uuidv4 } from "uuid";
 import FormRow from "./FormRow";
+import FirebaseServices from "../services/FirebaseServices";
 
 ///////////////////////////////////
 // PENDING TASKS
@@ -26,10 +24,8 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     },
   ]);
 
-  console.log(formRows);
   /// USE THIS FOR THE ROWS - provided by Javier
-  // Returns a functions that contains the input within the scope => need more understanding regarding the use of this function
-  // Deleting a row only deletes the last item in the array - need to update this functionality - Javier mentioned the below would help but need to know how.
+  // Returns a functions that contains the first input within the scope for use until needed
   // const onFormRowChange = (rowIndex) => (values) => {
   //   let newRows = [...formRows];
   //   newRows[rowIndex] = values;
@@ -40,7 +36,7 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   // Trying to change inputs and add them to the corresponding state
   const onFormRowInputChange = (rowIndex) => (name, value) => {
     // Create copy of the state
-    console.log(rowIndex, name, value);
+    // console.log(rowIndex, name, value);
     let newInput = [...formRows];
     // Find the index of the selected input and then find the matching name
     newInput[rowIndex][name] = value;
@@ -70,13 +66,27 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   // loop over formrows array to create objects at each index - the amount of total items(objects) should be equal to the total form rows
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ways to get data
+    // Create items in firebase
+    FirebaseServices.addItemArrToWhse(currWhse, formRows);
 
-    // 1) by index
-    console.log(e.target[11].value);
+    // Empty the array once submitted
+    setFormRows([
+      {
+        brand: "",
+        caseCount: "",
+        caseWeight: "",
+        cogs: "",
+        itemName: "",
+        lotNumber: "",
+        poNumber: "",
+        received: "",
+        salesPrice: "",
+        size: "",
+      },
+    ]);
 
-    // 2) this returns a node list with all of the brands -> I can use this and then create new objects based on the index
-    console.log(e.target.elements.brand);
+    // Switch the view back to the items list
+    handleAddItemClick();
   };
 
   // Working example to add items - put this in the business logice when applicable.

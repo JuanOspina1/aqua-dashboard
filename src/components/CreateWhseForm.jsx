@@ -1,6 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { db } from "../firebase";
+import FirebaseServices from "../services/FirebaseServices";
 
 const CreateWhseForm = () => {
   const [inputs, setInputs] = useState({});
@@ -16,17 +15,11 @@ const CreateWhseForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    setDoc(doc(db, "warehouses", inputs.name), {
-      information: [
-        {
-          name: inputs.name,
-          email: inputs.email,
-          address: inputs.address,
-          phone: inputs.phone,
-        },
-      ],
-      Items: [],
-    });
+    // Create Warehouse
+    FirebaseServices.createWarehouse(inputs);
+
+    // Empty the form fields
+    setInputs({});
   };
 
   return (

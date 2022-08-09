@@ -13,11 +13,9 @@ const FormRow = ({
 }) => {
   // ATTEMPTING TO HANDLE ITEM CREATION IN THE PARENT COMPONENT
 
-  console.log(index);
-
   // Removing row based on index
   const removeFormRow = (index) => () => {
-    console.log(index);
+    // console.log(index);
     setFormRows(formRows.filter((fr, i) => i !== index));
   };
 

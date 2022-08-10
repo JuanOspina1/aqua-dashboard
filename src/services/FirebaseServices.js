@@ -1,11 +1,4 @@
-import {
-  arrayUnion,
-  doc,
-  getDoc,
-  onSnapshot,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 // Business logic for creating items
@@ -27,10 +20,23 @@ const FirebaseServices = {
     });
   },
 
-  // Delete Warehouse
+  // Better way to create warehouse with custom ID - Ref: Firestore docs: https://firebase.google.com/docs/firestore/manage-data/add-data
+  // createWarehouse: (inputs) => {
+  //   setDoc(doc(db, "warehouses"), {
+  //     information: [
+  //       {
+  //         id: doc.id,
+  //         name: inputs.name,
+  //         email: inputs.email,
+  //         address: inputs.address,
+  //         phone: inputs.phone,
+  //       },
+  //     ],
+  //     Items: [],
+  //   });
+  // },
 
-  ///////////////////////////////////
-  // USERS SECTION
+  // Delete Warehouse
 
   ///////////////////////////////////
   // ITEMS SECTION

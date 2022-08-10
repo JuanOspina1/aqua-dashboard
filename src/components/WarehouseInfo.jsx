@@ -65,7 +65,7 @@ const WarehouseInfo = () => {
       const res = await getDocs(collection(db, "warehouses"));
 
       res.forEach((doc) => {
-        // console.log(doc.id, "=>", doc.data());
+        console.log(doc.id, "=>", doc.data());
         warehouseOptions.push(doc.data().information[0].name);
         // console.log("This is inside the forEach" + warehouseOptions);
       });

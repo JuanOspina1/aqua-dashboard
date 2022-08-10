@@ -3,11 +3,6 @@ import { FaCheckCircle, FaPlusCircle, FaTimesCircle } from "react-icons/fa";
 import FormRow from "./FormRow";
 import FirebaseServices from "../services/FirebaseServices";
 
-///////////////////////////////////
-// PENDING TASKS
-
-// 1) BUSINESS LOGIC
-
 const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   const [formRows, setFormRows] = useState([
     {
@@ -63,7 +58,6 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     ]);
   };
 
-  // loop over formrows array to create objects at each index - the amount of total items(objects) should be equal to the total form rows
   const handleSubmit = (e) => {
     e.preventDefault();
     // Create items in firebase
@@ -88,14 +82,6 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     // Switch the view back to the items list
     handleAddItemClick();
   };
-
-  // Working example to add items - put this in the business logice when applicable.
-  //   const addItemArrToWhse = async () => {
-  //     const whseRef = doc(db, "warehouses", currWhse);
-  //     await updateDoc(whseRef, {
-  //       Items: arrayUnion(...newItemsArr),
-  //     });
-  //   };
 
   return (
     <form onSubmit={handleSubmit} className="ml-4 mt-4 w-full">

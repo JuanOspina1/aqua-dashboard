@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
 // I would like to implement a dissapearing success message when a new user is created.

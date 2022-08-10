@@ -1,4 +1,11 @@
-import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 // Business logic for creating items

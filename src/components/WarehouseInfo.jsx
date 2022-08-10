@@ -18,6 +18,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import WithdrawItemForm from "./WithdrawItemForm";
 
 import AddItemForm1 from "./AddItemForm1";
+import FirebaseServices from "../services/FirebaseServices";
 
 ////////////
 // Synchrony
@@ -35,38 +36,50 @@ import AddItemForm1 from "./AddItemForm1";
 const WarehouseInfo = () => {
   // List of warehouses in the DB
   const [warehouseCollection, setWarehouseCollection] = useState([]);
+
+  // Current Warehouse we are working in
   const [warehouseInfo, setWarehouseInfo] = useState([]);
+  // Inventory of the current warehouse
   const [inventory, setInventory] = useState([]);
 
+  // Togglers
   const [withdrawForm, setWithdrawForm] = useState(false);
   const [inventoryForm, setInventoryForm] = useState(true);
   const [addItemsForm, setAddItemsForm] = useState(false);
 
   //////////////////////////////
 
-  const initialWhseData = async (firstWhse) => {
-    // USE ONSNAPSHOT to keep changes in the DB rendering actively.
-
-    // const docSnap = await getDoc(doc(db, "warehouses", firstWhse));
-    // setWarehouseInfo(docSnap.data()?.information);
-    // setInventory(docSnap.data()?.Items);
-
-    onSnapshot(doc(db, "warehouses", firstWhse), (doc) => {
-      setInventory(doc.data()?.Items);
-      setWarehouseInfo(doc.data()?.information);
-    });
-  };
-
-  const getWhseFromDropdown = (e) => {
-    e.preventDefault();
-    // Target value is not working - could not find the value field upon inspection - using text since it is currently the same as value
-    const selectedWhse = e.target.text;
+  // Currently works to select the warehouse from the dropdown.
+  const handleSelectingWarehouse = (selectedWhse) => {
     console.log("you selected" + selectedWhse);
     onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
       setInventory(doc.data()?.Items);
       setWarehouseInfo(doc.data()?.information);
     });
   };
+
+  // Get all warehouses available
+  const warehouseOptions = [];
+  useEffect(() => {
+    async function getCollectionIDs() {
+      const res = await getDocs(collection(db, "warehouses"));
+
+      res.forEach((doc) => {
+        // console.log(doc.id, "=>", doc.data());
+        warehouseOptions.push(doc.data().information[0].name);
+        // console.log("This is inside the forEach" + warehouseOptions);
+      });
+      setWarehouseCollection(warehouseOptions);
+      // console.log(warehouseOptions);
+      // console.log(res.docs[0].data().Items[0]);
+      // console.log(res.docs[0].data().information[0]);
+
+      // I have to put these in an array due to previous logic used - deep refactoring may be needed but everything functions properly
+      setInventory([res.docs[0].data().Items[0]]);
+      setWarehouseInfo([res.docs[0].data().information[0]]);
+    }
+    getCollectionIDs();
+  }, []);
 
   //////////////////////////
   // HANDLERS SECTION
@@ -85,23 +98,7 @@ const WarehouseInfo = () => {
     setWithdrawForm(false);
   };
 
-  // Get all warehouses available
-  const warehouseOptions = [];
-  useEffect(() => {
-    async function getCollectionIDs() {
-      const res = await getDocs(collection(db, "warehouses"));
-      res.forEach((doc) => {
-        // console.log(doc.id, "=>", doc.data());
-        warehouseOptions.push(doc.data().information[0].name);
-        // console.log("This is inside the forEach" + warehouseOptions);
-      });
-      setWarehouseCollection(warehouseOptions);
-      // console.log(warehouseOptions);
-      initialWhseData(warehouseOptions[0]);
-    }
-    getCollectionIDs();
-  }, []);
-
+  // I have to deconstruct this due to old logic - could be refactored but everything works
   const [whseInfo] = warehouseInfo;
 
   // THIS FUNCTION IS PART OF THE PREBUILT DROPDOWN MENU
@@ -138,7 +135,8 @@ const WarehouseInfo = () => {
                   <Menu.Item key={whse}>
                     {({ active }) => (
                       <a
-                        onClick={getWhseFromDropdown}
+                        onClick={(e) => handleSelectingWarehouse(e.target.text)}
+                        // onClick={getWhseFromDropdown}
                         value={whse}
                         className={classNames(
                           active

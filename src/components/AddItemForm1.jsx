@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaCheckCircle, FaPlusCircle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import FormRow from "./FormRow";
 import FirebaseServices from "../services/FirebaseServices";
 

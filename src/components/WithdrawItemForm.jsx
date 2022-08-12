@@ -2,9 +2,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState, Fragment } from "react";
-import { FaCheckCircle } from "react-icons/fa";
-import { v4 as uuidv4 } from "uuid";
 import { db } from "../firebase";
+import FirebaseServices from "../services/FirebaseServices";
 
 // This can be used as an Edit Quantities option once an actual order form has been created.
 
@@ -34,33 +33,55 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
   };
 
   // VALIDATING INPUTS WITH NESTED IF STATEMENT - I need to find out how to stop the function if the if statement fails instead of making an invalid call to firebase
-  const withdrawItem = async (e) => {
-    try {
-      e.preventDefault();
-      // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
+  // const withdrawItem = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
 
-      // If statement is happening within the map - it will not stop the outer function - need to return if the alert window happens
-      const withdrawnInventoryArr = inventoryItems.map((el, i) => {
-        if (el.lotNumber === lotNumber) {
-          if (withdrawQty <= el.caseCount) {
-            el.caseCount = Number(el.caseCount) - withdrawQty;
-            return el;
-          } else {
-            return alert(
-              "The withdraw amount must be equal or less than the quantity available"
-            );
-          }
-        } else return el;
-      });
+  //     // If statement is happening within the map - it will not stop the outer function - need to return if the alert window happens
+  //     const withdrawnInventoryArr = inventoryItems.map((el, i) => {
+  //       if (el.lotNumber === lotNumber) {
+  //         if (withdrawQty <= el.caseCount) {
+  //           el.caseCount = Number(el.caseCount) - withdrawQty;
+  //           return el;
+  //         } else {
+  //           return alert(
+  //             "The withdraw amount must be equal or less than the quantity available"
+  //           );
+  //         }
+  //       } else return el;
+  //     });
 
-      console.log(withdrawnInventoryArr);
-      const whseRef = doc(db, "warehouses", currWhse.name);
-      await updateDoc(whseRef, {
-        Items: withdrawnInventoryArr,
-      });
-    } catch (err) {
-      console.error(err);
-    }
+  //     // FirebaseServices.updateQuantities(currWhse.name, withdrawnInventoryArr)
+  //     console.log(withdrawnInventoryArr);
+  //     const whseRef = doc(db, "warehouses", currWhse.name);
+  //     await updateDoc(whseRef, {
+  //       Items: withdrawnInventoryArr,
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  const withdrawItem = (e) => {
+    e.preventDefault();
+    // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
+
+    // If statement is happening within the map - it will not stop the outer function - need to return if the alert window happens
+    const withdrawnInventoryArr = inventoryItems.map((el, i) => {
+      if (el.lotNumber === lotNumber) {
+        if (withdrawQty <= el.caseCount) {
+          el.caseCount = Number(el.caseCount) - withdrawQty;
+          return el;
+        } else {
+          return alert(
+            "The withdraw amount must be equal or less than the quantity available"
+          );
+        }
+      } else return el;
+    });
+
+    FirebaseServices.updateQuantities(currWhse.name, withdrawnInventoryArr);
   };
 
   // Reset the state based on the whse changing
@@ -103,7 +124,7 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
             <div className="py-1">
               {inventoryItems.map((item) => {
                 return (
-                  <Menu.Item key={uuidv4()}>
+                  <Menu.Item key={item.lotNumber}>
                     {({ active }) => (
                       <a
                         onClick={getLotNumberFromDropdown}

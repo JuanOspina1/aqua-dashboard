@@ -6,8 +6,23 @@ import { db } from "../firebase";
 const FirebaseServices = {
   ////////////////////////////////////
   // WAREHOUSE SECTION
+  // createWarehouse: (inputs) => {
+  //   setDoc(doc(db, "warehouses", inputs.name), {
+  //     information: [
+  //       {
+  //         name: inputs.name,
+  //         email: inputs.email,
+  //         address: inputs.address,
+  //         phone: inputs.phone,
+  //       },
+  //     ],
+  //     Items: [],
+  //   });
+  // },
+
+  // Better way to create warehouse with custom ID - Ref: Firestore docs: https://firebase.google.com/docs/firestore/manage-data/add-data
   createWarehouse: (inputs) => {
-    setDoc(doc(db, "warehouses", inputs.name), {
+    setDoc(doc(db, "warehouses"), {
       information: [
         {
           name: inputs.name,
@@ -19,22 +34,6 @@ const FirebaseServices = {
       Items: [],
     });
   },
-
-  // Better way to create warehouse with custom ID - Ref: Firestore docs: https://firebase.google.com/docs/firestore/manage-data/add-data
-  // createWarehouse: (inputs) => {
-  //   setDoc(doc(db, "warehouses"), {
-  //     information: [
-  //       {
-  //         id: doc.id,
-  //         name: inputs.name,
-  //         email: inputs.email,
-  //         address: inputs.address,
-  //         phone: inputs.phone,
-  //       },
-  //     ],
-  //     Items: [],
-  //   });
-  // },
 
   // Delete Warehouse
 
@@ -65,6 +64,17 @@ const FirebaseServices = {
       });
     } catch (err) {
       console.log(err);
+    }
+  },
+
+  updateQuantities: async (warehouse, updatedQtyArr) => {
+    try {
+      const whseRef = doc(db, "warehouses", warehouse);
+      await updateDoc(whseRef, {
+        Items: updatedQtyArr,
+      });
+    } catch (error) {
+      console.error(error);
     }
   },
 };

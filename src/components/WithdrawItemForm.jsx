@@ -5,7 +5,7 @@ import FirebaseServices from "../services/FirebaseServices";
 
 // This can be used as an Edit Quantities option once an actual order form has been created.
 
-const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
+const WithdrawItemForm = ({ inventoryItems, whseID }) => {
   // console.log(inventoryItems);
   // console.log(whseInformation);
 
@@ -13,9 +13,6 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
   // Using state makes them persist if we switch warehouse, should probably save this in standard variables
   const [lotNumber, setLotNumber] = useState("");
   const [withdrawQty, setWithdrawQty] = useState(0);
-
-  const [currWhse] = whseInformation;
-  //   console.log(currWhse);
 
   // Withdraw from the current warehouse
   // Based on the current lot numbers available
@@ -25,8 +22,8 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
 
   const getLotNumberFromDropdown = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log(e.target.text);
+    // console.log(e.target);
+    // console.log(e.target.text);
     setLotNumber(e.target.text);
   };
 
@@ -50,7 +47,7 @@ const WithdrawItemForm = ({ inventoryItems, whseInformation }) => {
       } else return el;
     });
 
-    FirebaseServices.updateQuantities(currWhse.name, withdrawnInventoryArr);
+    FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr);
   };
 
   // Reset the state based on the whse changing

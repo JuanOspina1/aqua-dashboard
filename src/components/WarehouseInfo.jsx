@@ -68,7 +68,7 @@ const WarehouseInfo = () => {
       const res = await getDocs(collection(db, "warehouses"));
 
       res.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
+        // console.log(doc.id, "=>", doc.data());
         warehouseOptions.push({
           name: doc.data().information[0].name,
           id: doc.id,
@@ -231,10 +231,7 @@ const WarehouseInfo = () => {
             withdrawForm === true ? "" : "hidden"
           } grid grid-cols-2`}
         >
-          <WithdrawItemForm
-            inventoryItems={inventory}
-            whseInformation={warehouseInfo}
-          />
+          <WithdrawItemForm inventoryItems={inventory} whseID={whseID} />
         </div>
 
         <table

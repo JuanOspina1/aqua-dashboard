@@ -1,4 +1,10 @@
-import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 // Business logic for creating items
@@ -21,18 +27,22 @@ const FirebaseServices = {
   // },
 
   // Better way to create warehouse with custom ID - Ref: Firestore docs: https://firebase.google.com/docs/firestore/manage-data/add-data
-  createWarehouse: (inputs) => {
-    setDoc(doc(db, "warehouses"), {
-      information: [
-        {
-          name: inputs.name,
-          email: inputs.email,
-          address: inputs.address,
-          phone: inputs.phone,
-        },
-      ],
-      Items: [],
-    });
+  createWarehouse: async (inputs) => {
+    try {
+      setDoc(doc(collection(db, "warehouses")), {
+        information: [
+          {
+            name: inputs.name,
+            email: inputs.email,
+            address: inputs.address,
+            phone: inputs.phone,
+          },
+        ],
+        Items: [],
+      });
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   // Delete Warehouse

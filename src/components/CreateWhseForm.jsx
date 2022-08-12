@@ -14,7 +14,7 @@ const CreateWhseForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputs);
+    // console.log(inputs);
     // Create Warehouse
     FirebaseServices.createWarehouse(inputs);
 

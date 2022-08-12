@@ -1,8 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState, Fragment } from "react";
-import { db } from "../firebase";
 import FirebaseServices from "../services/FirebaseServices";
 
 // This can be used as an Edit Quantities option once an actual order form has been created.

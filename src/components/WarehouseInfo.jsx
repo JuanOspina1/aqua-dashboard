@@ -51,22 +51,25 @@ const WarehouseInfo = () => {
 
   // Currently works to select the warehouse from the dropdown.
   const handleSelectingWarehouse = (selectedWhse) => {
-    console.log("you selected" + selectedWhse);
+    console.log(selectedWhse);
     onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
       setInventory(doc.data()?.Items);
       setWarehouseInfo(doc.data()?.information);
     });
   };
 
-  // Get all warehouses available
-  const warehouseOptions = [];
   useEffect(() => {
+    const warehouseOptions = [];
+
     async function getCollectionIDs() {
       const res = await getDocs(collection(db, "warehouses"));
 
       res.forEach((doc) => {
         console.log(doc.id, "=>", doc.data());
-        warehouseOptions.push(doc.data().information[0].name);
+        warehouseOptions.push({
+          name: doc.data().information[0].name,
+          id: doc.id,
+        });
         // console.log("This is inside the forEach" + warehouseOptions);
       });
       setWarehouseCollection(warehouseOptions);
@@ -77,6 +80,7 @@ const WarehouseInfo = () => {
       // I have to put these in an array due to previous logic used - deep refactoring may be needed but everything functions properly
       setInventory([res.docs[0].data().Items[0]]);
       setWarehouseInfo([res.docs[0].data().information[0]]);
+      console.log(warehouseCollection);
     }
     getCollectionIDs();
   }, []);
@@ -132,12 +136,14 @@ const WarehouseInfo = () => {
             <div className="py-1">
               {warehouseCollection.map((whse) => {
                 return (
-                  <Menu.Item key={whse}>
+                  <Menu.Item key={whse.id}>
                     {({ active }) => (
                       <a
-                        onClick={(e) => handleSelectingWarehouse(e.target.text)}
-                        // onClick={getWhseFromDropdown}
-                        value={whse}
+                        onClick={(event) =>
+                          handleSelectingWarehouse(event.target.dataset.id)
+                        }
+                        value={whse.id}
+                        data-id={whse.id}
                         className={classNames(
                           active
                             ? "bg-gray-100 text-gray-900"
@@ -145,7 +151,7 @@ const WarehouseInfo = () => {
                           "block px-4 py-2 text-sm"
                         )}
                       >
-                        {whse}
+                        {whse.name}
                       </a>
                     )}
                   </Menu.Item>

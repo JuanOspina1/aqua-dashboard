@@ -59,6 +59,8 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   };
 
   const handleSubmit = (e) => {
+    // Need to set up validation logic. Loop through the objects array and validate each item.
+
     e.preventDefault();
     // Create items in firebase
     FirebaseServices.addItemArrToWhse(currWhse, formRows);

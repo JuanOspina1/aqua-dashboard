@@ -32,6 +32,7 @@ const FirebaseServices = {
       setDoc(doc(collection(db, "warehouses")), {
         information: [
           {
+            id: doc.id,
             name: inputs.name,
             email: inputs.email,
             address: inputs.address,

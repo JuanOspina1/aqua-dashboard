@@ -41,6 +41,8 @@ const WarehouseInfo = () => {
   const [warehouseInfo, setWarehouseInfo] = useState([]);
   // Inventory of the current warehouse
   const [inventory, setInventory] = useState([]);
+  // ID of the current Whse
+  const [whseID, setWhseID] = useState("");
 
   // Togglers
   const [withdrawForm, setWithdrawForm] = useState(false);
@@ -55,6 +57,7 @@ const WarehouseInfo = () => {
     onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
       setInventory(doc.data()?.Items);
       setWarehouseInfo(doc.data()?.information);
+      setWhseID(doc.id);
     });
   };
 
@@ -80,6 +83,7 @@ const WarehouseInfo = () => {
       // I have to put these in an array due to previous logic used - deep refactoring may be needed but everything functions properly
       setInventory([res.docs[0].data().Items[0]]);
       setWarehouseInfo([res.docs[0].data().information[0]]);
+      setWhseID(res.docs[0].id);
       console.log(warehouseCollection);
     }
     getCollectionIDs();
@@ -216,19 +220,11 @@ const WarehouseInfo = () => {
 
         <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
           <AddItemForm1
-            currWhse={whseInfo?.name}
+            currWhse={whseID}
             key={"itemForm"}
             handleAddItemClick={handleAddItemsForm}
           />
         </div>
-
-        {/* <div className={` ${addItemsForm === true ? "" : "hidden"}`}>
-          <AddItemFormOriginal
-            currWhse={whseInfo?.name}
-            key={"itemForm"}
-            handleAddItemClick={handleAddItemsForm}
-          />
-        </div> */}
 
         <div
           className={` ${

@@ -51,16 +51,6 @@ const WarehouseInfo = () => {
 
   //////////////////////////////
 
-  // Currently works to select the warehouse from the dropdown.
-  const handleSelectingWarehouse = (selectedWhse) => {
-    console.log(selectedWhse);
-    onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
-      setInventory(doc.data()?.Items);
-      setWarehouseInfo(doc.data()?.information);
-      setWhseID(doc.id);
-    });
-  };
-
   useEffect(() => {
     const warehouseOptions = [];
 
@@ -93,6 +83,16 @@ const WarehouseInfo = () => {
 
   //////////////////////////
   // HANDLERS SECTION
+
+  // Currently works to select the warehouse from the dropdown.
+  const handleSelectingWarehouse = (selectedWhse) => {
+    console.log(selectedWhse);
+    onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
+      setInventory(doc.data()?.Items);
+      setWarehouseInfo(doc.data()?.information);
+      setWhseID(doc.id);
+    });
+  };
 
   const handleWithdrawForm = () => {
     console.log("Withdraw form is clicked");

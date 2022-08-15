@@ -4,7 +4,7 @@ import FirebaseServices from "../services/FirebaseServices";
 
 // Delete based on lot number
 
-const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
+const WarehouseInventory = ({ whseID, inventoryItems, whseInformation }) => {
   // Sort by brand / lot # / case count
   // console.log(whseInformation);
   // console.log(inventoryItems);
@@ -13,7 +13,12 @@ const WarehouseInventory = ({ inventoryItems, whseInformation }) => {
   // console.log(items);
 
   const handleRemoveItem = (lotNumber) => {
-    FirebaseServices.removeItemFromWhse(lotNumber, whseInformation, items);
+    FirebaseServices.removeItemFromWhse(
+      lotNumber,
+
+      items,
+      whseID
+    );
   };
 
   return (

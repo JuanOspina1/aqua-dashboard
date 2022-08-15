@@ -81,10 +81,12 @@ const WarehouseInfo = () => {
       // console.log(res.docs[0].data().information[0]);
 
       // I have to put these in an array due to previous logic used - deep refactoring may be needed but everything functions properly
-      setInventory([res.docs[0].data().Items[0]]);
+      console.log(res.docs[0].data().Items);
+      setInventory(res.docs[0].data().Items);
+      // setInventory([res.docs[0].data().Items[0]]);
       setWarehouseInfo([res.docs[0].data().information[0]]);
       setWhseID(res.docs[0].id);
-      console.log(warehouseCollection);
+      // console.log(warehouseCollection);
     }
     getCollectionIDs();
   }, []);
@@ -256,6 +258,7 @@ const WarehouseInfo = () => {
             <WarehouseInventory
               inventoryItems={inventory}
               whseInformation={warehouseInfo}
+              whseID={whseID}
             />
           </tbody>
         </table>

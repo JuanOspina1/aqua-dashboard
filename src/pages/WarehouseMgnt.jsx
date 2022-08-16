@@ -3,6 +3,7 @@ import CreateWhseForm from "../components/CreateWhseForm";
 import Sidebar from "../components/Sidebar";
 import { FaUserCircle, FaWarehouse } from "react-icons/fa";
 import CreateUserForm from "../components/CreateUserForm";
+import ListTable from "../components/ListTable";
 
 // Get full list of users
 
@@ -32,8 +33,8 @@ const WarehouseMgnt = () => {
           </h1>
         </div>
 
-        <div className="grid ml-40">
-          <div className="grid grid-cols-2  justify-items-center bg-slate-200  rounded-md shadow-lg ml-4 mr-4 pb-4 w-1/2">
+        <div className="grid grid-cols-2 ml-40">
+          <div className="grid grid-cols-2  justify-items-center bg-white  rounded-md shadow-lg ml-4 mr-4 pb-4 w-1/2">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
 
             <div className="grid justify-items-center">
@@ -66,6 +67,9 @@ const WarehouseMgnt = () => {
           </div>
           <div className={` ${whseForm === true ? "" : "hidden"}`}>
             <CreateWhseForm />
+          </div>
+          <div className="w-[100px]">
+            <ListTable />
           </div>
         </div>
       </div>

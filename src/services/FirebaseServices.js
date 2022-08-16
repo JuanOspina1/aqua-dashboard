@@ -1,6 +1,7 @@
 import {
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   onSnapshot,
@@ -15,7 +16,7 @@ const FirebaseServices = {
   ////////////////////////////////////
   // WAREHOUSE SECTION
 
-  // Issue with this is that the items wont update upon creation - need to use onSnapshot but having issues with loading the snapshot data on the component
+  // Issue with this is that the items wont update upon creation - need to use onSnapshot but having issues with loading the snapshot data on the component - I am currently using onSnapshot within the component
   snapWarehouse: async (selectedWhse) => {
     const docRef = doc(db, "warehouses", selectedWhse);
     const docSnap = await getDoc(docRef);
@@ -55,7 +56,14 @@ const FirebaseServices = {
     }
   },
 
-  // Delete Warehouse
+  // Delete Warehouse - Works! took a bit of time to update, that could have been my internet.
+  deleteWarehouse: async (whseID) => {
+    try {
+      await deleteDoc(doc(db, "warehouses", whseID));
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
   ///////////////////////////////////
   // ITEMS SECTION

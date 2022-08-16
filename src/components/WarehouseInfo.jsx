@@ -1,16 +1,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { db } from "../firebase";
 import WarehouseInventory from "./WarehouseInventory";
-import {
-  updateDoc,
-  doc,
-  onSnapshot,
-  collection,
-  query,
-  getDocs,
-  collectionGroup,
-  getDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot, collection, query } from "firebase/firestore";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
@@ -28,6 +19,7 @@ import FirebaseServices from "../services/FirebaseServices";
 // 1) I should create random IDs instead of using the warehouses name - for the logic below, it is based on the ID being exactly the same as the warehouse name
 // 2) Lowercase all fields in the document
 // 3) Information for each warehouse should be a map instead of an array
+// 4) Initial warehouse creation does not get updated upon changes. May need to refactor that into an onSnapshot in the useEffect - after testing, the issue is with the useEffect
 
 ////////////////////////////
 // By default, I want the first warehouse to show so I need to make the initial state based on the first whse in the collection
@@ -51,33 +43,26 @@ const WarehouseInfo = () => {
 
   //////////////////////////////
 
+  // Initial warehouse loading and initial state
+  // ERROR - i keep pushing to the collections array.
   useEffect(() => {
-    const warehouseOptions = [];
+    let warehouseOptions = [];
 
-    async function getCollectionIDs() {
-      const res = await getDocs(collection(db, "warehouses"));
-
-      res.forEach((doc) => {
-        // console.log(doc.id, "=>", doc.data());
+    const q = query(collection(db, "warehouses"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      warehouseOptions = [];
+      querySnapshot.forEach((doc) => {
         warehouseOptions.push({
           name: doc.data().information[0].name,
           id: doc.id,
         });
-        // console.log("This is inside the forEach" + warehouseOptions);
+        setWarehouseCollection(warehouseOptions);
+        setInventory(querySnapshot.docs[0].data().Items);
+        // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
+        setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+        setWhseID(querySnapshot.docs[0].id);
       });
-      setWarehouseCollection(warehouseOptions);
-      // console.log(warehouseOptions);
-      // console.log(res.docs[0].data().Items[0]);
-      // console.log(res.docs[0].data().information[0]);
-
-      console.log(res.docs[0].data().Items);
-      setInventory(res.docs[0].data().Items);
-      // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
-      setWarehouseInfo([res.docs[0].data().information[0]]);
-      setWhseID(res.docs[0].id);
-      // console.log(warehouseCollection);
-    }
-    getCollectionIDs();
+    });
   }, []);
 
   //////////////////////////

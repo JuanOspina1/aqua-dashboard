@@ -34,8 +34,8 @@ const ListTable = () => {
     setWarehouseReference(warehouses);
   });
 
-  const handleRemoveItem = (whseID) => {
-    FirebaseServices.deleteWarehouse(whseID);
+  const handleRemoveItem = async (whseID) => {
+    await FirebaseServices.deleteWarehouse(whseID);
   };
 
   return (

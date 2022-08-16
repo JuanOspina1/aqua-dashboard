@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import FormRow from "./FormRow";
 import FirebaseServices from "../services/FirebaseServices";
+import toast from "react-hot-toast";
 
 const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
   const [formRows, setFormRows] = useState([
@@ -19,14 +20,8 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     },
   ]);
 
-  /// USE THIS FOR THE ROWS - provided by Javier
+  /// USE THIS FOR THE ROWS - concept provided by Javier
   // Returns a functions that contains the first input within the scope for use until needed
-  // const onFormRowChange = (rowIndex) => (values) => {
-  //   let newRows = [...formRows];
-  //   newRows[rowIndex] = values;
-  //   setFormRows(newRows);
-  //   console.log("changed");
-  // };
 
   // Trying to change inputs and add them to the corresponding state
   const onFormRowInputChange = (rowIndex) => (name, value) => {
@@ -63,7 +58,12 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
 
     e.preventDefault();
     // Create items in firebase
-    FirebaseServices.addItemArrToWhse(currWhse, formRows);
+    // Toast not working, need to apply the component
+    toast.promise(FirebaseServices.addItemArrToWhse(currWhse, formRows), {
+      loading: "Loading",
+      success: "Item(s) created",
+      error: "Error fetching data",
+    });
 
     // Empty the array once submitted
     setFormRows([

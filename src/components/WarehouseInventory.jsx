@@ -1,6 +1,7 @@
 import React from "react";
 import { FaTimesCircle } from "react-icons/fa";
 import FirebaseServices from "../services/FirebaseServices";
+import toast from "react-hot-toast";
 
 // Delete based on lot number
 
@@ -13,11 +14,13 @@ const WarehouseInventory = ({ whseID, inventoryItems, whseInformation }) => {
   // console.log(items);
 
   const handleRemoveItem = (lotNumber) => {
-    FirebaseServices.removeItemFromWhse(
-      lotNumber,
-
-      items,
-      whseID
+    toast.promise(
+      FirebaseServices.removeItemFromWhse(lotNumber, items, whseID),
+      {
+        loading: "Loading",
+        success: "Item deleted!",
+        error: "Error deleting",
+      }
     );
   };
 

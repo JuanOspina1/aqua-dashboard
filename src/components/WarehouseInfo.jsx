@@ -70,10 +70,9 @@ const WarehouseInfo = () => {
       // console.log(res.docs[0].data().Items[0]);
       // console.log(res.docs[0].data().information[0]);
 
-      // I have to put these in an array due to previous logic used - deep refactoring may be needed but everything functions properly
       console.log(res.docs[0].data().Items);
       setInventory(res.docs[0].data().Items);
-      // setInventory([res.docs[0].data().Items[0]]);
+      // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
       setWarehouseInfo([res.docs[0].data().information[0]]);
       setWhseID(res.docs[0].id);
       // console.log(warehouseCollection);

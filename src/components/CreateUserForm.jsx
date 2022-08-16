@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { UserAuth } from "../context/AuthContext";
 
-// I would like to implement a dissapearing success message when a new user is created.
+// I would like to implement a disappearing success message when a new user is created.
 
 const CreateUserForm = () => {
   const [inputs, setInputs] = useState({});

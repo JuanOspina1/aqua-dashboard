@@ -14,21 +14,8 @@ import { db } from "../firebase";
 const FirebaseServices = {
   ////////////////////////////////////
   // WAREHOUSE SECTION
-  // createWarehouse: (inputs) => {
-  //   setDoc(doc(db, "warehouses", inputs.name), {
-  //     information: [
-  //       {
-  //         name: inputs.name,
-  //         email: inputs.email,
-  //         address: inputs.address,
-  //         phone: inputs.phone,
-  //       },
-  //     ],
-  //     Items: [],
-  //   });
-  // },
 
-  // Issue with this is that the items wont update upon creation - need to use onSnapshot but must make it async
+  // Issue with this is that the items wont update upon creation - need to use onSnapshot but having issues with loading the snapshot data on the component
   snapWarehouse: async (selectedWhse) => {
     const docRef = doc(db, "warehouses", selectedWhse);
     const docSnap = await getDoc(docRef);

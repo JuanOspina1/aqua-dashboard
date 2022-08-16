@@ -16,10 +16,10 @@ import FirebaseServices from "../services/FirebaseServices";
 
 ////////////////////////////
 // ISSUES TO ADDRESS IN DB
-// 1) I should create random IDs instead of using the warehouses name - for the logic below, it is based on the ID being exactly the same as the warehouse name
+// 1) I should create random IDs instead of using the warehouses name - for the logic below, it is based on the ID being exactly the same as the warehouse name - COMPLETED
 // 2) Lowercase all fields in the document
 // 3) Information for each warehouse should be a map instead of an array
-// 4) Initial warehouse creation does not get updated upon changes. May need to refactor that into an onSnapshot in the useEffect - after testing, the issue is with the useEffect
+// 4) Is the logic with a useEffect for an initial snapshot correct? Everything works but it may  be worth looking into if there is a better way to reduce this logic.
 
 ////////////////////////////
 // By default, I want the first warehouse to show so I need to make the initial state based on the first whse in the collection
@@ -44,7 +44,8 @@ const WarehouseInfo = () => {
   //////////////////////////////
 
   // Initial warehouse loading and initial state
-  // ERROR - i keep pushing to the collections array.
+
+  // Logic behind this -> when a user first loads on the page we want to display information for a warehouse. onSnapshot is used in case the user interacts with the initial warehouse. When the user leaves to another page and returns, the useEffect returns the state to the first warehouse in the DB. Is there a better way to work this logic and perhaps keep the state persistant if a user goes back and forth.
   useEffect(() => {
     let warehouseOptions = [];
 
@@ -64,6 +65,24 @@ const WarehouseInfo = () => {
       });
     });
   }, []);
+
+  // let warehouseOptions = [];
+
+  // const q = query(collection(db, "warehouses"));
+  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //   warehouseOptions = [];
+  //   querySnapshot.forEach((doc) => {
+  //     warehouseOptions.push({
+  //       name: doc.data().information[0].name,
+  //       id: doc.id,
+  //     });
+  //     setWarehouseCollection(warehouseOptions);
+  //     setInventory(querySnapshot.docs[0].data().Items);
+  //     // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
+  //     setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+  //     setWhseID(querySnapshot.docs[0].id);
+  //   });
+  // });
 
   //////////////////////////
   // HANDLERS SECTION

@@ -14,8 +14,23 @@ import { db } from "../firebase";
 
 const FirebaseServices = {
   ////////////////////////////////////
+  // USER INFO SECTION
+  getUserInformation: async (selectedUser) => {
+    try {
+      const docRef = doc(db, "users", selectedUser);
+      const docSnap = await getDoc(docRef);
+      const userInfo = docSnap.data();
+      // console.log(docSnap.data());
+      return userInfo;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  ////////////////////////////////////
   // WAREHOUSE SECTION
 
+  // snapWarehouse is currently not in user
   // Issue with this is that the items wont update upon creation - need to use onSnapshot but having issues with loading the snapshot data on the component - I am currently using onSnapshot within the component
   snapWarehouse: async (selectedWhse) => {
     const docRef = doc(db, "warehouses", selectedWhse);

@@ -6,11 +6,6 @@ import FirebaseServices from "../services/FirebaseServices";
 // This can be used as an Edit Quantities option once an actual order form has been created.
 
 const WithdrawItemForm = ({ inventoryItems, whseID }) => {
-  // console.log(inventoryItems);
-  // console.log(whseInformation);
-
-  ///////////////////////////////
-  // Using state makes them persist if we switch warehouse, should probably save this in standard variables
   const [lotNumber, setLotNumber] = useState("");
   const [withdrawQty, setWithdrawQty] = useState(0);
 

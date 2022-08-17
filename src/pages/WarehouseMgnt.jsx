@@ -3,7 +3,7 @@ import CreateWhseForm from "../components/CreateWhseForm";
 import Sidebar from "../components/Sidebar";
 import { FaUserCircle, FaWarehouse } from "react-icons/fa";
 import CreateUserForm from "../components/CreateUserForm";
-import WarehouseListTable from "../components/warehouseListTable";
+import WarehouseListTable from "../components/WarehouseListTable";
 
 // Get full list of users
 

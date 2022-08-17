@@ -3,7 +3,7 @@ import CreateWhseForm from "../components/CreateWhseForm";
 import Sidebar from "../components/Sidebar";
 import { FaUserCircle, FaWarehouse } from "react-icons/fa";
 import CreateUserForm from "../components/CreateUserForm";
-import ListTable from "../components/ListTable";
+import WarehouseListTable from "../components/warehouseListTable";
 
 // Get full list of users
 
@@ -69,7 +69,7 @@ const WarehouseMgnt = () => {
             <CreateWhseForm />
           </div>
           <div className="w-[100px]">
-            <ListTable />
+            <WarehouseListTable />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import FirebaseServices from "../services/FirebaseServices";
 
 const CreateWhseForm = () => {
@@ -16,7 +17,11 @@ const CreateWhseForm = () => {
     e.preventDefault();
     // console.log(inputs);
     // Create Warehouse
-    FirebaseServices.createWarehouse(inputs);
+    toast.promise(FirebaseServices.createWarehouse(inputs), {
+      loading: "Loading",
+      success: "Warehouse Created!",
+      error: "Issue Creating Warehouse",
+    });
 
     // Empty the form fields
     setInputs({});

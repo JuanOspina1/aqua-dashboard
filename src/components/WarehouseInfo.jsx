@@ -66,24 +66,6 @@ const WarehouseInfo = () => {
     });
   }, []);
 
-  // let warehouseOptions = [];
-
-  // const q = query(collection(db, "warehouses"));
-  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //   warehouseOptions = [];
-  //   querySnapshot.forEach((doc) => {
-  //     warehouseOptions.push({
-  //       name: doc.data().information[0].name,
-  //       id: doc.id,
-  //     });
-  //     setWarehouseCollection(warehouseOptions);
-  //     setInventory(querySnapshot.docs[0].data().Items);
-  //     // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
-  //     setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
-  //     setWhseID(querySnapshot.docs[0].id);
-  //   });
-  // });
-
   //////////////////////////
   // HANDLERS SECTION
 

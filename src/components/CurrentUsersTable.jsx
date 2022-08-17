@@ -1,6 +1,10 @@
-import { collection, onSnapshot, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  query,
+  QuerySnapshot,
+} from "firebase/firestore";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import { FaTimesCircle } from "react-icons/fa";
 import { db } from "../firebase";
 import FirebaseServices from "../services/FirebaseServices";
@@ -9,7 +13,7 @@ import FirebaseServices from "../services/FirebaseServices";
 
 // Logic - need to review how to delete a user. I can delete them and their information based on an ID but need to review logic for actually removing the user from AUTH
 
-const ListTable = () => {
+const CurrentUsersTable = () => {
   // Title for the row
   const [warehouseReference, setWarehouseReference] = useState([]);
 
@@ -30,12 +34,8 @@ const ListTable = () => {
     setWarehouseReference(warehouses);
   });
 
-  const handleRemoveItem = (whseID) => {
-    toast.promise(FirebaseServices.deleteWarehouse(whseID), {
-      loading: "Loading",
-      success: "Warehouse Deleted",
-      error: "Error Deleting Warehouse",
-    });
+  const handleRemoveItem = async (whseID) => {
+    await FirebaseServices.deleteWarehouse(whseID);
   };
 
   return (
@@ -71,4 +71,4 @@ const ListTable = () => {
   );
 };
 
-export default ListTable;
+export default CurrentUsersTable;

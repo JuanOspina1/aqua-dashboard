@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  deleteUser,
 } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 
@@ -40,6 +41,11 @@ export function AuthContextProvider({ children }) {
   function logOut() {
     return signOut(auth);
   }
+
+  // This would delete the current logged in user. The functionality I want would come from the Firebase Admin SDK - need to learn how to use and implement it.
+  // function removeUser() {
+  //   return deleteUser(user);
+  // }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

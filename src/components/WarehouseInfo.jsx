@@ -47,6 +47,31 @@ const WarehouseInfo = () => {
 
   // Logic behind this -> when a user first loads on the page we want to display information for a warehouse. onSnapshot is used in case the user interacts with the initial warehouse. When the user leaves to another page and returns, the useEffect returns the state to the first warehouse in the DB. Is there a better way to work this logic and perhaps keep the state persistant if a user goes back and forth.
 
+  // 1st) useEffect - get collection onSnapshot - keeps the list of warehouses in dropdown updated - empty dependency array so it only runs once
+
+  // 2nd) useEffect - get warehouse & inv based on selected warehouse - dependency array based on whseID?
+
+  // useEffect for collections
+  // useEffect(() => {
+  //   let warehouseOptions = [];
+
+  //   const q = query(collection(db, "warehouses"));
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //    // Clear the array so they do not duplicate
+  //     warehouseOptions = [];
+  //     querySnapshot.forEach((doc) => {
+  //       warehouseOptions.push({
+  //         name: doc.data().information[0].name,
+  //         id: doc.id,
+  //       });
+  //       setWarehouseCollection(warehouseOptions);
+  //     });
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
   useEffect(() => {
     let warehouseOptions = [];
 
@@ -69,10 +94,6 @@ const WarehouseInfo = () => {
       unsubscribe();
     };
   }, []);
-
-  // useEffect - get collection onSnapshot - keeps the list of warehouses in dropdown updated - empty dependency array so it only runs once
-
-  // 2nd useEffect - get warehouse & inv based on selected warehouse - dependency array based on whseID?
 
   //////////////////////////
   // HANDLERS SECTION

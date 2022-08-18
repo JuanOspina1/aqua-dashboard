@@ -51,32 +51,13 @@ const WarehouseInfo = () => {
 
   // 2nd) useEffect - get warehouse & inv based on selected warehouse - dependency array based on whseID?
 
-  // useEffect for collections
-  // useEffect(() => {
-  //   let warehouseOptions = [];
-
-  //   const q = query(collection(db, "warehouses"));
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //    // Clear the array so they do not duplicate
-  //     warehouseOptions = [];
-  //     querySnapshot.forEach((doc) => {
-  //       warehouseOptions.push({
-  //         name: doc.data().information[0].name,
-  //         id: doc.id,
-  //       });
-  //       setWarehouseCollection(warehouseOptions);
-  //     });
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
-
+  // useEffect for warehouse collections - unsubs when component unmounts
   useEffect(() => {
     let warehouseOptions = [];
 
     const q = query(collection(db, "warehouses"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      // Clear the array so they do not duplicate
       warehouseOptions = [];
       querySnapshot.forEach((doc) => {
         warehouseOptions.push({
@@ -84,10 +65,6 @@ const WarehouseInfo = () => {
           id: doc.id,
         });
         setWarehouseCollection(warehouseOptions);
-        setInventory(querySnapshot.docs[0].data().Items);
-        // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
-        setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
-        setWhseID(querySnapshot.docs[0].id);
       });
     });
     return () => {
@@ -95,20 +72,76 @@ const WarehouseInfo = () => {
     };
   }, []);
 
+  // second useEffect -> if whseID is empty, get the collection and select the first one in the list, else gets the warehouse based on the whseID
+
+  useEffect(() => {
+    let q;
+    if (whseID === "") {
+      q = query(collection(db, "warehouses"));
+    } else {
+      q = doc((db, "warehouses", whseID));
+    }
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      if (whseID === "") {
+        setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+        setInventory(querySnapshot.docs[0].data().Items);
+        // if i want to add or remove items I need the warehouse ID, which will trigger the useEffect to happen again.
+        setWhseID(querySnapshot.docs[0].id);
+      } else {
+        setInventory(querySnapshot.data()?.Items);
+        setWarehouseInfo(querySnapshot.data()?.information);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  // CURRENT
+  // useEffect(() => {
+  //   let warehouseOptions = [];
+
+  //   const q = query(collection(db, "warehouses"));
+  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //     warehouseOptions = [];
+  //     querySnapshot.forEach((doc) => {
+  //       warehouseOptions.push({
+  //         name: doc.data().information[0].name,
+  //         id: doc.id,
+  //       });
+  //       setWarehouseCollection(warehouseOptions);
+  //       setInventory(querySnapshot.docs[0].data().Items);
+  //       // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
+  //       setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+  //       setWhseID(querySnapshot.docs[0].id);
+  //     });
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
   //////////////////////////
   // HANDLERS SECTION
 
   // Currently works to select the warehouse from the dropdown.
   // Perhaps a dependency array in useEffect that is based on the state of the "current warehouse" - I could find a way to set up an initial warehouse separately.
-  //CURRENT
   const handleSelectingWarehouse = (selectedWhse) => {
     console.log(selectedWhse);
-    onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
-      setInventory(doc.data()?.Items);
-      setWarehouseInfo(doc.data()?.information);
-      setWhseID(doc.id);
-    });
+    setWhseID(selectedWhse);
   };
+
+  //CURRENT
+  // const handleSelectingWarehouse = (selectedWhse) => {
+  //   console.log(selectedWhse);
+  //   onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
+  //     setInventory(doc.data()?.Items);
+  //     setWarehouseInfo(doc.data()?.information);
+  //     setWhseID(doc.id);
+  //   });
+  // };
 
   const handleWithdrawForm = () => {
     console.log("Withdraw form is clicked");

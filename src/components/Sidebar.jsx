@@ -9,17 +9,17 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
-// Need to fix css so only the link only works on the button click instead of the entire div
-
 const Sidebar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
   // console.log(user.email)
 
+  // I need to unsubscribe from listeners
   const handleLogout = async () => {
     try {
       await logOut();
       navigate("/");
+      console.log(user);
     } catch (error) {
       console.log(error);
     }

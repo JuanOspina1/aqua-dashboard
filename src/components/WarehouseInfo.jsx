@@ -46,6 +46,7 @@ const WarehouseInfo = () => {
   // Initial warehouse loading and initial state
 
   // Logic behind this -> when a user first loads on the page we want to display information for a warehouse. onSnapshot is used in case the user interacts with the initial warehouse. When the user leaves to another page and returns, the useEffect returns the state to the first warehouse in the DB. Is there a better way to work this logic and perhaps keep the state persistant if a user goes back and forth.
+
   useEffect(() => {
     let warehouseOptions = [];
 
@@ -64,12 +65,21 @@ const WarehouseInfo = () => {
         setWhseID(querySnapshot.docs[0].id);
       });
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
+
+  // useEffect - get collection onSnapshot - keeps the list of warehouses in dropdown updated - empty dependency array so it only runs once
+
+  // 2nd useEffect - get warehouse & inv based on selected warehouse - dependency array based on whseID?
 
   //////////////////////////
   // HANDLERS SECTION
 
   // Currently works to select the warehouse from the dropdown.
+  // Perhaps a dependency array in useEffect that is based on the state of the "current warehouse" - I could find a way to set up an initial warehouse separately.
+  //CURRENT
   const handleSelectingWarehouse = (selectedWhse) => {
     console.log(selectedWhse);
     onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {

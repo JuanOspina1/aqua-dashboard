@@ -21,6 +21,7 @@ const CurrentUsersTable = () => {
   // Warehouses use information[0].name
 
   // Listening to multiple docs in a collection
+  // Wrap in a useEffect to apply unsubscribe on unmount
   const q = query(collection(db, "warehouses"));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const warehouses = [];

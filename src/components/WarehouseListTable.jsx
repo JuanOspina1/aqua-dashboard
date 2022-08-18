@@ -1,5 +1,6 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaTimesCircle } from "react-icons/fa";
 import { db } from "../firebase";
@@ -17,18 +18,24 @@ const WarehouseListTable = () => {
   // Warehouses use information[0].name
 
   // Listening to multiple docs in a collection
-  const q = query(collection(db, "warehouses"));
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    const warehouses = [];
 
-    querySnapshot.forEach((doc) => {
-      warehouses.push({
-        name: doc.data().information[0].name,
-        id: doc.id,
+  useEffect(() => {
+    const q = query(collection(db, "warehouses"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const warehouses = [];
+
+      querySnapshot.forEach((doc) => {
+        warehouses.push({
+          name: doc.data().information[0].name,
+          id: doc.id,
+        });
       });
+      setWarehouseReference(warehouses);
     });
-    setWarehouseReference(warehouses);
-  });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const handleRemoveItem = (whseID) => {
     toast.promise(FirebaseServices.deleteWarehouse(whseID), {

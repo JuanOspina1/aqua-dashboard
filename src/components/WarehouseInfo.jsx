@@ -65,6 +65,13 @@ const WarehouseInfo = () => {
           id: doc.id,
         });
         setWarehouseCollection(warehouseOptions);
+
+        // if whseID is empty, fill in the initial data
+        if (whseID === "") {
+          setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+          setInventory(querySnapshot.docs[0].data().Items);
+          setWhseID(querySnapshot.docs[0].id);
+        }
       });
     });
     return () => {
@@ -75,29 +82,21 @@ const WarehouseInfo = () => {
   // second useEffect -> if whseID is empty, get the collection and select the first one in the list, else gets the warehouse based on the whseID
 
   useEffect(() => {
-    let q;
-    if (whseID === "") {
-      q = query(collection(db, "warehouses"));
-    } else {
-      q = doc((db, "warehouses", whseID));
-    }
+    console.log("2nd useEffect Ran", whseID);
 
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      if (whseID === "") {
-        setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
-        setInventory(querySnapshot.docs[0].data().Items);
-        // if i want to add or remove items I need the warehouse ID, which will trigger the useEffect to happen again if used in the dependency array.
-        setWhseID(querySnapshot.docs[0].id);
-      } else {
-        setInventory(querySnapshot.data()?.Items);
-        setWarehouseInfo(querySnapshot.data()?.information);
-      }
-    });
+    const q = doc((db, "warehouses", whseID));
+    let unsubscribe;
+    if (whseID !== "") {
+      unsubscribe = onSnapshot(q, (doc) => {
+        setInventory(doc.data()?.Items);
+        setWarehouseInfo(doc.data()?.information);
+      });
+    }
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [whseID]);
 
   // CURRENT
   // useEffect(() => {
@@ -126,14 +125,12 @@ const WarehouseInfo = () => {
   //////////////////////////
   // HANDLERS SECTION
 
-  // Currently works to select the warehouse from the dropdown.
-  // Perhaps a dependency array in useEffect that is based on the state of the "current warehouse" - I could find a way to set up an initial warehouse separately.
   const handleSelectingWarehouse = (selectedWhse) => {
     console.log(selectedWhse);
     setWhseID(selectedWhse);
   };
 
-  //CURRENT
+  //CURRENT - cannot unsubscribe since it is not in a useEffect
   // const handleSelectingWarehouse = (selectedWhse) => {
   //   console.log(selectedWhse);
   //   onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {

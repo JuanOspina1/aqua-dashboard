@@ -86,7 +86,7 @@ const WarehouseInfo = () => {
       if (whseID === "") {
         setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
         setInventory(querySnapshot.docs[0].data().Items);
-        // if i want to add or remove items I need the warehouse ID, which will trigger the useEffect to happen again.
+        // if i want to add or remove items I need the warehouse ID, which will trigger the useEffect to happen again if used in the dependency array.
         setWhseID(querySnapshot.docs[0].id);
       } else {
         setInventory(querySnapshot.data()?.Items);

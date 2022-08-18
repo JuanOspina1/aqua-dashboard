@@ -80,6 +80,7 @@ const WarehouseInfo = () => {
   }, []);
 
   // second useEffect -> if whseID is empty, get the collection and select the first one in the list, else gets the warehouse based on the whseID
+  // Instead of onSnapshot we may want to use individual get request and update the state.
 
   useEffect(() => {
     console.log("2nd useEffect Ran", whseID);

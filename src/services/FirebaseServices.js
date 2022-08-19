@@ -30,27 +30,6 @@ const FirebaseServices = {
   ////////////////////////////////////
   // WAREHOUSE SECTION
 
-  // snapWarehouse is currently not in user
-  // Issue with this is that the items wont update upon creation - need to use onSnapshot but having issues with loading the snapshot data on the component - I am currently using onSnapshot within the component
-  snapWarehouse: async (selectedWhse) => {
-    const docRef = doc(db, "warehouses", selectedWhse);
-    const docSnap = await getDoc(docRef);
-
-    console.log([
-      docSnap.data()?.Items,
-      docSnap.data()?.information,
-      docSnap.id,
-    ]);
-
-    return [docSnap.data()?.Items, docSnap.data()?.information, docSnap.id];
-
-    // onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
-    //   console.log([doc.data()?.Items, doc.data()?.information, doc.id]);
-    //   let stuff = [doc.data()?.Items, doc.data()?.information, doc.id];
-    //   return stuff;
-    // });
-  },
-
   // Better way to create warehouse with custom ID - Ref: Firestore docs: https://firebase.google.com/docs/firestore/manage-data/add-data
   createWarehouse: async (inputs) => {
     try {

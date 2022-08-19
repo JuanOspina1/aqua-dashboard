@@ -24,36 +24,50 @@ const Sidebar = () => {
     }
   };
 
+  const handleNavigate = (page) => {
+    console.log(page);
+
+    navigate(`/${page.toLowerCase()}`);
+  };
+
   return (
     <div className="fixed top-0 h-screen w-40 m-0 pt-4 flex flex-col bg-gray-600">
-      <Link to="/home">
+      {/* <Link to="/home">
         <div className="sidebar-icon">
           <FaHome />
           <span className="p-2"> Home</span>
         </div>
-      </Link>
-
-      {/* Order tab to be implemented in the future, using single item withdraw currently */}
-      {/* <Link to="/orders">
-        <div className="sidebar-icon">
-          <FaClipboardList />
-          <span className="p-2">Orders</span>
-        </div>
       </Link> */}
 
-      <Link to="/warehouses">
-        <div className="sidebar-icon">
-          <FaWarehouse />
-          <span className="p-2">Warehouse</span>
-        </div>
-      </Link>
+      <button
+        className="sidebar-icon"
+        onClick={(e) => handleNavigate(e.target.textContent)}
+      >
+        <FaHome /> <span className="p-2">Home</span>
+      </button>
 
-      <Link to="/management">
-        <button className="sidebar-icon">
-          <FaTools />
-          <span className="p-2">Management</span>
-        </button>
-      </Link>
+      {/* Order tab to be implemented in the future, using single item withdraw currently */}
+
+      <button
+        className="sidebar-icon"
+        onClick={(e) => handleNavigate(e.target.textContent)}
+      >
+        <FaClipboardList /> <span className="p-2">Orders</span>
+      </button>
+
+      <button
+        className="sidebar-icon"
+        onClick={(e) => handleNavigate(e.target.textContent)}
+      >
+        <FaWarehouse /> <span className="p-2">Warehouses</span>
+      </button>
+
+      <button
+        className="sidebar-icon"
+        onClick={(e) => handleNavigate(e.target.textContent)}
+      >
+        <FaTools /> <span className="p-2">Management</span>
+      </button>
 
       <button className="sidebar-icon" onClick={handleLogout}>
         <FaSignOutAlt /> <span className="p-2">Logout</span>

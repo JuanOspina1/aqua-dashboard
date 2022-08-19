@@ -36,7 +36,7 @@ const WarehouseInfo = () => {
   const [warehouseCollection, setWarehouseCollection] = useState([]);
 
   // Current Warehouse we are working in
-  const [warehouseInfo, setWarehouseInfo] = useState([]);
+  const [whseInfo, setWarehouseInfo] = useState([]);
   // Inventory of the current warehouse
   const [inventory, setInventory] = useState([]);
   // ID of the current Whse
@@ -71,7 +71,7 @@ const WarehouseInfo = () => {
         setWhseID(querySnapshot.docs[0].id);
 
         // This may be unessesary since the above setState will trigger this useEffect with the second if statement
-        setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+        setWarehouseInfo(querySnapshot.docs[0].data().information[0]);
         setInventory(querySnapshot.docs[0].data().Items);
       }
 
@@ -81,7 +81,7 @@ const WarehouseInfo = () => {
           (doc) => doc.id === whseID
         );
         // console.log(selectedWhse);
-        setWarehouseInfo([selectedWhse?.data().information[0]]);
+        setWarehouseInfo(selectedWhse?.data().information[0]);
         setInventory(selectedWhse?.data().Items);
       }
     });
@@ -113,7 +113,9 @@ const WarehouseInfo = () => {
   };
 
   // I have to deconstruct this due to old logic - could be refactored but everything works
-  const [whseInfo] = warehouseInfo;
+  // CURRENT
+  // const [whseInfo] = warehouseInfo;
+  // const whseInfo = warehouseInfo;
 
   // THIS FUNCTION IS PART OF THE PREBUILT DROPDOWN MENU
   function classNames(...classes) {
@@ -261,7 +263,7 @@ const WarehouseInfo = () => {
           <tbody className="text-center ">
             <WarehouseInventory
               inventoryItems={inventory}
-              whseInformation={warehouseInfo}
+              whseInformation={whseInfo}
               whseID={whseID}
             />
           </tbody>

@@ -31,6 +31,7 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
     // If statement is happening within the map - it will not stop the outer function - need to return if the alert window happens
     const withdrawnInventoryArr = inventoryItems.map((el, i) => {
       if (el.lotNumber === lotNumber) {
+        // if the withdraw qty is less than or equal to the case count, subtract the qty
         if (withdrawQty <= el.caseCount) {
           el.caseCount = Number(el.caseCount) - withdrawQty;
           return el;
@@ -41,6 +42,9 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
         }
       } else return el;
     });
+    console.log(withdrawnInventoryArr);
+
+    if (withdrawnInventoryArr.includes(undefined)) return;
 
     FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr);
   };
@@ -116,7 +120,7 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
         onChange={(e) => setWithdrawQty(e.target.value)}
         name="quantity"
         className=" my-2 w-full rouded bg-slate-200"
-        type="text"
+        type="number"
         placeholder="Quantity"
         value={withdrawQty}
       />

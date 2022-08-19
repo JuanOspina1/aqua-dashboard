@@ -69,10 +69,6 @@ const WarehouseInfo = () => {
       // if whseID is empty, fill in the initial data
       if (whseID === "") {
         setWhseID(querySnapshot.docs[0].id);
-
-        // This may be unessesary since the above setState will trigger this useEffect with the second if statement
-        setWarehouseInfo(querySnapshot.docs[0].data().information[0]);
-        setInventory(querySnapshot.docs[0].data().Items);
       }
 
       if (whseID !== "") {

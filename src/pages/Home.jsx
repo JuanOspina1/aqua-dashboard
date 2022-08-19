@@ -17,8 +17,9 @@ const Home = () => {
   };
 
   useEffect(() => {
+    console.log("this ran");
     getUser(user.email);
-  }, []);
+  }, [user.email]);
 
   return (
     <>

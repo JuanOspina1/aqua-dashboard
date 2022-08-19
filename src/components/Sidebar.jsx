@@ -9,6 +9,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
+// Sometimes a space is added to the textContent. I can try to make sure any spaces are elimited in the handler.
+
 const Sidebar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ const Sidebar = () => {
   };
 
   const handleNavigate = (page) => {
-    console.log(page);
+    console.log(page.toLowerCase());
 
     navigate(`/${page.toLowerCase()}`);
   };

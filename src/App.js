@@ -8,7 +8,6 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  console.log(process.env.REACT_APP_TEST);
   return (
     <>
       <div>

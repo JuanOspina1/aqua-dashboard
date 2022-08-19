@@ -49,15 +49,8 @@ const WarehouseInfo = () => {
 
   //////////////////////////////
 
-  // Initial warehouse loading and initial state
+  // useEffect for warehouse collections - Initial warehouse loading and initial state - altered based on whseID - onsnapshot unsubs when component unmounts
 
-  // Logic behind this -> when a user first loads on the page we want to display information for a warehouse. onSnapshot is used in case the user interacts with the initial warehouse. When the user leaves to another page and returns, the useEffect returns the state to the first warehouse in the DB. Is there a better way to work this logic and perhaps keep the state persistant if a user goes back and forth.
-
-  // 1st) useEffect - get collection onSnapshot - keeps the list of warehouses in dropdown updated - empty dependency array so it only runs once
-
-  // 2nd) useEffect - get warehouse & inv based on selected warehouse - dependency array based on whseID?
-
-  // useEffect for warehouse collections - unsubs when component unmounts
   useEffect(() => {
     let warehouseOptions = [];
 
@@ -83,11 +76,11 @@ const WarehouseInfo = () => {
       }
 
       if (whseID !== "") {
-        console.log(querySnapshot.docs);
+        // console.log(querySnapshot.docs);
         const selectedWhse = querySnapshot.docs.find(
           (doc) => doc.id === whseID
         );
-        console.log(selectedWhse);
+        // console.log(selectedWhse);
         setWarehouseInfo([selectedWhse?.data().information[0]]);
         setInventory(selectedWhse?.data().Items);
       }
@@ -97,77 +90,23 @@ const WarehouseInfo = () => {
     };
   }, [whseID]);
 
-  // second useEffect -> if whseID is empty, get the collection and select the first one in the list, else gets the warehouse based on the whseID
-  // Instead of onSnapshot we may want to use individual get request and update the state.
-
-  // useEffect(() => {
-  //   console.log("2nd useEffect Ran", whseID);
-
-  //   const q = doc((db, "warehouses", whseID));
-  //   let unsubscribe;
-  //   if (whseID !== "") {
-  //     unsubscribe = onSnapshot(q, (doc) => {
-  //       setInventory(doc.data()?.Items);
-  //       setWarehouseInfo(doc.data()?.information);
-  //     });
-  //   }
-
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, [whseID]);
-
-  // CURRENT
-  // useEffect(() => {
-  //   let warehouseOptions = [];
-
-  //   const q = query(collection(db, "warehouses"));
-  //   const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  //     warehouseOptions = [];
-  //     querySnapshot.forEach((doc) => {
-  //       warehouseOptions.push({
-  //         name: doc.data().information[0].name,
-  //         id: doc.id,
-  //       });
-  //       setWarehouseCollection(warehouseOptions);
-  //       setInventory(querySnapshot.docs[0].data().Items);
-  //       // I have to put this in an array due to previous logic used - deep refactoring may be needed but everything functions properly
-  //       setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
-  //       setWhseID(querySnapshot.docs[0].id);
-  //     });
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
-
   //////////////////////////
   // HANDLERS SECTION
 
   const handleSelectingWarehouse = (selectedWhse) => {
-    console.log(selectedWhse);
+    // console.log(selectedWhse);
     setWhseID(selectedWhse);
   };
 
-  //CURRENT - cannot unsubscribe since it is not in a useEffect
-  // const handleSelectingWarehouse = (selectedWhse) => {
-  //   console.log(selectedWhse);
-  //   onSnapshot(doc(db, "warehouses", selectedWhse), (doc) => {
-  //     setInventory(doc.data()?.Items);
-  //     setWarehouseInfo(doc.data()?.information);
-  //     setWhseID(doc.id);
-  //   });
-  // };
-
   const handleWithdrawForm = () => {
-    console.log("Withdraw form is clicked");
+    // console.log("Withdraw form is clicked");
     setAddItemsForm(false);
     setInventoryForm(true);
     setWithdrawForm(!withdrawForm);
   };
 
   const handleAddItemsForm = () => {
-    console.log("Add Items has been clicked");
+    // console.log("Add Items has been clicked");
     setAddItemsForm(!addItemsForm);
     setInventoryForm(!inventoryForm);
     setWithdrawForm(false);

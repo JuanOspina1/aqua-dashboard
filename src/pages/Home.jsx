@@ -13,7 +13,7 @@ const Home = () => {
   const getUser = async (userEmail) => {
     const data = await FirebaseServices.getUserInformation(userEmail);
     setCurrentUserInfo(data);
-    console.log(currentUserInfo);
+    // console.log(currentUserInfo);
   };
 
   useEffect(() => {

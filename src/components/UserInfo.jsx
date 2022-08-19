@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserInfo = ({ currentUserInfo }) => {
-  console.log(currentUserInfo);
+  // console.log(currentUserInfo);
   const { userInfo } = currentUserInfo;
 
   // email / firstName / lastName / officeAddress / officePhone

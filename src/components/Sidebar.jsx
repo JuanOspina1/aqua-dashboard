@@ -14,12 +14,11 @@ const Sidebar = () => {
   const navigate = useNavigate();
   // console.log(user.email)
 
-  // I need to unsubscribe from listeners
   const handleLogout = async () => {
     try {
       await logOut();
       navigate("/");
-      console.log(user);
+      // console.log(user);
     } catch (error) {
       console.log(error);
     }

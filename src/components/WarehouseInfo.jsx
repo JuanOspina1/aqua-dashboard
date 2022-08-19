@@ -1,7 +1,13 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { db } from "../firebase";
 import WarehouseInventory from "./WarehouseInventory";
-import { doc, onSnapshot, collection, query } from "firebase/firestore";
+import {
+  doc,
+  onSnapshot,
+  collection,
+  query,
+  collectionGroup,
+} from "firebase/firestore";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
@@ -65,39 +71,49 @@ const WarehouseInfo = () => {
           id: doc.id,
         });
         setWarehouseCollection(warehouseOptions);
-
-        // if whseID is empty, fill in the initial data
-        if (whseID === "") {
-          setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
-          setInventory(querySnapshot.docs[0].data().Items);
-          setWhseID(querySnapshot.docs[0].id);
-        }
       });
+
+      // if whseID is empty, fill in the initial data
+      if (whseID === "") {
+        setWarehouseInfo([querySnapshot.docs[0].data().information[0]]);
+        setInventory(querySnapshot.docs[0].data().Items);
+        setWhseID(querySnapshot.docs[0].id);
+      }
+
+      if (whseID !== "") {
+        console.log(querySnapshot.docs);
+        const selectedWhse = querySnapshot.docs.find(
+          (doc) => doc.id === whseID
+        );
+        console.log(selectedWhse);
+        setWarehouseInfo([selectedWhse?.data().information[0]]);
+        setInventory(selectedWhse?.data().Items);
+      }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [whseID]);
 
   // second useEffect -> if whseID is empty, get the collection and select the first one in the list, else gets the warehouse based on the whseID
   // Instead of onSnapshot we may want to use individual get request and update the state.
 
-  useEffect(() => {
-    console.log("2nd useEffect Ran", whseID);
+  // useEffect(() => {
+  //   console.log("2nd useEffect Ran", whseID);
 
-    const q = doc((db, "warehouses", whseID));
-    let unsubscribe;
-    if (whseID !== "") {
-      unsubscribe = onSnapshot(q, (doc) => {
-        setInventory(doc.data()?.Items);
-        setWarehouseInfo(doc.data()?.information);
-      });
-    }
+  //   const q = doc((db, "warehouses", whseID));
+  //   let unsubscribe;
+  //   if (whseID !== "") {
+  //     unsubscribe = onSnapshot(q, (doc) => {
+  //       setInventory(doc.data()?.Items);
+  //       setWarehouseInfo(doc.data()?.information);
+  //     });
+  //   }
 
-    return () => {
-      unsubscribe();
-    };
-  }, [whseID]);
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [whseID]);
 
   // CURRENT
   // useEffect(() => {

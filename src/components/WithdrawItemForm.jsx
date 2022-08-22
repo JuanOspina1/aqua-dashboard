@@ -22,13 +22,10 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
     setLotNumber(e.target.text);
   };
 
-  // VALIDATING INPUTS WITH NESTED IF STATEMENT - I need to find out how to stop the function if the if statement fails instead of making an invalid call to firebase
-
   const withdrawItem = (e) => {
     e.preventDefault();
     // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
 
-    // If statement is happening within the map - it will not stop the outer function - need to return if the alert window happens
     const withdrawnInventoryArr = inventoryItems.map((el, i) => {
       if (el.lotNumber === lotNumber) {
         // if the withdraw qty is less than or equal to the case count, subtract the qty

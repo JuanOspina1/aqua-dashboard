@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AquaLogo from "../images/small-aqua-logo.PNG";
 import OrderFormRow from "./OrderFormRow";
 
@@ -8,9 +8,57 @@ const OrderForm = ({
   whseInfo,
   inventory,
 }) => {
+  const [formRowData, setFormRowData] = useState([
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+    {
+      caseCount: 0,
+      lotNumber: "",
+    },
+  ]);
+
+  const onFormRowInputChange = (rowIndex) => (name, value) => {
+    // Create copy of the state
+    // console.log(rowIndex, name, value);
+    let newInput = [...formRowData];
+    // Find the index of the selected input and then find the matching name
+    newInput[rowIndex][name] = value;
+    setFormRowData(newInput);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit order");
+    console.log(formRowData);
   };
 
   return (
@@ -125,15 +173,51 @@ const OrderForm = ({
       </div>
 
       {/* ITEM FORM ROWS - I WANT A DEFAULT OF 9 - EVERY OTHER ROW CHANGES COLOR */}
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
-      <OrderFormRow inventory={inventory} />
+      <OrderFormRow
+        id={0}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(0)}
+      />
+      <OrderFormRow
+        id={1}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(1)}
+      />
+      <OrderFormRow
+        id={2}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(2)}
+      />
+      <OrderFormRow
+        id={3}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(3)}
+      />
+      <OrderFormRow
+        id={4}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(4)}
+      />
+      <OrderFormRow
+        id={5}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(5)}
+      />
+      <OrderFormRow
+        id={6}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(6)}
+      />
+      <OrderFormRow
+        id={7}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(7)}
+      />
+      <OrderFormRow
+        id={8}
+        inventory={inventory}
+        onFormRowInputChange={onFormRowInputChange(8)}
+      />
 
       <button className="w-1/2 bg-red-500">Clear Order</button>
       <button className="w-1/2 bg-green-500" type="submit">

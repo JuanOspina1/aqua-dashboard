@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // options / item description / item weight
-const OrderFormRow = ({ inventory }) => {
+const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [caseAmount, setCaseAmount] = useState(0);
 
@@ -19,7 +19,8 @@ const OrderFormRow = ({ inventory }) => {
       <div className="w-[20%] border-r  border-black">
         <select
           className="bg-[#dbe5f1]"
-          onChange={(e) => handleLotChange(e.target.value)}
+          // onChange={(e) => handleLotChange(e.target.value)}
+          onChange={(e) => onFormRowInputChange("lotNumber", e.target.value)}
         >
           <option value=""></option>
           {inventory.map((item) => {
@@ -42,7 +43,8 @@ const OrderFormRow = ({ inventory }) => {
         // }
         placeholder="0"
         className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
-        onChange={(e) => setCaseAmount(e.target.valueAsNumber)}
+        // onChange={(e) => setCaseAmount(e.target.valueAsNumber)}
+        onChange={(e) => onFormRowInputChange("caseCount", e.target.value)}
       ></input>
 
       <div className="w-[50%] border-r border-black">

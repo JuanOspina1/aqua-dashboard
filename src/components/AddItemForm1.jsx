@@ -58,7 +58,7 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
 
     e.preventDefault();
     // Create items in firebase
-    // Toast not working, need to apply the component
+
     toast.promise(FirebaseServices.addItemArrToWhse(currWhse, formRows), {
       loading: "Loading",
       success: "Item(s) created",

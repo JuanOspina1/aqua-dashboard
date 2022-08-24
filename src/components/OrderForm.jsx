@@ -8,14 +8,15 @@ const OrderForm = ({
   whseInfo,
   inventory,
 }) => {
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("submit order");
   };
 
   return (
     <form
       className="w-full border border-black bg-white"
-      onSubmit={handleSubmit}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <div className="flex w-full">
         <img
@@ -101,6 +102,7 @@ const OrderForm = ({
           <input
             type="number"
             min="0"
+            placeholder="0"
             className="text-center bg-[#dbe5f1] w-full"
           ></input>
         </div>
@@ -124,221 +126,19 @@ const OrderForm = ({
 
       {/* ITEM FORM ROWS - I WANT A DEFAULT OF 9 - EVERY OTHER ROW CHANGES COLOR */}
       <OrderFormRow inventory={inventory} />
-      {/* <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select className="bg-[#dbe5f1]">
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
+      <OrderFormRow inventory={inventory} />
 
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-white border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select>
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select className="bg-[#dbe5f1]">
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-white border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select>
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select className="bg-[#dbe5f1]">
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-white border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select>
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select className="bg-[#dbe5f1]">
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-white border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select>
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div>
-
-      <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
-        <div className="w-[20%] border-r  border-black">
-          <select className="bg-[#dbe5f1]">
-            <option></option>
-            <option>73583-R8</option>
-            <option>69752-R1</option>
-            <option>76539-6 </option>
-          </select>
-        </div>
-
-        <input
-          type="number"
-          min="0"
-          placeholder="0"
-          className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
-        ></input>
-
-        <div className="w-[50%] border-r border-black">
-          Tilapia Fillet - 3/5oz - Aquanita Brand - 1/10lb
-        </div>
-
-        <div className="w-[12.5%]">Case x LB</div>
-      </div> */}
+      <button className="w-1/2 bg-red-500">Clear Order</button>
+      <button className="w-1/2 bg-green-500" type="submit">
+        Submit Order
+      </button>
     </form>
   );
 };

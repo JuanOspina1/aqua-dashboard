@@ -1,7 +1,13 @@
 import React from "react";
 import AquaLogo from "../images/small-aqua-logo.PNG";
+import OrderFormRow from "./OrderFormRow";
 
-const OrderForm = () => {
+const OrderForm = ({
+  warehouseCollection,
+  handleSelectingWarehouse,
+  whseInfo,
+  inventory,
+}) => {
   const handleSubmit = () => {
     console.log("submit order");
   };
@@ -20,8 +26,24 @@ const OrderForm = () => {
 
         <div className="w-1/2 bg-white  text-center border-l border-b border-black">
           <h1 className="border-b border-black">Cold Storage:</h1>
-          <p>Seafrigo Chicago</p>
-          <p>4464 W 44th St, Chicago, IL 60632</p>
+          <select
+            className="bg-white"
+            onChange={(e) => handleSelectingWarehouse(e.target.value)}
+          >
+            {warehouseCollection.map((warehouse) => {
+              return (
+                <option
+                  className="text-center"
+                  key={warehouse.name}
+                  value={warehouse.id}
+                  data-id={warehouse.id}
+                >
+                  {warehouse.name}
+                </option>
+              );
+            })}
+          </select>
+          <p>{whseInfo.address}</p>
         </div>
       </div>
 
@@ -101,7 +123,8 @@ const OrderForm = () => {
       </div>
 
       {/* ITEM FORM ROWS - I WANT A DEFAULT OF 9 - EVERY OTHER ROW CHANGES COLOR */}
-      <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
+      <OrderFormRow inventory={inventory} />
+      {/* <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
         <div className="w-[20%] border-r  border-black">
           <select className="bg-[#dbe5f1]">
             <option></option>
@@ -315,7 +338,7 @@ const OrderForm = () => {
         </div>
 
         <div className="w-[12.5%]">Case x LB</div>
-      </div>
+      </div> */}
     </form>
   );
 };

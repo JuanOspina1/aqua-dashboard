@@ -41,6 +41,9 @@ const Sidebar = () => {
         </div>
       </Link> */}
 
+      <div className="text-center  text-[#06aedb]">AQUANITA</div>
+      <div className="border-b-8 border-[#06aedb] mt-4"></div>
+
       <button
         className="sidebar-icon"
         onClick={(e) => handleNavigate(e.target.textContent)}

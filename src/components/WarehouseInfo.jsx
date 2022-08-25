@@ -8,7 +8,7 @@ import {
   query,
   collectionGroup,
 } from "firebase/firestore";
-import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
+import { FaPlusCircle, FaMinusCircle, FaClipboardList } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
@@ -216,7 +216,7 @@ const WarehouseInfo = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 justify-items-center bg-white rounded-md shadow-lg mr-4">
+          <div className="grid grid-cols-3 justify-items-center bg-white rounded-md shadow-lg mr-4">
             {/* When I toggle Hidden, change the title to say: "Return to Inventory" */}
 
             <div className="grid justify-items-center">
@@ -231,7 +231,7 @@ const WarehouseInfo = () => {
             </div>
 
             <div className="grid justify-items-center">
-              <span className="font-bold text-xl">Withdraw Items</span>
+              <span className="font-bold text-xl">Update Quantity</span>
               <div className="">
                 <FaMinusCircle
                   size={50}
@@ -244,7 +244,7 @@ const WarehouseInfo = () => {
             <div className="grid justify-items-center">
               <span className="font-bold text-xl">Order Form</span>
               <div className="">
-                <FaMinusCircle
+                <FaClipboardList
                   size={50}
                   className="cursor-pointer"
                   onClick={handleOrderForm}

@@ -41,7 +41,9 @@ const Sidebar = () => {
         </div>
       </Link> */}
 
-      <div className="text-center  text-[#06aedb]">AQUANITA</div>
+      <div className="text-center font-bold text-xl text-[#06aedb]">
+        AQUA DASHBOARD
+      </div>
       <div className="border-b-8 border-[#06aedb] mt-4"></div>
 
       <button

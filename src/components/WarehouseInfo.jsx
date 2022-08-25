@@ -16,6 +16,7 @@ import WithdrawItemForm from "./WithdrawItemForm";
 
 import AddItemForm1 from "./AddItemForm1";
 import FirebaseServices from "../services/FirebaseServices";
+import OrderForm from "./OrderForm";
 
 ////////////
 // Synchrony
@@ -46,6 +47,7 @@ const WarehouseInfo = () => {
   const [withdrawForm, setWithdrawForm] = useState(false);
   const [inventoryForm, setInventoryForm] = useState(true);
   const [addItemsForm, setAddItemsForm] = useState(false);
+  const [orderForm, setOrderForm] = useState(false);
 
   //////////////////////////////
 
@@ -99,13 +101,32 @@ const WarehouseInfo = () => {
     setAddItemsForm(false);
     setInventoryForm(true);
     setWithdrawForm(!withdrawForm);
+    setOrderForm(false);
   };
 
   const handleAddItemsForm = () => {
     // console.log("Add Items has been clicked");
+    if (orderForm) {
+      setInventoryForm(false);
+    } else {
+      setInventoryForm(!inventoryForm);
+    }
     setAddItemsForm(!addItemsForm);
-    setInventoryForm(!inventoryForm);
     setWithdrawForm(false);
+    setOrderForm(false);
+  };
+
+  const handleOrderForm = () => {
+    if (addItemsForm) {
+      setInventoryForm(false);
+    } else {
+      setInventoryForm(!inventoryForm);
+    }
+
+    setAddItemsForm(false);
+    setWithdrawForm(false);
+
+    setOrderForm(!orderForm);
   };
 
   // I have to deconstruct this due to old logic - could be refactored but everything works
@@ -219,6 +240,17 @@ const WarehouseInfo = () => {
                 />
               </div>
             </div>
+
+            <div className="grid justify-items-center">
+              <span className="font-bold text-xl">Order Form</span>
+              <div className="">
+                <FaMinusCircle
+                  size={50}
+                  className="cursor-pointer"
+                  onClick={handleOrderForm}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -264,6 +296,15 @@ const WarehouseInfo = () => {
             />
           </tbody>
         </table>
+
+        <div className={`w-[700px] ml-4 ${orderForm ? "" : "hidden"}`}>
+          <OrderForm
+            warehouseCollection={warehouseCollection}
+            handleSelectingWarehouse={handleSelectingWarehouse}
+            whseInfo={whseInfo}
+            inventory={inventory}
+          />
+        </div>
       </div>
     </>
   );

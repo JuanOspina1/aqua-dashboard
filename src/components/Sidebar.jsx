@@ -33,7 +33,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed top-0 h-screen w-40 m-0 pt-4 flex flex-col bg-gray-600">
+    <div className="fixed top-0 h-screen w-40 m-0 pt-4 flex flex-col bg-gray-800">
       {/* <Link to="/home">
         <div className="sidebar-icon">
           <FaHome />

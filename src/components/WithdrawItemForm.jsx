@@ -30,7 +30,31 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
       if (el.lotNumber === lotNumber) {
         // if the withdraw qty is less than or equal to the case count, subtract the qty
         if (withdrawQty <= el.caseCount) {
-          el.caseCount = Number(el.caseCount) - withdrawQty;
+          el.caseCount = Number(el.caseCount) - +withdrawQty;
+          return el;
+        } else {
+          return alert(
+            "The withdraw amount must be equal or less than the quantity available"
+          );
+        }
+      } else return el;
+    });
+    console.log(withdrawnInventoryArr);
+
+    if (withdrawnInventoryArr.includes(undefined)) return;
+
+    FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr);
+  };
+
+  const addItem = (e) => {
+    e.preventDefault();
+    // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
+
+    const withdrawnInventoryArr = inventoryItems.map((el, i) => {
+      if (el.lotNumber === lotNumber) {
+        // if the withdraw qty is less than or equal to the case count, subtract the qty
+        if (withdrawQty <= el.caseCount) {
+          el.caseCount = Number(el.caseCount) + +withdrawQty;
           return el;
         } else {
           return alert(
@@ -58,10 +82,7 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
   }
 
   return (
-    <form
-      onSubmit={withdrawItem}
-      className="grid grid-cols-4 gap-2 ml-4 mr-2 mt-4 border-4 bg-white"
-    >
+    <div className="grid grid-cols-5 gap-2 ml-4 mr-2 mt-4 border-4 bg-white">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
@@ -117,18 +138,25 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
         onChange={(e) => setWithdrawQty(e.target.value)}
         name="quantity"
         className=" my-2 w-full rouded bg-slate-200"
+        // min="0"
         type="number"
         placeholder="Quantity"
         value={withdrawQty}
       />
 
       <button
-        type="submit"
+        onClick={addItem}
+        className="rounded-md bg-white border-2 border-black shadow-sm"
+      >
+        Add!
+      </button>
+      <button
+        onClick={withdrawItem}
         className="rounded-md bg-white border-2 border-rose-600 shadow-sm"
       >
         Withdraw!
       </button>
-    </form>
+    </div>
   );
 };
 

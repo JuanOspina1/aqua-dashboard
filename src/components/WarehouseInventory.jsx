@@ -34,7 +34,7 @@ const WarehouseInventory = ({ whseID, inventoryItems, whseInformation }) => {
             <td className="border-r-2">{item?.brand}</td>
             <td className="border-r-2">{item?.itemName}</td>
             <td className="border-r-2">{item?.size}</td>
-            <td className="border-r-2">{item?.caseCount}</td>
+            <td className="border-r-2">{+item?.caseCount}</td>
             <td className="border-r-2">{item?.caseWeight}</td>
             <td className="border-r-2">{item?.cogs}</td>
             <td className="border-r-2">{item?.salesPrice}</td>

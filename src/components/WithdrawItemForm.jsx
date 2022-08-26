@@ -1,6 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState, Fragment } from "react";
+import toast from "react-hot-toast";
 import FirebaseServices from "../services/FirebaseServices";
 
 // This can be used as an Edit Quantities option once an actual order form has been created.
@@ -24,7 +25,6 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
 
   const withdrawItem = (e) => {
     e.preventDefault();
-    // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
 
     const withdrawnInventoryArr = inventoryItems.map((el, i) => {
       if (el.lotNumber === lotNumber) {
@@ -39,11 +39,18 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
         }
       } else return el;
     });
-    console.log(withdrawnInventoryArr);
+    // console.log(withdrawnInventoryArr);
 
     if (withdrawnInventoryArr.includes(undefined)) return;
 
-    FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr);
+    toast.promise(
+      FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr),
+      {
+        loading: "Loading",
+        success: "Cases Removed!",
+        error: "Something went wrong",
+      }
+    );
   };
 
   const addItem = (e) => {
@@ -55,11 +62,15 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
         return el;
       } else return el;
     });
-    console.log(withdrawnInventoryArr);
 
-    // if (withdrawnInventoryArr.includes(undefined)) return;
-
-    FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr);
+    toast.promise(
+      FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr),
+      {
+        loading: "Loading",
+        success: "Cases Added!",
+        error: "Something went wrong",
+      }
+    );
   };
 
   // Reset the state based on the whse changing

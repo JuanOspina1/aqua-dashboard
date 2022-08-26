@@ -48,24 +48,16 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
 
   const addItem = (e) => {
     e.preventDefault();
-    // Need to add validation regarding the quantity - must validate quantity only after finding the matching item - withdrawing a negative number adds to the total
 
     const withdrawnInventoryArr = inventoryItems.map((el, i) => {
       if (el.lotNumber === lotNumber) {
-        // if the withdraw qty is less than or equal to the case count, subtract the qty
-        if (withdrawQty <= el.caseCount) {
-          el.caseCount = Number(el.caseCount) + +withdrawQty;
-          return el;
-        } else {
-          return alert(
-            "The withdraw amount must be equal or less than the quantity available"
-          );
-        }
+        el.caseCount = Number(el.caseCount) + +withdrawQty;
+        return el;
       } else return el;
     });
     console.log(withdrawnInventoryArr);
 
-    if (withdrawnInventoryArr.includes(undefined)) return;
+    // if (withdrawnInventoryArr.includes(undefined)) return;
 
     FirebaseServices.updateQuantities(whseID, withdrawnInventoryArr);
   };
@@ -134,14 +126,19 @@ const WithdrawItemForm = ({ inventoryItems, whseID }) => {
           Lot Number: {lotNumber}
         </span>
       </div>
+
       <input
-        onChange={(e) => setWithdrawQty(e.target.value)}
-        name="quantity"
         className=" my-2 w-full rouded bg-slate-200"
-        // min="0"
-        type="number"
+        type="text"
+        onKeyPress={(event) => {
+          if (!/[0-9]/.test(event.key)) {
+            event.preventDefault();
+          }
+        }}
+        onChange={(e) => setWithdrawQty(e.target.value)}
         placeholder="Quantity"
         value={withdrawQty}
+        name="quantity"
       />
 
       <button

@@ -2,16 +2,21 @@ import React, { useState } from "react";
 
 // options / item description / item weight
 const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState("");
   const [caseAmount, setCaseAmount] = useState(0);
 
   const handleLotChange = (selectedLot) => {
-    // console.log(selectedLot);
-    const inventoryItem = inventory.find(({ lotNumber }) => {
-      return lotNumber === selectedLot;
-    });
-    // console.log(inventoryItem);
-    setSelectedItem(inventoryItem);
+    console.log(selectedLot);
+
+    if (selectedLot === "") {
+      setSelectedItem("");
+    } else {
+      const inventoryItem = inventory.find(({ lotNumber }) => {
+        return lotNumber === selectedLot;
+      });
+      // console.log(inventoryItem);
+      setSelectedItem(inventoryItem);
+    }
   };
 
   return (
@@ -38,7 +43,7 @@ const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
       <input
         type="number"
         min="0"
-        max={selectedItem === null ? "100000" : `${selectedItem.caseCount}`}
+        max={selectedItem === "" ? "100000" : `${selectedItem?.caseCount}`}
         placeholder="0"
         className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
         onChange={(e) => {
@@ -49,14 +54,14 @@ const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
 
       <div className="w-[50%] border-r border-black">
         {/* itemName + size + brand + weight */}
-        {selectedItem === null
+        {selectedItem === ""
           ? ""
           : `${selectedItem?.itemName} - ${selectedItem?.size} - ${selectedItem?.brand} - ${selectedItem?.caseWeight}`}
       </div>
 
       <div className="w-[12.5%]">
         {/* Case x LB */}
-        {selectedItem === null ? 0 : caseAmount * +selectedItem.caseWeight}
+        {selectedItem === "" ? 0 : caseAmount * +selectedItem?.caseWeight}
       </div>
     </div>
   );

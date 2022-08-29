@@ -1,21 +1,16 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { db } from "../firebase";
 import WarehouseInventory from "./WarehouseInventory";
-import {
-  doc,
-  onSnapshot,
-  collection,
-  query,
-  collectionGroup,
-} from "firebase/firestore";
-import { FaPlusCircle, FaMinusCircle, FaClipboardList } from "react-icons/fa";
+import { onSnapshot, collection, query } from "firebase/firestore";
+import { FaPlusCircle, FaClipboardList, FaRedoAlt } from "react-icons/fa";
+
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
 import WithdrawItemForm from "./WithdrawItemForm";
 
 import AddItemForm1 from "./AddItemForm1";
-import FirebaseServices from "../services/FirebaseServices";
+
 import OrderForm from "./OrderForm";
 
 ////////////
@@ -233,7 +228,7 @@ const WarehouseInfo = () => {
             <div className="grid justify-items-center">
               <span className="font-bold text-xl">Update Quantity</span>
               <div className="">
-                <FaMinusCircle
+                <FaRedoAlt
                   size={50}
                   className="cursor-pointer"
                   onClick={handleWithdrawForm}

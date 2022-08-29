@@ -53,12 +53,12 @@ const Sidebar = () => {
 
       {/* Order tab to be implemented in the future, using single item withdraw currently */}
 
-      {/* <button
+      <button
         className="sidebar-icon"
         onClick={(e) => handleNavigate(e.target.textContent)}
       >
         <FaClipboardList /> <span className="p-2">Orders</span>
-      </button> */}
+      </button>
 
       <button
         className="sidebar-icon"

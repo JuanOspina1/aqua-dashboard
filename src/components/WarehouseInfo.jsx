@@ -12,6 +12,7 @@ import WithdrawItemForm from "./WithdrawItemForm";
 import AddItemForm1 from "./AddItemForm1";
 
 import OrderForm from "./OrderForm";
+import NewOrderForm from "./NewOrderForm";
 
 ////////////
 // Synchrony
@@ -292,10 +293,18 @@ const WarehouseInfo = () => {
           </tbody>
         </table>
 
-        <div className={`w-[700px] ml-[28%] mt-4 ${orderForm ? "" : "hidden"}`}>
+        {/* <div className={`w-[700px] ml-[28%] mt-4 ${orderForm ? "" : "hidden"}`}>
           <OrderForm
             warehouseCollection={warehouseCollection}
             handleSelectingWarehouse={handleSelectingWarehouse}
+            whseInfo={whseInfo}
+            inventory={inventory}
+          /> */}
+
+        <div className={`w-full ml-4 mt-4 ${orderForm ? "" : "hidden"}`}>
+          <NewOrderForm
+            warehouseCollection={warehouseCollection}
+            whseID={whseID}
             whseInfo={whseInfo}
             inventory={inventory}
           />

@@ -6,7 +6,7 @@ import WarehouseInfo from "../components/WarehouseInfo";
 const Warehouses = () => {
   return (
     <>
-      <div className="flex-wrap w-full">
+      <div className="flex-wrap w-full h-full">
         <Sidebar />
         <div className="h-auto w-full">
           <h1 className="text-3xl font-bold p-4 text-center">

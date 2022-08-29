@@ -9,8 +9,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
-// Sometimes a space is added to the textContent. I can try to make sure any spaces are elimited in the handler.
-
 const Sidebar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
@@ -33,7 +31,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed top-0 h-screen w-40 m-0 pt-4 flex flex-col bg-gray-800">
+    <div className="fixed top-0 h-full w-40 m-0 pt-4 flex flex-col bg-gray-800">
       {/* <Link to="/home">
         <div className="sidebar-icon">
           <FaHome />

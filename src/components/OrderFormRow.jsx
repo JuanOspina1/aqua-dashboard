@@ -38,11 +38,7 @@ const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
       <input
         type="number"
         min="0"
-        // max={
-        //   selectedItem.caseCount === null
-        //     ? "100000"
-        //     : `${selectedItem.caseCount}`
-        // }
+        max={selectedItem === null ? "100000" : `${selectedItem.caseCount}`}
         placeholder="0"
         className="text-center w-[12.5%] border-r border-black bg-[#dbe5f1]"
         onChange={(e) => {

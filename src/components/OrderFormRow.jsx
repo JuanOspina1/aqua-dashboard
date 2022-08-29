@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { FaTimesCircle } from "react-icons/fa";
 
 // options / item description / item weight
-const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
+const OrderFormRow = ({
+  inventory,
+  onFormRowInputChange,
+  index,
+  formRows,
+  setFormRows,
+}) => {
   const [selectedItem, setSelectedItem] = useState("");
   const [caseAmount, setCaseAmount] = useState(0);
 
@@ -17,6 +24,11 @@ const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
       // console.log(inventoryItem);
       setSelectedItem(inventoryItem);
     }
+  };
+
+  const removeFormRow = (index) => () => {
+    // console.log(index);
+    setFormRows(formRows.filter((fr, i) => i !== index));
   };
 
   return (
@@ -63,6 +75,14 @@ const OrderFormRow = ({ inventory, onFormRowInputChange }) => {
         {/* Case x LB */}
         {selectedItem === "" ? 0 : caseAmount * +selectedItem?.caseWeight}
       </div>
+      <button
+        className="border-2"
+        key={index + 111}
+        type="button"
+        onClick={removeFormRow(index)}
+      >
+        <FaTimesCircle className="cursor-pointer fill-red-600" size={40} />
+      </button>
     </div>
   );
 };

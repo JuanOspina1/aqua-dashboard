@@ -297,7 +297,7 @@ const WarehouseInfo = () => {
           </tbody>
         </table>
 
-        <div className={`w-[700px] ml-4 ${orderForm ? "" : "hidden"}`}>
+        <div className={`w-[700px] ml-[28%] mt-4 ${orderForm ? "" : "hidden"}`}>
           <OrderForm
             warehouseCollection={warehouseCollection}
             handleSelectingWarehouse={handleSelectingWarehouse}

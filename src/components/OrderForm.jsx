@@ -45,7 +45,7 @@ const OrderForm = ({ whseID, inventory }) => {
       ...formRows,
       {
         caseCount: "",
-        lotNumber: "",
+        lotNumber: 0,
       },
     ]);
   };
@@ -56,9 +56,28 @@ const OrderForm = ({ whseID, inventory }) => {
     console.log(formRows);
   };
 
+  // Array is updating properly - need to submit the new array to Firestore
+  const submitOrder = (e) => {
+    e.preventDefault();
+    // console.log(inventory);
+    const updatedArr = inventory.map((item) => {
+      const matchingItem = formRows.find(
+        (input) => input.lotNumber === item.lotNumber
+      );
+      if (matchingItem) {
+        console.log(matchingItem);
+        item.caseCount -= matchingItem.caseCount;
+        return item;
+      } else {
+        return item;
+      }
+    });
+    console.log(updatedArr);
+  };
+
   return (
     <>
-      <form className="rounded" onSubmit={(e) => checkForm(e)}>
+      <form className="rounded" onSubmit={(e) => submitOrder(e)}>
         <div className="flex space-x-4 bg-white h-max w-1/2 text-center rounded">
           <div className="ml-2">
             <h1>Release To:</h1>

@@ -98,6 +98,8 @@ const FirebaseServices = {
       console.error(error);
     }
   },
+
+  createOrder: async (whseID, updatedQtyArr) => {},
 };
 
 export default FirebaseServices;

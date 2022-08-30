@@ -99,7 +99,7 @@ const FirebaseServices = {
     }
   },
 
-  createOrder: async (whseID, inventory, formRows) => {
+  withdrawOrderQty: async (whseID, inventory, formRows) => {
     try {
       const updatedArr = inventory.map((item) => {
         const matchingItem = formRows.find(
@@ -117,6 +117,16 @@ const FirebaseServices = {
       const whseRef = doc(db, "warehouses", whseID);
       await updateDoc(whseRef, {
         Items: updatedArr,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  createOrder: async (inputs) => {
+    try {
+      setDoc(doc(collection(db, "orders")), {
+        inputs,
       });
     } catch (error) {
       console.error(error);

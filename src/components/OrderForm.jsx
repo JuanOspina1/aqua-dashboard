@@ -6,6 +6,13 @@ import OrderFormRow from "./OrderFormRow";
 // INPUTS: CURRENT WAREHOUSE / RELEASE TO / CONSIGNEE / PO / RELEASE DATE / RELEASE ON PALLETS? / # OF PALLETS / REP / ARRAY OF LOT #s WITH CASE COUNTS
 
 const OrderForm = ({ whseID, inventory }) => {
+  const [formRows, setFormRows] = useState([
+    {
+      caseCount: "",
+      lotNumber: "",
+    },
+  ]);
+
   const [formData, setFormData] = useState({
     releaseTo: "",
     consignee: "",
@@ -15,13 +22,6 @@ const OrderForm = ({ whseID, inventory }) => {
     numberOfPallets: "",
     rep: "",
   });
-
-  const [formRows, setFormRows] = useState([
-    {
-      caseCount: "",
-      lotNumber: "",
-    },
-  ]);
 
   const onFormRowInputChange = (rowIndex) => (name, value) => {
     // Create copy of the state
@@ -51,17 +51,18 @@ const OrderForm = ({ whseID, inventory }) => {
     ]);
   };
 
-  const checkForm = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    console.log(formRows);
-  };
-
   // Array is updating properly - need to submit the new array to Firestore
   const submitOrder = (e) => {
     e.preventDefault();
+    console.log(formRows);
+    console.log(formData);
 
-    FirebaseServices.createOrder(whseID, inventory, formRows);
+    const newOrder = formData;
+    newOrder.items = [...formRows];
+    console.log(newOrder);
+
+    FirebaseServices.withdrawOrderQty(whseID, inventory, formRows);
+    FirebaseServices.createOrder(newOrder);
   };
 
   return (
@@ -98,6 +99,15 @@ const OrderForm = ({ whseID, inventory }) => {
           </div>
 
           <div className="flex flex-col space-y-4">
+            <div>
+              <h1>Rep:</h1>
+              <input
+                onChange={(e) => onFormChange("rep", e.target.value)}
+                type="text"
+                className="bg-[#dbe5f1]"
+              ></input>
+            </div>
+
             <div>
               <h1>Release Date:</h1>
               <input

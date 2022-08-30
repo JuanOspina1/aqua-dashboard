@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useReactToPrint } from "react-to-print";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import FirebaseServices from "../services/FirebaseServices";
 import OrderFormRow from "./OrderFormRow";
+import ReleaseFormTemplate from "./ReleaseFormTemplate";
 
 // INPUTS: CURRENT WAREHOUSE / RELEASE TO / CONSIGNEE / PO / RELEASE DATE / RELEASE ON PALLETS? / # OF PALLETS / REP / ARRAY OF LOT #s WITH CASE COUNTS
 
-const OrderForm = ({ whseID, inventory }) => {
+const OrderForm = ({ whseID, inventory, whseInfo }) => {
   const [formRows, setFormRows] = useState([
     {
       caseCount: "",
@@ -22,6 +24,17 @@ const OrderForm = ({ whseID, inventory }) => {
     numberOfPallets: "",
     rep: "",
   });
+
+  ////////////////////////////////
+  // PRINTING SECTION
+
+  const componentRef = React.createRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  ////////////////////////////////
+  // ON CHANGE SECTION
 
   const onFormRowInputChange = (rowIndex) => (name, value) => {
     // Create copy of the state
@@ -51,9 +64,14 @@ const OrderForm = ({ whseID, inventory }) => {
     ]);
   };
 
-  // Array is updating properly - need to submit the new array to Firestore
+  ////////////////////////////////
+  // SUBMITTING ORDER
+
   const submitOrder = (e) => {
     e.preventDefault();
+
+    handlePrint();
+
     console.log(formRows);
     console.log(formData);
 
@@ -166,6 +184,16 @@ const OrderForm = ({ whseID, inventory }) => {
           <button onClick={addFormRow}>
             <FaPlusCircle className="cursor-pointer ml-4" size={40} />
           </button>
+        </div>
+
+        <div className="hidden">
+          <ReleaseFormTemplate
+            ref={componentRef}
+            whseInfo={whseInfo}
+            formData={formData}
+            formRows={formRows}
+            inventory={inventory}
+          />
         </div>
       </form>
     </>

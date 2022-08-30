@@ -1,6 +1,6 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import OrderFormTemplate from "../components/OrderFormTemplate";
+import ReleaseFormTemplate from "../components/ReleaseFormTemplate";
 import Sidebar from "../components/Sidebar";
 import WarehouseInventory from "../components/WarehouseInventory";
 import { db } from "../firebase";
@@ -68,36 +68,13 @@ const Orders = () => {
         <div className="ml-40">
           <div className="flex">
             <div className="w-[700px] mt-4 ml-4">
-              <OrderFormTemplate
+              {/* <ReleaseFormTemplate
                 warehouseCollection={warehouseCollection}
                 handleSelectingWarehouse={handleSelectingWarehouse}
                 whseInfo={whseInfo}
                 inventory={inventory}
-              />
+              /> */}
             </div>
-            {/* I may want to incorporate the inventory list showing the item description for reference. It is hard to know what item to pick only based on the lot number */}
-            {/* <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 w-max">
-              <thead className="border-b-2">
-                <tr>
-                  <th>Lot Number</th>
-                  <th>PO Number</th>
-                  <th>Brand</th>
-                  <th>Product</th>
-                  <th>Size</th>
-                  <th>Case Count</th>
-                  <th>Weight (LB)</th>
-                  <th>Cost Of Goods (LB)</th>
-                  <th>Sales Price (LB)</th>
-                  <th>Delete Lot</th>
-                </tr>
-              </thead>
-              <tbody className="text-center ">
-                <WarehouseInventory
-                  inventoryItems={inventory}
-                  whseID={whseID}
-                />
-              </tbody>
-            </table> */}
           </div>
         </div>
       </div>

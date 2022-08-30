@@ -5,18 +5,21 @@ import ReleaseFormRows from "./ReleaseFormRows";
 const ReleaseForm = React.forwardRef(
   ({ whseInfo, inventory, formData, formRows }, ref) => {
     // Creating the full items with the release case counts for the rows
-    const releaseItems = inventory.map((item) => {
-      const matchingItem = formRows.find(
+
+    const releaseItems = formRows.map((item) => {
+      const matchingItem = inventory.find(
         (input) => input.lotNumber === item.lotNumber
       );
       if (matchingItem) {
-        // The case count should be the amount being released - this is modifying the inventory directly - pointing to the original obj in memory
+        // The case count should be the amount being released
         //  item.caseCount = matchingItem.caseCount;
-        return { ...item, caseCount: matchingItem.caseCount };
+        return { ...matchingItem, caseCount: item.caseCount };
       } else {
         return;
       }
     });
+
+    console.log(releaseItems);
 
     return (
       <div ref={ref} className="w-full border border-black bg-white">

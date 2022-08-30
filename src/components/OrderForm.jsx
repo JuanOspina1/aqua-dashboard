@@ -70,7 +70,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
   const submitOrder = (e) => {
     e.preventDefault();
 
-    handlePrint();
+    // handlePrint();
 
     console.log(formRows);
     console.log(formData);
@@ -186,7 +186,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
           </button>
         </div>
 
-        <div className="hidden">
+        <div className="">
           <ReleaseForm
             ref={componentRef}
             whseInfo={whseInfo}

@@ -28,7 +28,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
   ////////////////////////////////
   // PRINTING SECTION
 
-  const componentRef = React.createRef();
+  const componentRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -70,7 +70,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
   const submitOrder = (e) => {
     e.preventDefault();
 
-    // handlePrint();
+    handlePrint();
 
     console.log(formRows);
     console.log(formData);

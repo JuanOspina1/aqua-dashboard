@@ -1,11 +1,22 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import AquaLogo from "../images/small-aqua-logo.PNG";
-import OrderFormRow from "./OrderFormRow";
+import ReleaseFormRows from "./ReleaseFormRows";
 
-const ReleaseFormTemplate = React.forwardRef(
+const ReleaseForm = React.forwardRef(
   ({ whseInfo, inventory, formData, formRows }, ref) => {
-    // useEffect(() => {}, [formData]);
+    // Creating the full items with the release case counts for the rows
+    const releaseItems = inventory.map((item) => {
+      const matchingItem = formRows.find(
+        (input) => input.lotNumber === item.lotNumber
+      );
+      if (matchingItem) {
+        // The case count should be the amount being released - this is modifying the inventory directly - pointing to the original obj in memory
+        //  item.caseCount = matchingItem.caseCount;
+        return { ...item, caseCount: matchingItem.caseCount };
+      } else {
+        return;
+      }
+    });
 
     return (
       <div ref={ref} className="w-full border border-black bg-white">
@@ -43,31 +54,31 @@ const ReleaseFormTemplate = React.forwardRef(
 
         {/* ORDER INFORMATION  */}
         <div className="flex w-full mt-2 text-center border-t border-b border-black bg-[#dbe5f1]">
-          <div className="border-r border-black">
+          <div className="border-r border-black w-[20%]">
             <h1>PO Number</h1>
             <div className="text-center bg-[#dbe5f1]">{formData.PO}</div>
           </div>
 
-          <div className="border-r border-black">
+          <div className="border-r border-black w-[20%]">
             <h1>Release Date:</h1>
             <div className="text-center bg-[#dbe5f1]">
               {formData.releaseDate}
             </div>
           </div>
 
-          <div className="border-r border-black w-36 ml-2">
+          <div className="border-r border-black w-[20%] ml-2">
             <h1 className="w-max">Release on Pallets</h1>
             <div className="bg-[#dbe5f1]">{formData.releaseOnPallets}</div>
           </div>
 
-          <div className="border-r border-black w-32">
+          <div className="border-r border-black w-[20%]">
             <h1># of Pallets</h1>
             <div className="text-center bg-[#dbe5f1] w-full">
               {formData.numberOfPallets}
             </div>
           </div>
 
-          <div className="ml-2">
+          <div className="ml-2 w-[20%]">
             <h1>Rep</h1>
             <p>{formData.rep}</p>
           </div>
@@ -84,55 +95,12 @@ const ReleaseFormTemplate = React.forwardRef(
           <div className="w-[12.5%]">Net Weight</div>
         </div>
 
-        {/* ITEM FORM ROWS - I WANT A DEFAULT OF 9 - EVERY OTHER ROW CHANGES COLOR */}
-        {/* <OrderFormRow
-        id={0}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(0)}
-      />
-      <OrderFormRow
-        id={1}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(1)}
-      />
-      <OrderFormRow
-        id={2}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(2)}
-      />
-      <OrderFormRow
-        id={3}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(3)}
-      />
-      <OrderFormRow
-        id={4}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(4)}
-      />
-      <OrderFormRow
-        id={5}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(5)}
-      />
-      <OrderFormRow
-        id={6}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(6)}
-      />
-      <OrderFormRow
-        id={7}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(7)}
-      />
-      <OrderFormRow
-        id={8}
-        inventory={inventory}
-        onFormRowInputChange={onFormRowInputChange(8)}
-      /> */}
+        {releaseItems.map((item, i) => {
+          <ReleaseFormRows item={item} i={i} />;
+        })}
       </div>
     );
   }
 );
 
-export default ReleaseFormTemplate;
+export default ReleaseForm;

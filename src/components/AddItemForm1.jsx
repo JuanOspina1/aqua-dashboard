@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
-import FormRow from "./FormRow";
+import AddItemFormRow from "./AddItemFormRow";
 import FirebaseServices from "../services/FirebaseServices";
 import toast from "react-hot-toast";
 
@@ -89,7 +89,7 @@ const AddItemForm1 = ({ currWhse, handleAddItemClick }) => {
     <form onSubmit={handleSubmit} className="ml-4 mt-4 w-full">
       {formRows.map((row, i) => {
         return (
-          <FormRow
+          <AddItemFormRow
             key={i}
             index={i}
             value={row}

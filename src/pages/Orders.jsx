@@ -1,6 +1,6 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import ReleaseFormTemplate from "../components/ReleaseFormTemplate";
+import ReleaseForm from "../components/ReleaseForm";
 import Sidebar from "../components/Sidebar";
 import WarehouseInventory from "../components/WarehouseInventory";
 import { db } from "../firebase";
@@ -68,7 +68,7 @@ const Orders = () => {
         <div className="ml-40">
           <div className="flex">
             <div className="w-[700px] mt-4 ml-4">
-              {/* <ReleaseFormTemplate
+              {/* <ReleaseForm
                 warehouseCollection={warehouseCollection}
                 handleSelectingWarehouse={handleSelectingWarehouse}
                 whseInfo={whseInfo}

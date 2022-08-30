@@ -3,7 +3,7 @@ import { useReactToPrint } from "react-to-print";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import FirebaseServices from "../services/FirebaseServices";
 import OrderFormRow from "./OrderFormRow";
-import ReleaseFormTemplate from "./ReleaseFormTemplate";
+import ReleaseForm from "./ReleaseForm";
 
 // INPUTS: CURRENT WAREHOUSE / RELEASE TO / CONSIGNEE / PO / RELEASE DATE / RELEASE ON PALLETS? / # OF PALLETS / REP / ARRAY OF LOT #s WITH CASE COUNTS
 
@@ -187,7 +187,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
         </div>
 
         <div className="hidden">
-          <ReleaseFormTemplate
+          <ReleaseForm
             ref={componentRef}
             whseInfo={whseInfo}
             formData={formData}

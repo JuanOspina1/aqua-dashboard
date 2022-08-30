@@ -124,11 +124,6 @@ const WarehouseInfo = () => {
     setOrderForm(!orderForm);
   };
 
-  // I have to deconstruct this due to old logic - could be refactored but everything works
-  // CURRENT
-  // const [whseInfo] = warehouseInfo;
-  // const whseInfo = warehouseInfo;
-
   // THIS FUNCTION IS PART OF THE PREBUILT DROPDOWN MENU
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

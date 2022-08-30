@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
+import FirebaseServices from "../services/FirebaseServices";
 import OrderFormRow from "./OrderFormRow";
 
 // INPUTS: CURRENT WAREHOUSE / RELEASE TO / CONSIGNEE / PO / RELEASE DATE / RELEASE ON PALLETS? / # OF PALLETS / REP / ARRAY OF LOT #s WITH CASE COUNTS
@@ -59,20 +60,8 @@ const OrderForm = ({ whseID, inventory }) => {
   // Array is updating properly - need to submit the new array to Firestore
   const submitOrder = (e) => {
     e.preventDefault();
-    // console.log(inventory);
-    const updatedArr = inventory.map((item) => {
-      const matchingItem = formRows.find(
-        (input) => input.lotNumber === item.lotNumber
-      );
-      if (matchingItem) {
-        console.log(matchingItem);
-        item.caseCount -= matchingItem.caseCount;
-        return item;
-      } else {
-        return item;
-      }
-    });
-    console.log(updatedArr);
+
+    FirebaseServices.createOrder(whseID, inventory, formRows);
   };
 
   return (

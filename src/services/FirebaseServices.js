@@ -99,7 +99,29 @@ const FirebaseServices = {
     }
   },
 
-  createOrder: async (whseID, updatedQtyArr) => {},
+  createOrder: async (whseID, inventory, formRows) => {
+    try {
+      const updatedArr = inventory.map((item) => {
+        const matchingItem = formRows.find(
+          (input) => input.lotNumber === item.lotNumber
+        );
+        if (matchingItem) {
+          console.log(matchingItem);
+          item.caseCount -= matchingItem.caseCount;
+          return item;
+        } else {
+          return item;
+        }
+      });
+
+      const whseRef = doc(db, "warehouses", whseID);
+      await updateDoc(whseRef, {
+        Items: updatedArr,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default FirebaseServices;

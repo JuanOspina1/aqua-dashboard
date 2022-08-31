@@ -1,42 +1,29 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { forwardRef } from "react";
 import AquaLogo from "../images/small-aqua-logo.PNG";
 import ReleaseFormRows from "./ReleaseFormRows";
 
 const ReleaseForm = ({ whseInfo, inventory, formData, formRows }, ref) => {
   // Creating the full items with the release case counts for the rows
-  // const [releaseItems1, setReleaseItems1] = useState([]);
 
-  // useEffect(() => {
-  //   console.log("useEffect Ran");
-  //   const releaseItems = formRows.map((item) => {
-  //     const matchingItem = inventory.find(
-  //       (input) => input.lotNumber === item.lotNumber
-  //     );
-  //     if (matchingItem) {
-  //       // The case count should be the amount being released
-  //       //  item.caseCount = matchingItem.caseCount;
-  //       return { ...matchingItem, caseCount: item.caseCount };
-  //     } else {
-  //       return;
-  //     }
-  //   });
-
-  //   setReleaseItems1([releaseItems]);
-  // }, [formRows]);
+  // const releaseItems = formRows.map((item) => {
+  //   const matchingItem = inventory.find(
+  //     (input) => input.lotNumber === item.lotNumber
+  //   );
+  //   if (matchingItem) {
+  //     // The case count should be the amount being released
+  //     //  item.caseCount = matchingItem.caseCount;
+  //     return { ...matchingItem, caseCount: item.caseCount };
+  //   } else {
+  //     return;
+  //   }
+  // });
 
   const releaseItems = formRows.map((item) => {
     const matchingItem = inventory.find(
       (input) => input.lotNumber === item.lotNumber
     );
-    if (matchingItem) {
-      // The case count should be the amount being released
-      //  item.caseCount = matchingItem.caseCount;
-      return { ...matchingItem, caseCount: item.caseCount };
-    } else {
-      return;
-    }
+    return { ...matchingItem, caseCount: item.caseCount };
   });
 
   return (
@@ -50,6 +37,7 @@ const ReleaseForm = ({ whseInfo, inventory, formData, formRows }, ref) => {
 
         <div className="w-1/2 bg-white  text-center border-l border-b border-black">
           <h1 className="border-b border-black">Cold Storage:</h1>
+          <p>{whseInfo.name}</p>
           <p>{whseInfo.address}</p>
         </div>
       </div>
@@ -115,7 +103,7 @@ const ReleaseForm = ({ whseInfo, inventory, formData, formRows }, ref) => {
       </div>
       <div>
         {releaseItems.map((item, i) => {
-          return <ReleaseFormRows item={item} i={i} />;
+          return <ReleaseFormRows key={i} item={item} i={i} />;
         })}
       </div>
     </div>

@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  FaHome,
-  FaWarehouse,
-  FaClipboardList,
-  FaTools,
-  FaSignOutAlt,
-} from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaWarehouse, FaTools, FaSignOutAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
 const Sidebar = () => {
@@ -51,14 +45,14 @@ const Sidebar = () => {
         <FaHome /> <span className="p-2">Home</span>
       </button>
 
-      {/* Order tab to be implemented in the future, using single item withdraw currently */}
+      {/* I have moved orders functionality to the warehouse tab */}
 
-      <button
+      {/* <button
         className="sidebar-icon"
         onClick={(e) => handleNavigate(e.target.textContent)}
       >
         <FaClipboardList /> <span className="p-2">Orders</span>
-      </button>
+      </button> */}
 
       <button
         className="sidebar-icon"

@@ -38,6 +38,9 @@ const WarehouseInfo = () => {
   // ID of the current Whse
   const [whseID, setWhseID] = useState("");
 
+  // Search state
+  const [search, setSearch] = useState("");
+
   // Togglers
   const [withdrawForm, setWithdrawForm] = useState(false);
   const [inventoryForm, setInventoryForm] = useState(true);
@@ -260,6 +263,13 @@ const WarehouseInfo = () => {
           <WithdrawItemForm inventoryItems={inventory} whseID={whseID} />
         </div>
 
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          className={`bg-white rounded-md mt-4 mr-4 ml-4 border-2 border-black text-center
+          ${inventoryForm === true ? "" : "hidden"}`}
+          type="text"
+          placeholder="Search By Product"
+        ></input>
         <table
           className={`table-auto bg-white rounded-md mt-4 mr-4 ml-4 
           ${inventoryForm === true ? "" : "hidden"}`}
@@ -281,7 +291,7 @@ const WarehouseInfo = () => {
           <tbody className="text-center ">
             <WarehouseInventory
               inventoryItems={inventory}
-              whseInformation={whseInfo}
+              search={search}
               whseID={whseID}
             />
           </tbody>

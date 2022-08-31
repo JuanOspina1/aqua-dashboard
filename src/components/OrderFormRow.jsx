@@ -32,7 +32,7 @@ const OrderFormRow = ({
   };
 
   return (
-    <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black h-10">
+    <div className="flex w-full text-center bg-[#dbe5f1] border-b border-black">
       <div className="w-[20%] border-r  border-black">
         <select
           className="bg-[#dbe5f1]"

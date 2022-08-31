@@ -186,7 +186,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
           </button>
         </div>
 
-        <div className="">
+        <div className="hidden">
           <ReleaseForm
             ref={componentRef}
             whseInfo={whseInfo}

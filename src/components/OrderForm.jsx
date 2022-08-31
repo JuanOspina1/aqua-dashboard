@@ -4,6 +4,7 @@ import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import FirebaseServices from "../services/FirebaseServices";
 import OrderFormRow from "./OrderFormRow";
 import ReleaseForm from "./ReleaseForm";
+import toast from "react-hot-toast";
 
 // INPUTS: CURRENT WAREHOUSE / RELEASE TO / CONSIGNEE / PO / RELEASE DATE / RELEASE ON PALLETS? / # OF PALLETS / REP / ARRAY OF LOT #s WITH CASE COUNTS
 
@@ -80,7 +81,11 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
     console.log(newOrder);
 
     FirebaseServices.withdrawOrderQty(whseID, inventory, formRows);
-    FirebaseServices.createOrder(newOrder);
+    toast.promise(FirebaseServices.createOrder(newOrder), {
+      loading: "Processing Order",
+      success: "Order Created!",
+      error: "There was an error creating an order.",
+    });
   };
 
   return (

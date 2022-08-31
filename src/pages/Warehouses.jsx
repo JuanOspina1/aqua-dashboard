@@ -6,37 +6,22 @@ import WarehouseInfo from "../components/WarehouseInfo";
 const Warehouses = () => {
   return (
     <>
-      <div className="flex-wrap w-full h-full">
-        <Sidebar />
-        <div className="h-auto w-full">
-          <h1 className="text-3xl font-bold p-4 text-center">
-            Warehouse & Inventory
-          </h1>
-        </div>
+      <div className="flex">
+        <Sidebar className="flex-auto" />
+        <div className="flex-auto h-auto ml-40">
+          <div>
+            <h1 className="text-3xl font-bold p-4 text-center">
+              Warehouse & Inventory
+            </h1>
+          </div>
 
-        <div className="flex-wrap ml-40">
-          <WarehouseInfo />
+          <div className="">
+            <WarehouseInfo />
+          </div>
         </div>
       </div>
     </>
   );
-
-  // return (
-  //   <>
-  //     <Sidebar />
-  //     <div className="flex-wrap w-full ml-40 pr-40">
-  //       <div className="h-auto w-full">
-  //         <h1 className="text-3xl font-bold p-4 text-center">
-  //           Warehouse & Inventory
-  //         </h1>
-  //       </div>
-
-  //       <div className="flex-wrap w-full">
-  //         <WarehouseInfo />
-  //       </div>
-  //     </div>
-  //   </>
-  // );
 };
 
 export default Warehouses;

@@ -91,7 +91,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
   return (
     <>
       <form className="rounded" onSubmit={(e) => submitOrder(e)}>
-        <div className="flex space-x-4 bg-white h-max w-1/2 text-center rounded">
+        <div className="flex space-x-4 bg-white h-max w-1/2 text-center rounded-md shadow-lg p-6">
           <div className="ml-2">
             <h1>Release To:</h1>
             <textarea

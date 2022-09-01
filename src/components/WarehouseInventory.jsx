@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 
 const WarehouseInventory = ({ whseID, inventoryItems, search }) => {
   // Sort by brand / lot # / case count
-  console.log(search);
 
   const handleRemoveItem = (lotNumber) => {
     toast.promise(

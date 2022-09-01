@@ -187,7 +187,7 @@ const WarehouseInfo = () => {
       {/* I need to make the whse information section mobile responsive */}
       <div className="grid ">
         <div className="grid grid-cols-2 gap-6">
-          <div className="grid grid-cols-2 ml-4 bg-white  rounded-md shadow-lg">
+          <div className="grid grid-cols-2 ml-4 bg-white rounded-md shadow-lg">
             <div className="whse-info">
               <h1 className="font-bold">Warehouse Name</h1>
               <p>{whseInfo?.name}</p>

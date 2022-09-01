@@ -15,7 +15,7 @@ const ReleaseFormRows = ({ item, i }) => {
       <div className="w-[12.5%] border-r border-black">{item?.caseCount}</div>
       <div className="w-[50%] border-r border-black">
         {item.lotNumber
-          ? `${item?.itemName} - ${item?.size} - ${item?.brand} - ${item?.caseWeight}`
+          ? `${item?.itemName} - ${item?.size} - ${item?.brand} - ${item?.caseWeight}/lb`
           : ""}
       </div>
       <div className="w-[12.5%]">

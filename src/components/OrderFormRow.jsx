@@ -69,7 +69,7 @@ const OrderFormRow = ({
         {/* itemName + size + brand + weight */}
         {selectedItem === ""
           ? ""
-          : `${selectedItem?.itemName} - ${selectedItem?.size} - ${selectedItem?.brand} - ${selectedItem?.caseWeight}`}
+          : `${selectedItem?.itemName} - ${selectedItem?.size} - ${selectedItem?.brand} - ${selectedItem?.caseWeight}/lb`}
       </div>
 
       <div className="w-[12.5%] border-r">

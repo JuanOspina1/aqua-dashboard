@@ -10,7 +10,7 @@ const UserInfo = ({ currentUserInfo }) => {
     <div className="grid grid-cols-2 ml-4 bg-white  rounded-md shadow-lg w-[600px]">
       <div className="whse-info">
         <h1 className="font-bold">Employee Name</h1>
-        <p>{userInfo?.firstName + " " + userInfo?.lastName}</p>
+        <p>{userInfo ? userInfo.firstName + " " + userInfo.lastName : ""}</p>
       </div>
 
       <div className="whse-info">

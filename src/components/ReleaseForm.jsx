@@ -107,6 +107,9 @@ const ReleaseForm = ({ whseInfo, inventory, formData, formRows }, ref) => {
           return <ReleaseFormRows key={i} item={item} i={i} />;
         })}
       </div>
+      <div className="text-center border-t border-black">
+        Aquanita Foods - 2150 Coral Way, Suite 7A, Miami FL 33145
+      </div>
     </div>
   );
 };

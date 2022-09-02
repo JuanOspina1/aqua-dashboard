@@ -98,6 +98,7 @@ const AddItemFormRow = ({
           className=" my-2  rouded w-full"
           type="text"
           placeholder="Lot Number"
+          required
           value={formRows[index].lotNumber || ""}
         />
       </label>

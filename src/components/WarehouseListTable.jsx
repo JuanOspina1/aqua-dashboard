@@ -46,9 +46,8 @@ const WarehouseListTable = () => {
   };
 
   return (
-    // I can apply the bottom once I create the user information in the db - using the user state
-    <div className="grid ">
-      <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4">
+    <div className="grid">
+      <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 text-center">
         <thead className="border-b-2">
           <tr>
             <th>Active Warehouses</th>

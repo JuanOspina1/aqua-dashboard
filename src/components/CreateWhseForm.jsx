@@ -28,7 +28,7 @@ const CreateWhseForm = () => {
   };
 
   return (
-    <div className="bg-slate-200  mt-4 ml-4 mr-4 rounded-md w-1/2 shadow-lg">
+    <div className="bg-slate-200  mt-4  mr-4 rounded-md shadow-lg">
       <h1 className="text-center py-2 font-bold text-lg ">
         Create New Warehouse
       </h1>

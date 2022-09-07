@@ -7,7 +7,7 @@ const UserInfo = ({ currentUserInfo }) => {
   // email / firstName / lastName / officeAddress / officePhone
 
   return (
-    <div className="grid grid-cols-2 ml-4 bg-white  rounded-md shadow-lg w-[600px]">
+    <div className="grid grid-cols-2 ml-4 bg-white  rounded-md shadow-lg w-full">
       <div className="whse-info">
         <h1 className="font-bold">Employee Name</h1>
         <p>{userInfo ? userInfo.firstName + " " + userInfo.lastName : ""}</p>

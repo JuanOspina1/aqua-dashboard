@@ -1,35 +1,35 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { FaTimesCircle } from "react-icons/fa";
+import { db } from "../firebase";
+import FirebaseServices from "../services/FirebaseServices";
 
 const OrderHistory = () => {
-  const [warehouseReference, setWarehouseReference] = useState([]);
-
-  // Array of names
-  // Warehouses use information[0].name
-
-  // Listening to multiple docs in a collection
+  const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "warehouses"));
+    const q = query(collection(db, "orders"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const warehouses = [];
+      const orders = [];
 
       querySnapshot.forEach((doc) => {
-        warehouses.push({
-          name: doc.data().information[0].name,
+        orders.push({
+          warehouse: doc.data().inputs.warehouse,
+          po: doc.data().inputs.PO,
           id: doc.id,
         });
       });
-      setWarehouseReference(warehouses);
+      setOrderList(orders);
+      console.log(orderList);
     });
     return () => {
       unsubscribe();
     };
   }, []);
 
-  const handleRemoveItem = (whseID) => {
-    toast.promise(FirebaseServices.deleteWarehouse(whseID), {
+  const handleRemoveItem = (orderID) => {
+    toast.promise(FirebaseServices.deleteOrder(orderID), {
       loading: "Loading",
       success: "Order Deleted",
       error: "Error Deleting Order",
@@ -39,19 +39,23 @@ const OrderHistory = () => {
   return (
     <div className="grid">
       <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 text-center">
+        <caption>Order History</caption>
         <thead className="border-b-2">
           <tr>
-            <th>Active Warehouses</th>
+            <th>Warehouse</th>
+            <th>PO Number</th>
+            <th></th>
           </tr>
         </thead>
         <tbody className="text-center ">
-          {warehouseReference.map((item, i) => {
+          {orderList.map((item, i) => {
             return (
               <tr key={i} className="shadow-lg mt-4 h-16">
-                <td className="border-r-2">{item.name}</td>
+                <td className="border-r-2">{item?.warehouse}</td>
+                <td className="border-r-2">{item?.po}</td>
                 <td className="border-r-2 grid justify-items-center ">
                   <span
-                    id={item.id}
+                    id={item?.id}
                     onClick={(e) => handleRemoveItem(e.currentTarget.id)}
                     className="cursor-pointer"
                     value={item.name}

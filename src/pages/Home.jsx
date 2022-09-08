@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { FaUserCircle, FaWarehouse } from "react-icons/fa";
 import CreateUserForm from "../components/CreateUserForm";
 import CreateWhseForm from "../components/CreateWhseForm";
+import OrderHistory from "../components/OrderHistory";
 import Sidebar from "../components/Sidebar";
 import UserInfo from "../components/UserInfo";
 import WarehouseListTable from "../components/WarehouseListTable";
@@ -11,14 +12,14 @@ import FirebaseServices from "../services/FirebaseServices";
 
 const Home = () => {
   const [userForm, setUserform] = useState(false);
-  const [whseForm, setWhseform] = useState(false);
+  const [whseForm, setWhseform] = useState(true);
 
   const controlUserForm = () => {
-    setUserform(!userForm);
+    setUserform(true);
     setWhseform(false);
   };
   const controlWhseForm = () => {
-    setWhseform(!whseForm);
+    setWhseform(true);
     setUserform(false);
   };
 
@@ -27,13 +28,18 @@ const Home = () => {
   const { user } = UserAuth();
 
   const getUser = async (userEmail) => {
-    const data = await FirebaseServices.getUserInformation(userEmail);
-    setCurrentUserInfo(data);
+    try {
+      const data = await FirebaseServices.getUserInformation(userEmail);
+      setCurrentUserInfo(data);
+    } catch (error) {
+      console.error(error);
+    }
     // console.log(currentUserInfo);
   };
 
   useEffect(() => {
-    // console.log("this ran");
+    console.log("this ran");
+    console.log(user);
     getUser(user.email);
   }, [user.email]);
 
@@ -76,6 +82,7 @@ const Home = () => {
           <div className="flex">
             <div className="flex w-1/2">
               <WarehouseListTable />
+              <OrderHistory />
             </div>
 
             <div className=" w-1/2">

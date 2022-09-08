@@ -24,6 +24,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
     releaseOnPallets: "Yes",
     numberOfPallets: "",
     rep: "",
+    creationDate: Date.now(),
   });
 
   ////////////////////////////////
@@ -77,6 +78,7 @@ const OrderForm = ({ whseID, inventory, whseInfo }) => {
     console.log(formData);
 
     const newOrder = formData;
+    newOrder.warehouse = whseInfo.name;
     newOrder.items = [...formRows];
     console.log(newOrder);
 

@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   const handleNavigate = (page) => {
     const goToPage = page.replace(/\s+/g, "").toLowerCase();
-    console.log(goToPage);
+    // console.log(goToPage);
     navigate(`/${goToPage}`);
   };
 

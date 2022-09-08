@@ -132,6 +132,14 @@ const FirebaseServices = {
       console.error(error);
     }
   },
+
+  deleteOrder: async (orderID) => {
+    try {
+      await deleteDoc(doc(db, "orders", orderID));
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default FirebaseServices;

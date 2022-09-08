@@ -46,19 +46,20 @@ const WarehouseListTable = () => {
   };
 
   return (
-    <div className="grid">
-      <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 text-center">
+    <div className="mt-4 mr-4 ml-4">
+      <table className="table-auto bg-white rounded-md text-center w-full">
         <thead className="border-b-2">
           <tr>
             <th>Active Warehouses</th>
           </tr>
         </thead>
-        <tbody className="text-center ">
+
+        <tbody className="flex flex-col overflow-y-scroll h-[225px] w-full">
           {warehouseReference.map((item, i) => {
             return (
-              <tr key={i} className="shadow-lg mt-4 h-16">
-                <td className="border-r-2">{item.name}</td>
-                <td className="border-r-2 grid justify-items-center ">
+              <tr key={i} className="flex shadow-lg h-16 w-full">
+                <td className="border-r-2 p-2 w-5/6">{item.name}</td>
+                <td className="border-r-2 p-2 w-1/6">
                   <span
                     id={item.id}
                     onClick={(e) => handleRemoveItem(e.currentTarget.id)}

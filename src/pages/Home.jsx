@@ -27,21 +27,23 @@ const Home = () => {
   const [currentUserInfo, setCurrentUserInfo] = useState({});
   const { user } = UserAuth();
 
-  const getUser = async (userEmail) => {
-    try {
-      const data = await FirebaseServices.getUserInformation(userEmail);
-      setCurrentUserInfo(data);
-    } catch (error) {
-      console.error(error);
-    }
-    // console.log(currentUserInfo);
-  };
+  // Example site for async in useEffect: https://devtrium.com/posts/async-functions-useeffect
 
+  // The first time this runs, the data is undefined
   useEffect(() => {
+    const getUser = async (userEmail) => {
+      try {
+        const data = await FirebaseServices.getUserInformation(userEmail);
+        console.log(data);
+        setCurrentUserInfo(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     console.log("this ran");
     console.log(user);
     getUser(user.email);
-  }, [user.email]);
+  }, [user]);
 
   return (
     <>

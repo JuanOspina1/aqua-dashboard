@@ -48,6 +48,7 @@ export function AuthContextProvider({ children }) {
   // }
 
   useEffect(() => {
+    console.log("Auth Ran");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
@@ -55,6 +56,11 @@ export function AuthContextProvider({ children }) {
       unsubscribe();
     };
   });
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //   });
+  // });
 
   return (
     <AuthContext.Provider value={{ signUp, logIn, logOut, user }}>

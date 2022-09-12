@@ -53,20 +53,20 @@ export function AuthContextProvider({ children }) {
     console.log("Auth Ran");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        console.log("state = signed in");
+        // console.log("state = signed in");
         setUser(currentUser);
         //////////////////////////////////
 
         const getUserInfo = async (userEmail) => {
           try {
             const data = await FirebaseServices.getUserInformation(userEmail);
-            console.log(data);
+            // console.log(data);
             setUserInformation(data);
           } catch (error) {
             console.error(error);
           }
         };
-        console.log("this ran");
+        // console.log("this ran");
         // console.log(user);
         getUserInfo(currentUser.email);
       } else {

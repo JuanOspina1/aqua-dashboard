@@ -21,7 +21,7 @@ const OrderHistory = () => {
         });
       });
       setOrderList(orders);
-      console.log(orderList);
+      // console.log(orderList);
     });
     return () => {
       unsubscribe();
@@ -50,9 +50,9 @@ const OrderHistory = () => {
         {orderList.map((item, i) => {
           return (
             <tr key={i} className="flex shadow-lg w-full">
-              <td className="w-1/3 border-r-2">{item?.warehouse}</td>
-              <td className="w-1/3 border-r-2">{item?.po}</td>
-              <td className="w-1/3 border-r-2 ">
+              <td className="w-1/3 border-r-2 p-2">{item?.warehouse}</td>
+              <td className="w-1/3 border-r-2 p-2">{item?.po}</td>
+              <td className="w-1/3 border-r-2 p-2">
                 <span
                   id={item?.id}
                   onClick={(e) => handleRemoveItem(e.currentTarget.id)}

@@ -8,11 +8,13 @@ import {
   deleteUser,
 } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
+import FirebaseServices from "../services/FirebaseServices";
 
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
+  const [userInformation, setUserInformation] = useState({});
 
   function signUp(
     email,
@@ -50,20 +52,36 @@ export function AuthContextProvider({ children }) {
   useEffect(() => {
     console.log("Auth Ran");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        console.log("state = signed in");
+        setUser(currentUser);
+        //////////////////////////////////
+
+        const getUserInfo = async (userEmail) => {
+          try {
+            const data = await FirebaseServices.getUserInformation(userEmail);
+            console.log(data);
+            setUserInformation(data);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        console.log("this ran");
+        // console.log(user);
+        getUserInfo(currentUser.email);
+      } else {
+        console.log("state = signed out");
+      }
     });
     return () => {
       unsubscribe();
     };
-  });
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (currentUser) => {
-  //     setUser(currentUser);
-  //   });
-  // });
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ signUp, logIn, logOut, user }}>
+    <AuthContext.Provider
+      value={{ signUp, logIn, logOut, user, userInformation }}
+    >
       {children}
     </AuthContext.Provider>
   );

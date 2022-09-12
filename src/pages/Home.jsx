@@ -25,25 +25,25 @@ const Home = () => {
 
   // User gives me the email
   const [currentUserInfo, setCurrentUserInfo] = useState({});
-  const { user } = UserAuth();
+  const { userInformation } = UserAuth();
 
   // Example site for async in useEffect: https://devtrium.com/posts/async-functions-useeffect
 
   // The first time this runs, the data is undefined
-  useEffect(() => {
-    const getUser = async (userEmail) => {
-      try {
-        const data = await FirebaseServices.getUserInformation(userEmail);
-        console.log(data);
-        setCurrentUserInfo(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    console.log("this ran");
-    console.log(user);
-    getUser(user.email);
-  }, [user]);
+  // useEffect(() => {
+  //   const getUser = async (userEmail) => {
+  //     try {
+  //       const data = await FirebaseServices.getUserInformation(userEmail);
+  //       console.log(data);
+  //       setCurrentUserInfo(data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   console.log("this ran");
+  //   console.log(user);
+  //   getUser(user.email);
+  // }, [user]);
 
   return (
     <>
@@ -53,7 +53,8 @@ const Home = () => {
           <h1 className="text-3xl font-bold p-4 text-center flex-auto">Home</h1>
           <div className="flex">
             <div className="flex w-1/2">
-              <UserInfo currentUserInfo={currentUserInfo} />
+              {/* <UserInfo currentUserInfo={currentUserInfo} /> */}
+              <UserInfo currentUserInfo={userInformation} />
             </div>
             <div className="grid grid-cols-2  justify-items-center bg-white  rounded-md shadow-lg ml-4 mr-4 pb-4 w-1/2">
               <div className="grid justify-items-center">

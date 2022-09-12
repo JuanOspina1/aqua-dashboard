@@ -46,35 +46,35 @@ const WarehouseListTable = () => {
   };
 
   return (
-    <div className="mt-4 mr-4 ml-4">
-      <table className="table-auto bg-white rounded-md text-center w-full">
-        <thead className="border-b-2">
-          <tr>
-            <th>Active Warehouses</th>
-          </tr>
-        </thead>
+    <table className="table-auto bg-white rounded-md text-center w-full mt-4 pr-2 ml-4">
+      <caption className="bg-white">Active Warehouses</caption>
+      <thead className="flex w-full border-b-2">
+        <tr className="flex w-full">
+          <th className="w-3/4">Warehouses</th>
+          <th className="w-1/4">Delete</th>
+        </tr>
+      </thead>
 
-        <tbody className="flex flex-col overflow-y-scroll h-[225px] w-full">
-          {warehouseReference.map((item, i) => {
-            return (
-              <tr key={i} className="flex shadow-lg h-16 w-full">
-                <td className="border-r-2 p-2 w-5/6">{item.name}</td>
-                <td className="border-r-2 p-2 w-1/6">
-                  <span
-                    id={item.id}
-                    onClick={(e) => handleRemoveItem(e.currentTarget.id)}
-                    className="cursor-pointer"
-                    value={item.name}
-                  >
-                    <FaTimesCircle className="mt-2" size={25} />
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+      <tbody className="flex flex-col overflow-y-auto h-[225px] w-full">
+        {warehouseReference.map((item, i) => {
+          return (
+            <tr key={i} className="flex shadow-lg h-16 w-full">
+              <td className="border-r-2 p-2 w-3/4">{item.name}</td>
+              <td className="border-r-2 p-2 w-1/4">
+                <span
+                  id={item.id}
+                  onClick={(e) => handleRemoveItem(e.currentTarget.id)}
+                  className="cursor-pointer"
+                  value={item.name}
+                >
+                  <FaTimesCircle className="mt-2" size={25} />
+                </span>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

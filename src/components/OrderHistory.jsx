@@ -37,38 +37,36 @@ const OrderHistory = () => {
   };
 
   return (
-    <div className="grid">
-      <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 text-center">
-        <caption>Order History</caption>
-        <thead className="border-b-2">
-          <tr>
-            <th>Warehouse</th>
-            <th>PO Number</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody className="text-center ">
-          {orderList.map((item, i) => {
-            return (
-              <tr key={i} className="shadow-lg mt-4 h-16">
-                <td className="border-r-2">{item?.warehouse}</td>
-                <td className="border-r-2">{item?.po}</td>
-                <td className="border-r-2 grid justify-items-center ">
-                  <span
-                    id={item?.id}
-                    onClick={(e) => handleRemoveItem(e.currentTarget.id)}
-                    className="cursor-pointer"
-                    value={item.name}
-                  >
-                    <FaTimesCircle className="mt-2" size={25} />
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 text-center w-full">
+      <caption>Order History</caption>
+      <thead className="flex w-full border-b-2">
+        <tr className="flex w-full">
+          <th className="w-1/3">Warehouse</th>
+          <th className="w-1/3">PO Number</th>
+          <th className="w-1/3">Delete</th>
+        </tr>
+      </thead>
+      <tbody className="flex flex-col items-center h-[225px] overflow-y-auto">
+        {orderList.map((item, i) => {
+          return (
+            <tr key={i} className="flex shadow-lg w-full">
+              <td className="w-1/3 border-r-2">{item?.warehouse}</td>
+              <td className="w-1/3 border-r-2">{item?.po}</td>
+              <td className="w-1/3 border-r-2 ">
+                <span
+                  id={item?.id}
+                  onClick={(e) => handleRemoveItem(e.currentTarget.id)}
+                  className="cursor-pointer grid place-content-center"
+                  value={item.name}
+                >
+                  <FaTimesCircle className="mt-2" size={25} />
+                </span>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

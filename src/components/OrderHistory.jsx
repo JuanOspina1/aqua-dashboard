@@ -38,7 +38,7 @@ const OrderHistory = () => {
 
   return (
     <table className="table-auto bg-white rounded-md mt-4 mr-4 ml-4 text-center w-full">
-      <caption>Order History</caption>
+      <caption className="bg-white">Order History</caption>
       <thead className="flex w-full border-b-2">
         <tr className="flex w-full">
           <th className="w-1/3">Warehouse</th>

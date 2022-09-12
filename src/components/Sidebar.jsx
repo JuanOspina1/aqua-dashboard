@@ -61,12 +61,12 @@ const Sidebar = () => {
         <FaWarehouse /> <span className="p-2">Warehouses</span>
       </button>
 
-      <button
+      {/* <button
         className="sidebar-icon"
         onClick={(e) => handleNavigate(e.target.textContent)}
       >
         <FaTools /> <span className="p-2">Management</span>
-      </button>
+      </button> */}
 
       <button className="sidebar-icon" onClick={handleLogout}>
         <FaSignOutAlt /> <span className="p-2">Logout</span>

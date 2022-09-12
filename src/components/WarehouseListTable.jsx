@@ -64,7 +64,7 @@ const WarehouseListTable = () => {
                 <span
                   id={item.id}
                   onClick={(e) => handleRemoveItem(e.currentTarget.id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer grid place-content-center"
                   value={item.name}
                 >
                   <FaTimesCircle className="mt-2" size={25} />

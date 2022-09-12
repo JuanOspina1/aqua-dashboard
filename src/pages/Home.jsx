@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { FaUserCircle, FaWarehouse } from "react-icons/fa";
 import CreateUserForm from "../components/CreateUserForm";
 import CreateWhseForm from "../components/CreateWhseForm";
@@ -8,7 +7,6 @@ import Sidebar from "../components/Sidebar";
 import UserInfo from "../components/UserInfo";
 import WarehouseListTable from "../components/WarehouseListTable";
 import { UserAuth } from "../context/AuthContext";
-import FirebaseServices from "../services/FirebaseServices";
 
 const Home = () => {
   const [userForm, setUserform] = useState(false);
@@ -23,27 +21,7 @@ const Home = () => {
     setUserform(false);
   };
 
-  // User gives me the email
-  const [currentUserInfo, setCurrentUserInfo] = useState({});
   const { userInformation } = UserAuth();
-
-  // Example site for async in useEffect: https://devtrium.com/posts/async-functions-useeffect
-
-  // The first time this runs, the data is undefined
-  // useEffect(() => {
-  //   const getUser = async (userEmail) => {
-  //     try {
-  //       const data = await FirebaseServices.getUserInformation(userEmail);
-  //       console.log(data);
-  //       setCurrentUserInfo(data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   console.log("this ran");
-  //   console.log(user);
-  //   getUser(user.email);
-  // }, [user]);
 
   return (
     <>

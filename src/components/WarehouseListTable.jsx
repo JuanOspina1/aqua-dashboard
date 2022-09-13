@@ -38,12 +38,14 @@ const WarehouseListTable = () => {
   };
 
   return (
-    <table className="table-auto bg-white rounded-md text-center w-full mt-4 pr-2 ml-4">
-      <caption className="bg-white">Active Warehouses</caption>
-      <caption className="bg-white">
+    <table className="table-auto bg-white rounded-md text-center w-full mt-4 pr-2 ml-4 border-2 ">
+      <caption className="bg-white border-x-2 border-y-2 ">
+        Active Warehouses
+      </caption>
+      <caption className="bg-white border-x-2 ">
         <input
           placeholder="Search Warehouses"
-          className="text-center border-2 border-black"
+          className="text-center border-x-2"
           onChange={(e) => setWarehouseSearch(e.target.value)}
         ></input>
       </caption>

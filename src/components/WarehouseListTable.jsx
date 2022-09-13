@@ -43,7 +43,7 @@ const WarehouseListTable = () => {
       <caption className="bg-white">
         <input
           placeholder="Search Warehouses"
-          className="text-center border border-black"
+          className="text-center border-2 border-black"
           onChange={(e) => setWarehouseSearch(e.target.value)}
         ></input>
       </caption>

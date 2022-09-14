@@ -27,7 +27,7 @@ const ReleaseForm = ({ whseInfo, inventory, formData, formRows }, ref) => {
   });
 
   return (
-    <div ref={ref} className="w-full  bg-white p-4">
+    <div ref={ref} className="w-full bg-white p-4">
       <div className="flex w-full">
         <img
           src={AquaLogo}
@@ -107,10 +107,10 @@ const ReleaseForm = ({ whseInfo, inventory, formData, formRows }, ref) => {
           return <ReleaseFormRows key={i} item={item} i={i} />;
         })}
       </div>
-      <div className="text-center border-t border-black fixed bottom-0 inset-x-0 p-2">
-        Aquanita Foods - 2150 Coral Way, Suite 7A, Miami FL 33145 -
-        Delivery@auqan
-      </div>
+      <footer className="text-center border-t border-black fixed bottom-0 inset-x-0 p-2 w-full">
+        Inventory Dashboard - 2121 NW 23rd St, Suite 7A, Miami FL 333333 -
+        Delivery@dashboard.com
+      </footer>
     </div>
   );
 };

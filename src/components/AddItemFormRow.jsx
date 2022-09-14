@@ -59,6 +59,7 @@ const AddItemFormRow = ({
           step="any"
           placeholder="Case Weight"
           value={formRows[index].caseWeight || ""}
+          required
         />
       </label>
 
@@ -86,6 +87,7 @@ const AddItemFormRow = ({
           type="text"
           placeholder="Item Name"
           value={formRows[index].itemName || ""}
+          required
         />
       </label>
 
@@ -152,6 +154,7 @@ const AddItemFormRow = ({
           type="text"
           placeholder="Size"
           value={formRows[index].size || ""}
+          required
         />
       </label>
 

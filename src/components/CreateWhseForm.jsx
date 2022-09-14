@@ -28,13 +28,13 @@ const CreateWhseForm = () => {
   };
 
   return (
-    <div className="bg-slate-200  mt-4  mr-4 rounded-md shadow-lg">
+    <div className="bg-white  mt-4  mr-4 rounded-md shadow-lg">
       <h1 className="text-center py-2 font-bold text-lg ">
         Create New Warehouse
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-2 px-4 justify-items-center"
+        className="grid grid-cols-2 px-4 justify-items-center h-[277px]"
       >
         <label className="create-user-form-label">
           Warehouse Name:

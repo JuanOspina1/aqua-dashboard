@@ -31,7 +31,7 @@ const CreateUserForm = () => {
   };
 
   return (
-    <div className="bg-slate-200 mt-4 mr-4 rounded-md shadow-lg">
+    <div className="bg-white mt-4 mr-4 rounded-md shadow-lg">
       <h1 className="text-center py-2 font-bold text-lg ">Create New User</h1>
       <form
         onSubmit={handleSubmit}

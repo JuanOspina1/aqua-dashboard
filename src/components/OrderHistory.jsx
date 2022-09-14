@@ -42,10 +42,10 @@ const OrderHistory = () => {
       {/* <table className="table-auto bg-white mt-4 mr-4 ml-4 text-center w-full"> */}
       <table className="table-auto bg-white text-center w-full">
         <caption className="bg-white rounded-md">Order History</caption>
-        <caption className="bg-white">
+        <caption className="bg-white w-full">
           <input
             onChange={(e) => setPoSearch(e.target.value)}
-            className="text-center border-2 border-black"
+            className="text-center border-2 border-black w-full"
             placeholder="Search PO #"
           ></input>
         </caption>
@@ -61,7 +61,7 @@ const OrderHistory = () => {
             .filter((item) => {
               return poSearch.toLowerCase() === ""
                 ? item
-                : item.po.toLowerCase().includes(poSearch);
+                : item.po.toLowerCase().includes(poSearch.toLowerCase());
             })
             .map((item, i) => {
               return (

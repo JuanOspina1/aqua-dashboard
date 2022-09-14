@@ -45,6 +45,7 @@ const CreateUserForm = () => {
             name="email"
             value={inputs.email || ""}
             onChange={handleChange}
+            required
           />
         </label>
         <label className="create-user-form-label">
@@ -55,6 +56,7 @@ const CreateUserForm = () => {
             name="password"
             value={inputs.password || ""}
             onChange={handleChange}
+            required
           />
         </label>
         <label className="create-user-form-label">
@@ -65,6 +67,7 @@ const CreateUserForm = () => {
             name="firstName"
             value={inputs.firstName || ""}
             onChange={handleChange}
+            required
           />
         </label>
         <label className="create-user-form-label">
@@ -75,6 +78,7 @@ const CreateUserForm = () => {
             name="lastName"
             value={inputs.lastName || ""}
             onChange={handleChange}
+            required
           />
         </label>
         <label className="create-user-form-label">

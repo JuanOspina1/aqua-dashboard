@@ -43,10 +43,10 @@ const WarehouseListTable = () => {
         <caption className="bg-white border-x-2 border-y-2">
           Active Warehouses
         </caption>
-        <caption className="bg-white border-x-2">
+        <caption className="bg-white border-x-2 w-full">
           <input
             placeholder="Search Warehouses"
-            className={`text-center border-x-2`}
+            className="text-center border-2 border-black w-full"
             onChange={(e) => setWarehouseSearch(e.target.value)}
           ></input>
         </caption>
@@ -62,7 +62,9 @@ const WarehouseListTable = () => {
             .filter((item) => {
               return warehouseSearch.toLowerCase() === ""
                 ? item
-                : item.name.toLowerCase().includes(warehouseSearch);
+                : item.name
+                    .toLowerCase()
+                    .includes(warehouseSearch.toLowerCase());
             })
             .map((item, i) => {
               return (

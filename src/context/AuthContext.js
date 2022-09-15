@@ -71,6 +71,7 @@ export function AuthContextProvider({ children }) {
         };
         getUserInfo(currentUser.email);
       } else {
+        setAuthState(true);
         console.log("state = signed out");
       }
     });

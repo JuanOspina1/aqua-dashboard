@@ -5,6 +5,7 @@ import Warehouses from "./pages/Warehouses";
 import Orders from "./pages/Orders";
 import Login from "./pages/Login";
 import { AuthContextProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -13,17 +14,29 @@ function App() {
       <div>
         <Toaster />
       </div>
-      {/* <div className="flex "> */}
+
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/warehouses" element={<Warehouses />} />
-          <Route path="/management" element={<WarehouseMgnt />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/warehouses"
+            element={
+              <ProtectedRoute>
+                <Warehouses />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthContextProvider>
-      {/* </div> */}
     </>
   );
 }

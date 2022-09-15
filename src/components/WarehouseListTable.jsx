@@ -40,9 +40,7 @@ const WarehouseListTable = () => {
   return (
     <div className="bg-white mt-4 ml-4 rounded-md shadow-lg w-full">
       <table className="table-auto bg-white rounded-md text-center w-full border-2 shadow-lg">
-        <caption className="bg-white border-x-2 border-y-2">
-          Active Warehouses
-        </caption>
+        <caption className="bg-white">Active Warehouses</caption>
         <caption className="bg-white border-x-2 w-full">
           <input
             placeholder="Search Warehouses"

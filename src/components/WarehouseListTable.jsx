@@ -66,7 +66,10 @@ const WarehouseListTable = () => {
             })
             .map((item, i) => {
               return (
-                <tr key={i} className="flex shadow-lg h-16 w-full">
+                <tr
+                  key={i}
+                  className="flex shadow-lg h-16 w-full hover:bg-slate-300"
+                >
                   <td className="border-r-2 p-2 w-3/4">{item.name}</td>
                   <td className="border-r-2 p-2 w-1/4">
                     <span

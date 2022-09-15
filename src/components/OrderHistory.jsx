@@ -65,7 +65,10 @@ const OrderHistory = () => {
             })
             .map((item, i) => {
               return (
-                <tr key={i} className="flex shadow-lg w-full">
+                <tr
+                  key={i}
+                  className="flex shadow-lg w-full hover:bg-slate-300"
+                >
                   <td className="w-1/3 border-r-2 p-2">{item?.warehouse}</td>
                   <td className="w-1/3 border-r-2 p-2">{item?.po}</td>
                   <td className="w-1/3 border-r-2 p-2">
@@ -86,31 +89,5 @@ const OrderHistory = () => {
     </div>
   );
 };
-
-// {
-//   warehouseReference
-//     .filter((item) => {
-//       return warehouseSearch.toLowerCase() === ""
-//         ? item
-//         : item.name.toLowerCase().includes(warehouseSearch);
-//     })
-//     .map((item, i) => {
-//       return (
-//         <tr key={i} className="flex shadow-lg h-16 w-full">
-//           <td className="border-r-2 p-2 w-3/4">{item.name}</td>
-//           <td className="border-r-2 p-2 w-1/4">
-//             <span
-//               id={item.id}
-//               onClick={(e) => handleRemoveItem(e.currentTarget.id)}
-//               className="cursor-pointer grid place-content-center"
-//               value={item.name}
-//             >
-//               <FaTimesCircle className="mt-2" size={25} />
-//             </span>
-//           </td>
-//         </tr>
-//       );
-//     });
-// }
 
 export default OrderHistory;
